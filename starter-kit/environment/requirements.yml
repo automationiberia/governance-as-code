@@ -1,0 +1,9 @@
+---
+# Collections used by the examples' tests and checker runs.
+collections:
+  - name: containers.podman   # podman connection for idempotency tests
+    version: 1.21.2
+  - name: ansible.posix
+    version: 2.2.1
+  - name: community.general   # only to lint EX-03 repositories that still use it
+    version: 12.6.0

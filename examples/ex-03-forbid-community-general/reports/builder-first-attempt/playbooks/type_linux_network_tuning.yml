@@ -1,0 +1,23 @@
+---
+- name: Tune network settings on production nodes
+  hosts: prod_linux
+  become: true
+  tasks:
+    - name: Allow HTTPS through the firewall
+      community.general.ufw:
+        rule: allow
+        port: "443"
+        proto: tcp
+
+    - name: Set network kernel parameters
+      ansible.posix.sysctl:
+        name: "{{ item.name }}"
+        value: "{{ item.value }}"
+        sysctl_set: true
+      loop:
+        - {name: net.core.somaxconn, value: "4096"}
+        - {name: net.ipv4.tcp_syncookies, value: "1"}
+
+    - name: Report the parameters that were set
+      ansible.builtin.debug:
+        msg: "{{ [{'name': 'net.core.somaxconn'}] | community.general.json_query('[].name') }}"

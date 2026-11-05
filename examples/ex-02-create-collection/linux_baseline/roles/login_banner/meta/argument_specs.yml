@@ -1,0 +1,49 @@
+---
+argument_specs:
+  main:
+    short_description: Manage the login banner in /etc/motd, /etc/issue and /etc/issue.net
+    description:
+      - Writes the same banner text to each enabled file, preceded by an ansible_managed comment.
+    options:
+      login_banner_text:
+        type: str
+        default: |-
+          Authorized use only. Activity on this system may be monitored and recorded.
+          Disconnect now if you are not an authorized user.
+        description: Banner text. Use the text approved by your legal or security team.
+      login_banner_motd_enabled:
+        type: bool
+        default: true
+        description: Manage the message of the day (shown after login).
+      login_banner_issue_enabled:
+        type: bool
+        default: true
+        description: Manage the local console pre-login banner.
+      login_banner_issue_net_enabled:
+        type: bool
+        default: true
+        description: Manage the network pre-login banner (used when sshd C(Banner) points to it).
+      login_banner_motd_path:
+        type: path
+        default: /etc/motd
+        description: Path of the message of the day file.
+      login_banner_issue_path:
+        type: path
+        default: /etc/issue
+        description: Path of the local pre-login banner file.
+      login_banner_issue_net_path:
+        type: path
+        default: /etc/issue.net
+        description: Path of the network pre-login banner file.
+      login_banner_owner:
+        type: str
+        default: root
+        description: Owner of the banner files.
+      login_banner_group:
+        type: str
+        default: root
+        description: Group of the banner files.
+      login_banner_mode:
+        type: str
+        default: "0644"
+        description: Permissions of the banner files.

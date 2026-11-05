@@ -1,0 +1,89 @@
+# Instance manifest (draft — schema pending)
+# Declares what an organization's governance is built from.
+# Every entry below a base or slot must trace back to an ADR (GAC-0005).
+
+instance: <organization name>
+method_version: "0.1"            # version of the Governance as Code method followed
+
+# L0 — community bases, consumed as published and pinned (GAC-0002)
+bases:
+  - id: cop-good-practices
+    source: https://github.com/redhat-cop/automation-good-practices
+    ref: <commit or tag>
+  - id: ai-forge
+    source: https://github.com/ansible-community/ai-forge
+    ref: <commit or tag>
+    modules: [ansible-collection-sdlc]   # modules enabled; others are not consumed
+  - id: aap-skills
+    source: https://github.com/ansible/aap-skills
+    ref: <commit or tag>
+
+# Layers present in this instance
+layers:
+  organization:
+    adrs: adr/                   # paths relative to the instance root
+    rules: rules/
+  domains: []                    # optional L2 domains: [{name, adrs, rules}]
+  projects:
+    exceptions: exceptions/
+
+# How content repositories are classified (used by rule scopes)
+# Unlisted repositories are treated as prod by rules scoped to prod (deny by default).
+promotion_paths:
+  prod:
+    repositories: []             # repositories whose content reaches production
+  nonprod:
+    repositories: []             # lab, sandbox, development
+
+# Harness slots — what is plugged in, at which layer, and why (GAC-0005)
+slots:
+  knowledge: []
+  capabilities: []
+  integrations: []
+  input: []
+  output: []
+  guardrails: []
+  execution: []
+  evolution: []
+  # Entry format (see slots/README.md; applied and verified by gac-setup):
+  # - id: <tool or component>
+  #   adr: ADR-NNNN              # harness-adoption ADR
+  #   status: required | recommended
+  #   mechanism: reference | lola-module | mcp-server | hook | test-platform | instance-check
+  #   base: <id in bases>        # external sources are pinned in bases, never here
+  #   # mechanism-specific: paths/method_paths, modules/module_content/expect_skills,
+  #   # config (MCP server, hook event/matcher/script, instance-check command)
+
+# Optional repository classification attributes, used by rule scopes
+# (e.g. a PROC rule scoped to criticality: [high]). Decided by governance —
+# changes go through the Librarian and are approved like any governance change.
+classification: {}
+  # <repository>:
+  #   criticality: high | medium | low
+
+# Test platform — Execution slot (GAC-0010): how disposable test hosts are
+# created, so generated tests match it and can run. Adopt it with an ADR.
+test_platform:
+  adr: ADR-NNNN
+  runtime: <podman | docker | ...>
+  molecule_driver: <driver>
+  connection: <connection plugin for playbook tests>
+  default:
+    image: <image>
+    command: <start command>
+    privileged: false
+    become: false
+
+# Gates — outside the harness (GAC-0006)
+gates:
+  # The checker: ansible-lint with this instance's configuration.
+  # Paths are relative to the instance root.
+  checker:
+    config: gates/ansible-lint.yml
+    rules_dir: gates/rules
+    ignore_file: gates/ansible-lint-ignore.txt
+  pre-commit: <how it is provided>
+  ci: <how it is provided>
+  ee-build: <how it is provided>
+  hub-publish: <how it is provided>
+  aap-runtime: <how it is provided>

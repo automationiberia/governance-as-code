@@ -1,0 +1,9 @@
+# Tool versions used and verified by the method's examples (2026-11).
+# An organization pins its own versions in its instance; these are the method's reference.
+ansible-core==2.22.0
+ansible-lint==26.10.1
+molecule==26.10.0
+molecule-plugins[podman]==26.11.0   # Molecule podman driver for container-based tests
+ansible-creator==26.10.0
+pytest==9.2.0
+lola-ai==0.7.0

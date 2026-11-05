@@ -1,0 +1,6 @@
+      2 manage_users : Add_groups | Ensure groups are present
+      2 manage_users : Add_users | Ensure users are present
+      1 manage_users : Delete_groups | Ensure groups are absent
+      1 manage_users : Delete_users | Ensure users are absent
+      1 manage_users : Password_policy | Disable password inactivity period
+      1 manage_users : Password_policy | Force password change at next login for new users

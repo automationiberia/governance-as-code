@@ -1,0 +1,31 @@
+---
+- name: Main | Ensure every new user has an initial password
+  ansible.builtin.assert:
+    that:
+      - manage_users_password is defined or
+        (manage_users_users | dict2items | rejectattr('value.password', 'defined') | list | length == 0)
+    fail_msg: >-
+      Set manage_users_password or a "password" key for every user in
+      manage_users_users (from a vault). The role has no default password.
+    quiet: true
+  when: manage_users_add_users | bool
+
+- name: Main | Delete users
+  ansible.builtin.import_tasks: delete_users.yml
+  when: manage_users_delete_users | bool
+
+- name: Main | Delete groups
+  ansible.builtin.import_tasks: delete_groups.yml
+  when: manage_users_delete_groups | bool
+
+- name: Main | Add groups
+  ansible.builtin.import_tasks: add_groups.yml
+  when: manage_users_add_groups | bool
+
+- name: Main | Add users
+  ansible.builtin.import_tasks: add_users.yml
+  when: manage_users_add_users | bool
+
+- name: Main | Set password policy
+  ansible.builtin.import_tasks: password_policy.yml
+  when: manage_users_set_password_policy | bool

@@ -1,0 +1,25 @@
+# Rule registry entry (draft — schema pending)
+# One entry per rule. The registry is the single source channels read (GAC-0004).
+
+- id: R-AREA-NNN                 # e.g. R-COLL-001
+  adr: ADR-NNNN                  # accepted ADR that produced this rule
+  layer: organization            # organization | domain
+  domain: null                   # domain name when layer is "domain"
+  statement: >-
+    One sentence a human can read and a reviewer can apply.
+  scope:
+    content: [playbook, role, collection, plugin, ee]   # content types the rule applies to
+    promotion_path: [prod]       # promotion paths, or [all]
+    # Optional: other repository classification attributes declared in the
+    # manifest, e.g. criticality: [high]. Omitted = any value.
+  verifiability: mechanical      # mechanical | heuristic | process
+  enforcement: warn              # advise | warn | block
+  block_from: YYYY-MM-DD         # when "warn" becomes "block" (mechanical rules)
+  locked: false                  # true = red line; lower layers cannot relax it
+  owner: <role or team>          # who grants exceptions to a locked rule
+  acts_on:                       # relation to L0, if any
+    action: add                  # add | replace | tighten | disable
+    target: null
+  ai_hint: >-
+    Short instruction for AI agents, including the compliant alternative.
+  check: null                    # identifier of the gate check that verifies it (docs/spec/05-gates.md)

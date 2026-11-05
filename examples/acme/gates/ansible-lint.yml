@@ -1,0 +1,22 @@
+# ACME checker configuration (ansible-lint)
+# Every deviation from ansible-lint defaults references an ADR.
+profile: production                 # ADR-0001
+
+# With a profile set, ansible-lint unloads every rule outside the profile —
+# including organization rules — unless it is listed here.
+enable_list:
+  - loop-var-prefix                 # ADR-0001 → R-CODE-001 (tighten L0)
+  - R-DOC-001                       # ADR-0002 (organization rule)
+  - R-COLL-001                      # ADR-0005 (organization rule)
+
+loop_var_prefix: "^__{role}_"       # ADR-0001 → R-CODE-001 (CoP: __<role>_)
+
+rulesdir:
+  - rules                           # organization rules; rule id = registry id
+use_default_rules: true
+
+# The governance instance itself, when checked out inside a content repository
+# (recommended layout: a governance/ submodule). Its rule fixtures fail on purpose.
+exclude_paths:
+  - governance/
+  - .lola/          # Lola's local copies of installed modules (generated)

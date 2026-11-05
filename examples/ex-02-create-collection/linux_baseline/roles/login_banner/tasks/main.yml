@@ -1,0 +1,27 @@
+---
+- name: Ensure the message of the day shows the banner
+  ansible.builtin.template:
+    src: banner.j2
+    dest: "{{ login_banner_motd_path }}"
+    owner: "{{ login_banner_owner }}"
+    group: "{{ login_banner_group }}"
+    mode: "{{ login_banner_mode }}"
+  when: login_banner_motd_enabled | bool
+
+- name: Ensure the local pre-login banner is set
+  ansible.builtin.template:
+    src: banner.j2
+    dest: "{{ login_banner_issue_path }}"
+    owner: "{{ login_banner_owner }}"
+    group: "{{ login_banner_group }}"
+    mode: "{{ login_banner_mode }}"
+  when: login_banner_issue_enabled | bool
+
+- name: Ensure the network pre-login banner is set
+  ansible.builtin.template:
+    src: banner.j2
+    dest: "{{ login_banner_issue_net_path }}"
+    owner: "{{ login_banner_owner }}"
+    group: "{{ login_banner_group }}"
+    mode: "{{ login_banner_mode }}"
+  when: login_banner_issue_net_enabled | bool

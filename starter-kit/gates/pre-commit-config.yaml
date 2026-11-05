@@ -1,0 +1,13 @@
+# pre-commit configuration for a governed content repository.
+# Assumes the governance instance is checked out at governance/ (submodule).
+# Early feedback only: CI is the gate that cannot be bypassed.
+repos:
+  - repo: https://github.com/ansible/ansible-lint
+    rev: v26.10.1
+    hooks:
+      - id: ansible-lint
+        args:
+          - -c
+          - governance/gates/ansible-lint.yml
+          - -i
+          - governance/gates/ansible-lint-ignore.txt

@@ -1,0 +1,3 @@
+collections/requirements.yml:4: R-COLL-001: 'community.general' is forbidden in production content (ACME ADR-0005, repository 'network_tuning'). Use ansible.builtin, ansible.posix or certified collections, or request an exception.
+playbooks/type_linux_network_tuning.yml:7: R-COLL-001: 'community.general.ufw' is forbidden in production content (ACME ADR-0005, repository 'network_tuning'). Use ansible.builtin, ansible.posix or certified collections, or request an exception.
+playbooks/type_linux_network_tuning.yml:23: R-COLL-001: 'community.general.json_query' is forbidden in production content (ACME ADR-0005, repository 'network_tuning'). Use ansible.builtin, ansible.posix or certified collections, or request an exception.

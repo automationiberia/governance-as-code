@@ -1,0 +1,43 @@
+[WARNING]: No inventory was parsed, only implicit localhost is available
+[WARNING]: provided hosts list is empty, only localhost is available. Note that
+the implicit localhost does not match 'all'
+[DEPRECATION WARNING]: "include" is deprecated, use include_tasks/import_tasks 
+instead. See https://docs.ansible.com/ansible-
+core/2.15/user_guide/playbooks_reuse_includes.html for details. This feature 
+will be removed in version 2.16. Deprecation warnings can be disabled by 
+setting deprecation_warnings=False in ansible.cfg.
+
+PLAY [Characterize manage-users (original)] ************************************
+
+TASK [manage-users : Delete User] **********************************************
+ok: [localhost] => (item={'key': 'olduser', 'value': {}})
+
+TASK [manage-users : Delete Groups] ********************************************
+ok: [localhost] => (item={'key': 'oldgroup', 'value': {}})
+
+TASK [manage-users : Create Groups] ********************************************
+ok: [localhost] => (item={'key': 'oinstall', 'value': {'gid': 1200}})
+ok: [localhost] => (item={'key': 'dba', 'value': {'gid': 1205}})
+
+TASK [manage-users : Create Users] *********************************************
+[DEPRECATION WARNING]: Encryption using the Python crypt module is deprecated. 
+The Python crypt module is deprecated and will be removed from Python 3.13. 
+Install the passlib library for continued encryption functionality. This 
+feature will be removed in version 2.17. Deprecation warnings can be disabled 
+by setting deprecation_warnings=False in ansible.cfg.
+[WARNING]: 'append' is set, but no 'groups' are specified. Use 'groups' for
+appending new groups.This will change to an error in Ansible 2.14.
+ok: [localhost] => (item={'key': 'oracle', 'value': {'uid': 9000, 'group': 1200, 'groups': '1205', 'com': 'User Oracle'}})
+ok: [localhost] => (item={'key': 'orainfra', 'value': {'uid': 1220, 'group': 1200, 'com': 'User Oracle-Infra'}})
+
+TASK [manage-users : Force-chg-pwd] ********************************************
+skipping: [localhost] => (item={'key': 'oracle', 'value': {'uid': 9000, 'group': 1200, 'groups': '1205', 'com': 'User Oracle'}}) 
+skipping: [localhost] => (item={'key': 'orainfra', 'value': {'uid': 1220, 'group': 1200, 'com': 'User Oracle-Infra'}}) 
+skipping: [localhost]
+
+TASK [manage-users : Force-chg-pwd-Non-expiring] *******************************
+fatal: [localhost]: FAILED! => {"msg": "Unable to import chage due to invalid syntax"}
+
+PLAY RECAP *********************************************************************
+localhost                  : ok=4    changed=0    unreachable=0    failed=1    skipped=1    rescued=0    ignored=0   
+

@@ -1,0 +1,5 @@
+{
+  "ansible_lint": "ansible-lint",
+  "config": "../../acme/gates/ansible-lint.yml",
+  "offline": true
+}

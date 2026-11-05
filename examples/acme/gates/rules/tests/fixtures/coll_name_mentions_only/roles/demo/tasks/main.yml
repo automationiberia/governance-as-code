@@ -1,0 +1,4 @@
+---
+- name: Replace community.general.ufw with firewalld (community.general is not used)
+  ansible.builtin.debug:
+    msg: fixture

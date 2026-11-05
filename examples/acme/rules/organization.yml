@@ -1,0 +1,131 @@
+# ACME rule registry — organization layer (L1)
+# Single source for every ACME rule (GAC-0004). Each entry comes from an accepted ADR.
+
+- id: R-CODE-001
+  adr: ADR-0001
+  layer: organization
+  domain: null
+  statement: Role loop variables are named with the prefix __<role>_.
+  scope:
+    content: [role]
+    promotion_path: [all]
+  verifiability: mechanical
+  enforcement: block
+  block_from: 2026-11-04
+  locked: false
+  owner: automation-lead
+  acts_on:
+    action: tighten
+    target: "lint:loop-var-prefix"
+  ai_hint: >-
+    In roles, every loop sets loop_control.loop_var to __<role>_<name>; never
+    use the implicit item variable.
+  check: loop-var-prefix
+
+- id: R-DOC-001
+  adr: ADR-0002
+  layer: organization
+  domain: null
+  statement: Every role declares its entry point variables in meta/argument_specs.yml.
+  scope:
+    content: [role]
+    promotion_path: [all]
+  verifiability: mechanical
+  enforcement: block
+  block_from: 2026-11-04
+  locked: false
+  owner: automation-lead
+  acts_on:
+    action: tighten
+    target: "cop:roles/argument-validation"
+  ai_hint: >-
+    Create meta/argument_specs.yml with a main entry point describing every
+    public variable (type, required, default, description).
+  check: R-DOC-001
+
+- id: R-SEC-001
+  adr: ADR-0003
+  layer: organization
+  domain: null
+  statement: Roles do not define default values for passwords, tokens or keys.
+  scope:
+    content: [role]
+    promotion_path: [all]
+  verifiability: heuristic
+  enforcement: advise
+  block_from: null
+  locked: true
+  owner: security
+  acts_on:
+    action: add
+    target: null
+  ai_hint: >-
+    Make credential variables required (argument specs, no default) and mark
+    them no_log; values come from a vault.
+  check: null
+
+- id: R-CODE-002
+  adr: ADR-0004
+  layer: organization
+  domain: null
+  statement: command/shell only when no module provides the capability, with a comment naming the gap and idempotency guards.
+  scope:
+    content: [role, playbook]
+    promotion_path: [all]
+  verifiability: heuristic
+  enforcement: advise
+  block_from: null
+  locked: false
+  owner: automation-lead
+  acts_on:
+    action: tighten
+    target: "lint:command-instead-of-module, lint:no-changed-when"
+  ai_hint: >-
+    Prefer a module. If none exists, comment the missing capability above the
+    task, guard it with a check so it only runs when needed, and set
+    changed_when.
+  check: null
+
+- id: R-COLL-001
+  adr: ADR-0005
+  layer: organization
+  domain: null
+  statement: Production content uses nothing from community.general (modules, plugins, filters, lookups, dependencies, EE content).
+  scope:
+    content: [playbook, role, collection, ee]
+    promotion_path: [prod]
+  verifiability: mechanical
+  enforcement: block
+  block_from: 2026-11-04
+  locked: true
+  owner: security
+  acts_on:
+    action: add
+    target: null
+  ai_hint: >-
+    Do not use community.general in production repositories. Use
+    ansible.builtin, ansible.posix or certified collections; if none fits,
+    stop and request an exception.
+  check: R-COLL-001
+
+- id: R-TEST-001
+  adr: ADR-0006
+  layer: organization
+  domain: null
+  statement: Roles and collections in production repositories have an automated idempotency test.
+  scope:
+    content: [role, collection]
+    promotion_path: [prod]
+  verifiability: heuristic
+  enforcement: advise
+  block_from: null
+  locked: false
+  owner: automation-lead
+  acts_on:
+    action: tighten
+    target: "cop:roles/idempotency"
+  ai_hint: >-
+    Add a test that applies the content twice and fails if the second run
+    reports changes: a Molecule scenario with the idempotence step, or an
+    integration test run twice. Show the second-run result in the PR.
+  check: null

@@ -1,0 +1,60 @@
+before/roles/manage-users:1: role-name: Role name manage-users does not match ``^[a-z][a-z0-9_]*$`` pattern.
+before/roles/manage-users/defaults/main.yml:10:11: jinja[spacing][/]: Jinja2 spacing could be improved: {{item.key }} -> {{ item.key }} (warning)
+before/roles/manage-users/defaults/main.yml:11: yaml[comments][/]: Missing starting space in comment
+before/roles/manage-users/defaults/main.yml:12: yaml[comments][/]: Missing starting space in comment
+before/roles/manage-users/defaults/main.yml:13: yaml[comments][/]: Missing starting space in comment
+before/roles/manage-users/defaults/main.yml:14: yaml[comments][/]: Missing starting space in comment
+before/roles/manage-users/defaults/main.yml:15: yaml[truthy][/]: Truthy value should be one of [false, true]
+before/roles/manage-users/defaults/main.yml:16: yaml[truthy][/]: Truthy value should be one of [false, true]
+before/roles/manage-users/defaults/main.yml:19: yaml[truthy][/]: Truthy value should be one of [false, true]
+before/roles/manage-users/examples/example1.yml:8:9: syntax-check[specific][/]: The role 'manage-users' was not found in: <method>/examples/ex-01-modernize-ansible-manage-users/before/roles/manage-users/examples/roles:<acme>/gates/.ansible/roles:~/.ansible/roles:/usr/share/ansible/roles:/etc/ansible/roles:<method>/examples/ex-01-modernize-ansible-manage-users/before/roles/manage-users/examples
+before/roles/manage-users/examples/example2.yml:8:9: syntax-check[specific][/]: The role 'manage-users' was not found in: <method>/examples/ex-01-modernize-ansible-manage-users/before/roles/manage-users/examples/roles:<acme>/gates/.ansible/roles:~/.ansible/roles:/usr/share/ansible/roles:/etc/ansible/roles:<method>/examples/ex-01-modernize-ansible-manage-users/before/roles/manage-users/examples
+before/roles/manage-users/meta/main.yml:11: yaml[indentation][/]: Wrong indentation: expected 6 but found 4
+before/roles/manage-users/meta/main.yml:1: meta-no-tags: Tags must contain lowercase letters and digits only., invalid: 'group-management'
+before/roles/manage-users/meta/main.yml:1: meta-no-tags: Tags must contain lowercase letters and digits only., invalid: 'user-management'
+before/roles/manage-users/meta/main.yml:1: schema[meta][/]: $.galaxy_info.min_ansible_version 2.2 is not of type 'string'. See https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_reuse_roles.html#using-role-dependencies
+before/roles/manage-users/meta/main.yml:9: yaml[indentation][/]: Wrong indentation: expected 4 but found 2
+before/roles/manage-users/tasks/addgroup.yml:2: no-free-form: Avoid using free-form when calling module actions. (group)
+before/roles/manage-users/tasks/addgroup.yml:3:3: fqcn[action-core]: Use FQCN for builtin module actions (group).
+before/roles/manage-users/tasks/addgroup.yml:3: yaml[trailing-spaces]: Trailing spaces
+before/roles/manage-users/tasks/addgroup.yml:4: yaml[trailing-spaces]: Trailing spaces
+before/roles/manage-users/tasks/addgroup.yml:5: yaml[trailing-spaces]: Trailing spaces
+before/roles/manage-users/tasks/addgroup.yml:7:3: loop-var-prefix[missing][/]: Replace unsafe implicit `item` loop variable by adding a `loop_var` that is matching /^__{role}_/ regex.
+before/roles/manage-users/tasks/adduser.yml:17:3: loop-var-prefix[missing][/]: Replace unsafe implicit `item` loop variable by adding a `loop_var` that is matching /^__{role}_/ regex.
+before/roles/manage-users/tasks/adduser.yml:2: no-free-form: Avoid using free-form when calling module actions. (user)
+before/roles/manage-users/tasks/adduser.yml:3:3: fqcn[action-core]: Use FQCN for builtin module actions (user).
+before/roles/manage-users/tasks/chageuser.yml:11:3: loop-var-prefix[missing][/]: Replace unsafe implicit `item` loop variable by adding a `loop_var` that is matching /^__{role}_/ regex.
+before/roles/manage-users/tasks/chageuser.yml:15: no-free-form: Avoid using free-form when calling module actions. (chage)
+before/roles/manage-users/tasks/chageuser.yml:17:3: loop-var-prefix[missing][/]: Replace unsafe implicit `item` loop variable by adding a `loop_var` that is matching /^__{role}_/ regex.
+before/roles/manage-users/tasks/chageuser.yml:21: no-free-form: Avoid using free-form when calling module actions. (chage)
+before/roles/manage-users/tasks/chageuser.yml:21: yaml[trailing-spaces]: Trailing spaces
+before/roles/manage-users/tasks/chageuser.yml:22: yaml[trailing-spaces]: Trailing spaces
+before/roles/manage-users/tasks/chageuser.yml:23:3: loop-var-prefix[missing][/]: Replace unsafe implicit `item` loop variable by adding a `loop_var` that is matching /^__{role}_/ regex.
+before/roles/manage-users/tasks/chageuser.yml:8: yaml[trailing-spaces]: Trailing spaces
+before/roles/manage-users/tasks/chageuser.yml:9: no-free-form: Avoid using free-form when calling module actions. (chage)
+before/roles/manage-users/tasks/delgroup.yml:2: no-free-form: Avoid using free-form when calling module actions. (group)
+before/roles/manage-users/tasks/delgroup.yml:3:3: fqcn[action-core]: Use FQCN for builtin module actions (group).
+before/roles/manage-users/tasks/delgroup.yml:3: yaml[trailing-spaces]: Trailing spaces
+before/roles/manage-users/tasks/delgroup.yml:4: yaml[trailing-spaces]: Trailing spaces
+before/roles/manage-users/tasks/delgroup.yml:5: yaml[trailing-spaces]: Trailing spaces
+before/roles/manage-users/tasks/delgroup.yml:7:3: loop-var-prefix[missing][/]: Replace unsafe implicit `item` loop variable by adding a `loop_var` that is matching /^__{role}_/ regex.
+before/roles/manage-users/tasks/deluser.yml:2: no-free-form: Avoid using free-form when calling module actions. (user)
+before/roles/manage-users/tasks/deluser.yml:3:3: fqcn[action-core]: Use FQCN for builtin module actions (user).
+before/roles/manage-users/tasks/deluser.yml:7:3: loop-var-prefix[missing][/]: Replace unsafe implicit `item` loop variable by adding a `loop_var` that is matching /^__{role}_/ regex.
+before/roles/manage-users/tasks/main.yml:11: deprecated-module: Deprecated module. include
+before/roles/manage-users/tasks/main.yml:11: literal-compare: Don't compare to literal True/False.
+before/roles/manage-users/tasks/main.yml:11: name[missing][/]: All tasks should be named.
+before/roles/manage-users/tasks/main.yml:14: deprecated-module: Deprecated module. include
+before/roles/manage-users/tasks/main.yml:14: literal-compare: Don't compare to literal True/False.
+before/roles/manage-users/tasks/main.yml:14: name[missing][/]: All tasks should be named.
+before/roles/manage-users/tasks/main.yml:1: R-DOC-001: Role 'manage-users' has no meta/argument_specs.yml (ACME ADR-0002).
+before/roles/manage-users/tasks/main.yml:1: schema[tasks][/]: Replace 'include' with either 'ansible.builtin.include_tasks' or 'ansible.builtin.import_tasks'. See https://docs.ansible.com/projects/ansible/latest/collections/ansible/builtin/include_module.html
+before/roles/manage-users/tasks/main.yml:2: deprecated-module: Deprecated module. include
+before/roles/manage-users/tasks/main.yml:2: literal-compare: Don't compare to literal True/False.
+before/roles/manage-users/tasks/main.yml:2: name[missing][/]: All tasks should be named.
+before/roles/manage-users/tasks/main.yml:5: deprecated-module: Deprecated module. include
+before/roles/manage-users/tasks/main.yml:5: literal-compare: Don't compare to literal True/False.
+before/roles/manage-users/tasks/main.yml:5: name[missing][/]: All tasks should be named.
+before/roles/manage-users/tasks/main.yml:8: deprecated-module: Deprecated module. include
+before/roles/manage-users/tasks/main.yml:8: literal-compare: Don't compare to literal True/False.
+before/roles/manage-users/tasks/main.yml:8: name[missing][/]: All tasks should be named.

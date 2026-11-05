@@ -1,0 +1,24 @@
+---
+# Characterization: the ORIGINAL role, default password behavior (no override).
+- name: Characterize manage-users (original)
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  roles:
+    - role: manage-users
+      deluser: true
+      delgroup: true
+      addgroup: true
+      adduser: true
+      chageuser: true
+      chg_pwd: "Force-chg-pwd-Non-expiring"
+      users_del_list:
+        olduser: {}
+      groups_del_list:
+        oldgroup: {}
+      groups_list:
+        oinstall: {gid: 1200}
+        dba: {gid: 1205}
+      users_list:
+        oracle: {uid: 9000, group: 1200, groups: "1205", com: "User Oracle"}
+        orainfra: {uid: 1220, group: 1200, com: "User Oracle-Infra"}

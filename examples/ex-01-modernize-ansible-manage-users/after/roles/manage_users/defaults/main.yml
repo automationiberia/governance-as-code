@@ -1,0 +1,29 @@
+---
+# Actions — each one runs only when enabled
+manage_users_delete_users: false
+manage_users_delete_groups: false
+manage_users_add_groups: false
+manage_users_add_users: false
+manage_users_set_password_policy: false
+
+# Groups: name -> { gid }
+manage_users_groups: {}
+manage_users_groups_absent: {}
+
+# Users: name -> { uid, group, groups, home, com, shell, password }
+manage_users_users: {}
+manage_users_users_absent: {}
+
+# User creation options
+# No default password on purpose (ACME ADR-0003): set manage_users_password
+# or a per-user "password" key, from a vault.
+manage_users_default_shell: /bin/bash
+manage_users_update_password: on_create
+manage_users_create_home: true
+manage_users_non_unique: false
+
+# User removal options
+manage_users_remove_home: false
+
+# Password policy: force_change | force_change_non_expiring | non_expiring
+manage_users_password_policy: force_change

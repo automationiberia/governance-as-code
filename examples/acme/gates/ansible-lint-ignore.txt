@@ -1,0 +1,2 @@
+# ACME checker ignore file — exceptions and baselines.
+# Each line: <path> <rule-id>   # EXC-NNN or baseline-YYYY-MM-DD

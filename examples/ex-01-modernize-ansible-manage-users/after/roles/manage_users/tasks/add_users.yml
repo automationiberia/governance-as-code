@@ -1,0 +1,33 @@
+---
+- name: Add_users | Read existing accounts
+  ansible.builtin.getent:
+    database: passwd
+  tags: manage_users_add_users
+
+- name: Add_users | Record users created in this run
+  ansible.builtin.set_fact:
+    __manage_users_new_users: >-
+      {{ manage_users_users.keys() | difference(ansible_facts.getent_passwd.keys()) }}
+  tags: manage_users_add_users
+
+- name: Add_users | Ensure users are present
+  ansible.builtin.user:
+    name: "{{ __manage_users_user.key }}"
+    state: present
+    uid: "{{ __manage_users_user.value.uid | default(omit) }}"
+    group: "{{ __manage_users_user.value.group | default(omit) }}"
+    groups: "{{ __manage_users_user.value.groups | default(omit) }}"
+    append: "{{ __manage_users_user.value.groups is defined }}"  # ansible-core requires groups with append
+    home: "{{ __manage_users_user.value.home | default(omit) }}"
+    comment: "{{ __manage_users_user.value.com | default(omit) }}"
+    shell: "{{ __manage_users_user.value.shell | default(manage_users_default_shell) }}"
+    password: "{{ __manage_users_user.value.password | default(manage_users_password) | password_hash('sha512') }}"
+    update_password: "{{ manage_users_update_password }}"
+    create_home: "{{ manage_users_create_home }}"
+    non_unique: "{{ manage_users_non_unique }}"
+  loop: "{{ manage_users_users | dict2items }}"
+  loop_control:
+    loop_var: __manage_users_user
+    label: "{{ __manage_users_user.key }}"
+  no_log: true
+  tags: manage_users_add_users

@@ -1,0 +1,24 @@
+---
+# Same scenario with the modernized role (variables mapped per the migration table).
+- name: Characterize manage_users (modernized)
+  hosts: all
+  gather_facts: false
+  roles:
+    - role: manage_users
+      manage_users_delete_users: true
+      manage_users_delete_groups: true
+      manage_users_add_groups: true
+      manage_users_add_users: true
+      manage_users_set_password_policy: true
+      manage_users_password_policy: force_change_non_expiring
+      manage_users_password: "characterization-only"  # the role has no default (ADR-0003)
+      manage_users_users_absent:
+        olduser: {}
+      manage_users_groups_absent:
+        oldgroup: {}
+      manage_users_groups:
+        oinstall: {gid: 1200}
+        dba: {gid: 1205}
+      manage_users_users:
+        oracle: {uid: 9000, group: 1200, groups: "1205", com: "User Oracle"}
+        orainfra: {uid: 1220, group: 1200, com: "User Oracle-Infra"}

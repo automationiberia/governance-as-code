@@ -1,0 +1,4 @@
+---
+- name: Use a community.general filter
+  ansible.builtin.debug:
+    msg: "{{ [{'a': 1}] | community.general.json_query('[].a') }}"

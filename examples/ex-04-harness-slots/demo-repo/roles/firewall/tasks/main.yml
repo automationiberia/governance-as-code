@@ -1,0 +1,7 @@
+---
+# Demo: a task an AI might write. It breaks ACME rule R-COLL-001 (ADR-0005).
+- name: Allow SSH
+  community.general.ufw:
+    rule: allow
+    port: "22"
+    proto: tcp

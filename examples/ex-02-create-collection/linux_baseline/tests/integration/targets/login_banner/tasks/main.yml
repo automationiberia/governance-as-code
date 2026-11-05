@@ -1,0 +1,57 @@
+---
+# A stable directory (not tempfile) so that Molecule's idempotence step can
+# re-run this target and expect no changes.
+- name: Set the test directory
+  ansible.builtin.set_fact:
+    __login_banner_test_dir: >-
+      {{ lookup('env', 'MOLECULE_EPHEMERAL_DIRECTORY') | default('/tmp/login_banner_test', true) }}/banner
+
+- name: Ensure the test directory exists
+  ansible.builtin.file:
+    path: "{{ __login_banner_test_dir }}"
+    state: directory
+    mode: "0755"
+
+- name: Apply the role to the test directory
+  ansible.builtin.include_role:
+    name: acme.linux_baseline.login_banner
+  vars:
+    login_banner_text: Integration test banner
+    login_banner_motd_path: "{{ __login_banner_test_dir }}/motd"
+    login_banner_issue_path: "{{ __login_banner_test_dir }}/issue"
+    login_banner_issue_net_enabled: false
+    login_banner_owner: "{{ omit }}"
+    login_banner_group: "{{ omit }}"
+
+- name: Read the generated message of the day
+  ansible.builtin.slurp:
+    src: "{{ __login_banner_test_dir }}/motd"
+  register: __login_banner_test_motd
+
+- name: Read the generated local pre-login banner
+  ansible.builtin.slurp:
+    src: "{{ __login_banner_test_dir }}/issue"
+  register: __login_banner_test_issue
+
+- name: Read the permissions of the generated files
+  ansible.builtin.stat:
+    path: "{{ __login_banner_test_dir }}/{{ __login_banner_test_file }}"
+  loop: [motd, issue]
+  loop_control:
+    loop_var: __login_banner_test_file
+  register: __login_banner_test_stat
+
+- name: Check the issue.net file was not created
+  ansible.builtin.stat:
+    path: "{{ __login_banner_test_dir }}/issue.net"
+  register: __login_banner_test_issue_net
+
+- name: Assert the banner content and the disabled file
+  ansible.builtin.assert:
+    that:
+      - "'Integration test banner' in (__login_banner_test_motd.content | b64decode)"
+      - "'Ansible managed' in (__login_banner_test_motd.content | b64decode)"
+      - "'Integration test banner' in (__login_banner_test_issue.content | b64decode)"
+      - "'Ansible managed' in (__login_banner_test_issue.content | b64decode)"
+      - __login_banner_test_stat.results | map(attribute='stat.mode') | unique | list == ['0644']
+      - not __login_banner_test_issue_net.stat.exists

@@ -1,0 +1,37 @@
+# CI gate for a governed content repository (GitHub Actions).
+# Make "governance-checker" a required status check on protected branches.
+# Never add continue-on-error or "|| true" to this job (GAC-0006).
+name: governance-checker
+
+"on":
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  governance-checker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout content and governance instance (submodule)
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+
+      - name: Install checker
+        run: pip install "ansible-lint==26.10.1"
+
+      - name: Run checker
+        env:
+          # Repository identity comes from the platform, not from repository
+          # content: organization rules use it to read the promotion path and
+          # exceptions from the governance instance.
+          GAC_REPOSITORY: ${{ github.event.repository.name }}
+        run: >-
+          ansible-lint
+          -c governance/gates/ansible-lint.yml
+          -i governance/gates/ansible-lint-ignore.txt

@@ -1,0 +1,86 @@
+---
+argument_specs:
+  main:
+    short_description: Add and remove local users and groups, and set password aging policy
+    description:
+      - Each action runs only when its manage_users_* switch is true.
+      - Order of execution is delete users, delete groups, add groups, add users,
+        password policy.
+    options:
+      manage_users_delete_users:
+        type: bool
+        default: false
+        description: Remove the users listed in manage_users_users_absent.
+      manage_users_delete_groups:
+        type: bool
+        default: false
+        description: Remove the groups listed in manage_users_groups_absent.
+      manage_users_add_groups:
+        type: bool
+        default: false
+        description: Create the groups listed in manage_users_groups.
+      manage_users_add_users:
+        type: bool
+        default: false
+        description: Create the users listed in manage_users_users.
+      manage_users_set_password_policy:
+        type: bool
+        default: false
+        description: Apply manage_users_password_policy to the users in manage_users_users.
+      manage_users_groups:
+        type: dict
+        default: {}
+        description:
+          - Groups to create. Key is the group name; value may set C(gid).
+      manage_users_groups_absent:
+        type: dict
+        default: {}
+        description:
+          - Groups to remove. Key is the group name.
+      manage_users_users:
+        type: dict
+        default: {}
+        description:
+          - Users to create. Key is the user name.
+          - Value keys, all optional - C(uid), C(group), C(groups) (list or comma-separated),
+            C(home), C(com) (comment), C(shell), C(password) (plain text, from a vault).
+      manage_users_users_absent:
+        type: dict
+        default: {}
+        description:
+          - Users to remove. Key is the user name.
+      manage_users_password:
+        type: str
+        no_log: true
+        description:
+          - Initial password for users without their own C(password) key. Plain text, from a vault.
+          - Required when adding users that do not define C(password). There is no default.
+      manage_users_default_shell:
+        type: str
+        default: /bin/bash
+        description: Login shell for users without their own C(shell) key.
+      manage_users_update_password:
+        type: str
+        default: on_create
+        choices: [on_create, always]
+        description: When to set the password of existing users.
+      manage_users_create_home:
+        type: bool
+        default: true
+        description: Create the home directory of new users.
+      manage_users_non_unique:
+        type: bool
+        default: false
+        description: Allow non-unique UIDs.
+      manage_users_remove_home:
+        type: bool
+        default: false
+        description: Remove home directories when removing users.
+      manage_users_password_policy:
+        type: str
+        default: force_change
+        choices: [force_change, force_change_non_expiring, non_expiring]
+        description:
+          - C(force_change) - users created in this run must change their password at next login.
+          - C(force_change_non_expiring) - same, and password aging and account expiry are removed.
+          - C(non_expiring) - password aging and account expiry are removed.

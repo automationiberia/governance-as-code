@@ -1,0 +1,11 @@
+---
+- name: Add_groups | Ensure groups are present
+  ansible.builtin.group:
+    name: "{{ __manage_users_group.key }}"
+    gid: "{{ __manage_users_group.value.gid | default(omit) }}"
+    state: present
+  loop: "{{ manage_users_groups | dict2items }}"
+  loop_control:
+    loop_var: __manage_users_group
+    label: "{{ __manage_users_group.key }}"
+  tags: manage_users_add_groups

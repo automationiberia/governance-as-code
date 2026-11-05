@@ -1,0 +1,2378 @@
+{
+  "meta": {
+    "title": "Governance as Code — Ansible automation with AI, under your rules",
+    "author": "Governance as Code"
+  },
+  "canvas": {
+    "width": 1450,
+    "height": 870
+  },
+  "nodes": {
+    "people": {
+      "x": 430,
+      "y": 50,
+      "w": 200,
+      "h": 64,
+      "label": "People who decide",
+      "color": "#f0883e",
+      "type": "icon",
+      "sublabel": "architect · security · leads"
+    },
+    "dev": {
+      "x": 890,
+      "y": 50,
+      "w": 170,
+      "h": 64,
+      "label": "Developer",
+      "color": "#d2a8ff",
+      "type": "icon",
+      "sublabel": "with an AI assistant"
+    },
+    "l0": {
+      "x": 20,
+      "y": 130,
+      "w": 320,
+      "h": 480,
+      "label": "COMMUNITY BASELINE",
+      "color": "#58a6ff",
+      "type": "container"
+    },
+    "gov": {
+      "x": 370,
+      "y": 130,
+      "w": 320,
+      "h": 480,
+      "label": "YOUR GOVERNANCE",
+      "color": "#f0883e",
+      "type": "container"
+    },
+    "ai": {
+      "x": 720,
+      "y": 130,
+      "w": 350,
+      "h": 480,
+      "label": "AI ASSISTANT",
+      "color": "#d2a8ff",
+      "type": "container"
+    },
+    "auto": {
+      "x": 1100,
+      "y": 130,
+      "w": 330,
+      "h": 480,
+      "label": "YOUR AUTOMATION",
+      "color": "#3fb950",
+      "type": "container"
+    },
+    "trust": {
+      "x": 720,
+      "y": 660,
+      "w": 710,
+      "h": 190,
+      "label": "TRUSTED ZONE",
+      "color": "#e3b341",
+      "type": "boundary",
+      "labelAlign": "left"
+    },
+    "cop": {
+      "x": 45,
+      "y": 180,
+      "w": 270,
+      "h": 62,
+      "label": "Red Hat good practices",
+      "color": "#58a6ff",
+      "inner": true,
+      "sublabel": "how to write Ansible"
+    },
+    "aiforge": {
+      "x": 45,
+      "y": 265,
+      "w": 270,
+      "h": 62,
+      "label": "ai-forge skills",
+      "color": "#58a6ff",
+      "inner": true,
+      "sublabel": "AI know-how for Ansible content"
+    },
+    "aapskills": {
+      "x": 45,
+      "y": 350,
+      "w": 270,
+      "h": 62,
+      "label": "aap-skills",
+      "color": "#58a6ff",
+      "inner": true,
+      "sublabel": "AI know-how for the platform"
+    },
+    "lint": {
+      "x": 45,
+      "y": 435,
+      "w": 270,
+      "h": 62,
+      "label": "ansible-lint",
+      "color": "#58a6ff",
+      "inner": true,
+      "sublabel": "automatic checks"
+    },
+    "pinned": {
+      "x": 45,
+      "y": 520,
+      "w": 270,
+      "h": 62,
+      "label": "Used as published",
+      "color": "#8b949e",
+      "inner": true,
+      "sublabel": "pinned versions, never modified"
+    },
+    "adrs": {
+      "x": 395,
+      "y": 180,
+      "w": 270,
+      "h": 62,
+      "label": "Decisions (ADRs)",
+      "color": "#f0883e",
+      "inner": true,
+      "sublabel": "who decided what, and why"
+    },
+    "rules": {
+      "x": 395,
+      "y": 265,
+      "w": 270,
+      "h": 62,
+      "label": "Rules",
+      "color": "#f0883e",
+      "inner": true,
+      "sublabel": "one source, read by AI and tools"
+    },
+    "repomap": {
+      "x": 395,
+      "y": 350,
+      "w": 270,
+      "h": 62,
+      "label": "Repository map",
+      "color": "#f0883e",
+      "inner": true,
+      "sublabel": "production · lab"
+    },
+    "exceptions": {
+      "x": 395,
+      "y": 435,
+      "w": 270,
+      "h": 62,
+      "label": "Exceptions",
+      "color": "#f0883e",
+      "inner": true,
+      "sublabel": "scoped, approved, with expiry"
+    },
+    "ruletests": {
+      "x": 395,
+      "y": 520,
+      "w": 270,
+      "h": 62,
+      "label": "Rule tests",
+      "color": "#f0883e",
+      "inner": true,
+      "sublabel": "every rule proven to work"
+    },
+    "librarian": {
+      "x": 745,
+      "y": 180,
+      "w": 140,
+      "h": 70,
+      "label": "Librarian",
+      "color": "#d2a8ff",
+      "inner": true,
+      "sublabel": "proposes rules"
+    },
+    "contract": {
+      "x": 745,
+      "y": 265,
+      "w": 140,
+      "h": 70,
+      "label": "Success contract",
+      "color": "#d2a8ff",
+      "inner": true,
+      "fontSize": 14,
+      "sublabel": "agreed first"
+    },
+    "skills": {
+      "x": 745,
+      "y": 350,
+      "w": 140,
+      "h": 70,
+      "label": "Installed once",
+      "color": "#d2a8ff",
+      "inner": true,
+      "fontSize": 15,
+      "sublabel": "same everywhere"
+    },
+    "auditor": {
+      "x": 905,
+      "y": 180,
+      "w": 140,
+      "h": 70,
+      "label": "Auditor",
+      "color": "#d2a8ff",
+      "inner": true,
+      "sublabel": "reviews"
+    },
+    "builder": {
+      "x": 905,
+      "y": 265,
+      "w": 140,
+      "h": 70,
+      "label": "Builder",
+      "color": "#d2a8ff",
+      "inner": true,
+      "sublabel": "creates"
+    },
+    "operator": {
+      "x": 905,
+      "y": 350,
+      "w": 140,
+      "h": 70,
+      "label": "Operator",
+      "color": "#d2a8ff",
+      "inner": true,
+      "sublabel": "runs AAP"
+    },
+    "slots": {
+      "x": 745,
+      "y": 445,
+      "w": 300,
+      "h": 44,
+      "label": "Plug-in points",
+      "color": "#d2a8ff",
+      "inner": true,
+      "sublabel": "new AI tools plug in here",
+      "fontSize": 15
+    },
+    "legacy": {
+      "x": 1125,
+      "y": 180,
+      "w": 280,
+      "h": 60,
+      "label": "Legacy role",
+      "color": "#3fb950",
+      "inner": true,
+      "sublabel": "manage-users (2017)"
+    },
+    "modern": {
+      "x": 1125,
+      "y": 265,
+      "w": 280,
+      "h": 60,
+      "label": "Modernized role",
+      "color": "#3fb950",
+      "inner": true,
+      "sublabel": "manage_users"
+    },
+    "prodcoll": {
+      "x": 1125,
+      "y": 350,
+      "w": 280,
+      "h": 60,
+      "label": "Production collection",
+      "color": "#3fb950",
+      "inner": true,
+      "sublabel": "linux_baseline"
+    },
+    "labcoll": {
+      "x": 1125,
+      "y": 435,
+      "w": 280,
+      "h": 60,
+      "label": "Lab collection",
+      "color": "#3fb950",
+      "inner": true,
+      "sublabel": "lab_tools"
+    },
+    "fwrepos": {
+      "x": 1125,
+      "y": 520,
+      "w": 280,
+      "h": 60,
+      "label": "Firewall repositories",
+      "color": "#3fb950",
+      "inner": true,
+      "fontSize": 15,
+      "sublabel": "firewall_legacy · network_tuning"
+    },
+    "testplat": {
+      "x": 750,
+      "y": 710,
+      "w": 200,
+      "h": 90,
+      "label": "Test platform",
+      "color": "#e3b341",
+      "inner": true,
+      "sublabel": "disposable containers"
+    },
+    "ci": {
+      "x": 980,
+      "y": 710,
+      "w": 200,
+      "h": 90,
+      "label": "CI gate",
+      "color": "#e3b341",
+      "inner": true,
+      "sublabel": "blocks the merge"
+    },
+    "checker": {
+      "x": 1210,
+      "y": 710,
+      "w": 195,
+      "h": 90,
+      "label": "Checker",
+      "color": "#e3b341",
+      "inner": true,
+      "sublabel": "community + your rules"
+    },
+    "aap": {
+      "x": 30,
+      "y": 710,
+      "w": 150,
+      "h": 80,
+      "label": "AAP",
+      "color": "#8b949e",
+      "sublabel": "automation platform"
+    },
+    "report": {
+      "x": 220,
+      "y": 710,
+      "w": 170,
+      "h": 80,
+      "label": "Audit report",
+      "color": "#8b949e",
+      "sublabel": "findings + plan"
+    },
+    "pr": {
+      "x": 430,
+      "y": 710,
+      "w": 190,
+      "h": 80,
+      "label": "Pull request",
+      "color": "#8b949e",
+      "sublabel": "evidence for approval"
+    },
+    "slot_knowledge": {
+      "x": 745,
+      "y": 494,
+      "w": 69,
+      "h": 46,
+      "label": "Knowledge",
+      "color": "#d2a8ff",
+      "type": "plugin",
+      "inner": true,
+      "fontSize": 11
+    },
+    "slot_skills": {
+      "x": 822,
+      "y": 494,
+      "w": 69,
+      "h": 46,
+      "label": "Skills",
+      "color": "#d2a8ff",
+      "type": "plugin",
+      "inner": true,
+      "fontSize": 11
+    },
+    "slot_tools": {
+      "x": 899,
+      "y": 494,
+      "w": 69,
+      "h": 46,
+      "label": "Tools",
+      "color": "#d2a8ff",
+      "type": "plugin",
+      "inner": true,
+      "fontSize": 11
+    },
+    "slot_input": {
+      "x": 976,
+      "y": 494,
+      "w": 69,
+      "h": 46,
+      "label": "Input",
+      "color": "#d2a8ff",
+      "type": "plugin",
+      "inner": true,
+      "fontSize": 11
+    },
+    "slot_output": {
+      "x": 745,
+      "y": 550,
+      "w": 69,
+      "h": 46,
+      "label": "Output",
+      "color": "#d2a8ff",
+      "type": "plugin",
+      "inner": true,
+      "fontSize": 11
+    },
+    "slot_guardrails": {
+      "x": 822,
+      "y": 550,
+      "w": 69,
+      "h": 46,
+      "label": "Guardrails",
+      "color": "#d2a8ff",
+      "type": "plugin",
+      "inner": true,
+      "fontSize": 11
+    },
+    "slot_execution": {
+      "x": 899,
+      "y": 550,
+      "w": 69,
+      "h": 46,
+      "label": "Execution",
+      "color": "#d2a8ff",
+      "type": "plugin",
+      "inner": true,
+      "fontSize": 11
+    },
+    "slot_evolution": {
+      "x": 976,
+      "y": 550,
+      "w": 69,
+      "h": 46,
+      "label": "Evolution",
+      "color": "#d2a8ff",
+      "type": "plugin",
+      "inner": true,
+      "fontSize": 11
+    }
+  },
+  "tooltips": {
+    "cop": {
+      "title": "Red Hat good practices",
+      "description": "The community baseline for writing Ansible. Used as published and pinned to a version; never copied or modified.",
+      "links": [
+        [
+          "Source",
+          "https://redhat-cop.github.io/automation-good-practices/"
+        ]
+      ]
+    },
+    "aiforge": {
+      "title": "ai-forge",
+      "description": "Skills that give AI assistants Ansible know-how: scaffolding, writing content, tests, reviews.",
+      "links": [
+        [
+          "Source",
+          "https://github.com/ansible-community/ai-forge"
+        ]
+      ]
+    },
+    "aapskills": {
+      "title": "aap-skills",
+      "description": "Skills to operate Ansible Automation Platform through its MCP server. Read-only by default.",
+      "links": [
+        [
+          "Source",
+          "https://github.com/ansible/aap-skills"
+        ]
+      ]
+    },
+    "adrs": {
+      "title": "Decisions (ADRs)",
+      "description": "Every company rule starts as a decision: context, decision, consequences, who approved it. Only what differs from the community.",
+      "details": [
+        [
+          "Example",
+          "ADR-0005: no community.general in production"
+        ]
+      ],
+      "links": [
+        [
+          "ACME decisions",
+          "../examples/acme/README.md"
+        ],
+        [
+          "Method decisions",
+          "../adr/README.md"
+        ]
+      ]
+    },
+    "rules": {
+      "title": "Rules",
+      "description": "Each decision becomes one machine-readable rule. AI assistants and checkers read the same source.",
+      "links": [
+        [
+          "ACME rules",
+          "../examples/acme/rules/organization.yml"
+        ]
+      ]
+    },
+    "repomap": {
+      "title": "Repository map",
+      "description": "Which repositories reach production. It decides which rules apply — not the person asking. Unlisted repositories are treated as production.",
+      "links": [
+        [
+          "ACME manifest",
+          "../examples/acme/manifest.yml"
+        ]
+      ]
+    },
+    "exceptions": {
+      "title": "Exceptions",
+      "description": "When a project cannot comply: narrow scope, approved by the rule owner, with an expiry date. Expired exceptions stop working automatically.",
+      "links": [
+        [
+          "ACME register",
+          "../examples/acme/exceptions/register.yml"
+        ]
+      ]
+    },
+    "ruletests": {
+      "title": "Rule tests",
+      "description": "Each automatic rule has examples that must pass and must fail. They already caught three defects in our own rules.",
+      "links": [
+        [
+          "Tests",
+          "../examples/acme/gates/rules/tests/test_rules.py"
+        ]
+      ]
+    },
+    "skills": {
+      "title": "Installed once",
+      "description": "One setup per repository installs the modes and the community skills, pinned, in the format of each AI assistant (Claude Code, Cursor, Copilot…).",
+      "links": [
+        [
+          "Setup",
+          "../starter-kit/SETUP.md"
+        ]
+      ]
+    },
+    "auditor": {
+      "title": "Auditor",
+      "description": "Reviews existing automation against community and company rules. Every finding says which rule and who decided it.",
+      "links": [
+        [
+          "Example report",
+          "../examples/ex-01-modernize-ansible-manage-users/reports/audit-before.md"
+        ]
+      ]
+    },
+    "builder": {
+      "title": "Builder",
+      "description": "Creates or modernizes automation. Agrees the success contract first, then builds until every check passes."
+    },
+    "librarian": {
+      "title": "Librarian",
+      "description": "Turns needs into proposed decisions and rules, measuring their impact. It never approves."
+    },
+    "operator": {
+      "title": "Operator",
+      "description": "Checks jobs and diagnoses failures in AAP. Read-only first; any change needs explicit confirmation."
+    },
+    "contract": {
+      "title": "Success contract",
+      "description": "What will count as success, approved by a person before building: what must stay the same, what changes, how it is checked.",
+      "links": [
+        [
+          "Example",
+          "../examples/ex-01-modernize-ansible-manage-users/reports/success-contract.md"
+        ]
+      ]
+    },
+    "slots": {
+      "title": "Plug-in points",
+      "description": "New AI tools appear every week. Each one plugs into one of eight fixed points through a decision (ADR). In the reference instance all eight are adopted, installed by the setup and verified — including a guardrail that checks every edit the AI makes.",
+      "details": [
+        [
+          "Knowledge",
+          "community baseline + your governance"
+        ],
+        [
+          "Capabilities",
+          "modes, ai-forge, aap-skills"
+        ],
+        [
+          "Integrations",
+          "AAP MCP server (read-only)"
+        ],
+        [
+          "Input",
+          "rtk — shorter command output"
+        ],
+        [
+          "Output",
+          "report templates + concise style"
+        ],
+        [
+          "Guardrails",
+          "checker after every edit"
+        ],
+        [
+          "Execution",
+          "test containers"
+        ],
+        [
+          "Evolution",
+          "exception expiry watch"
+        ]
+      ],
+      "links": [
+        [
+          "Slot catalog",
+          "../slots/README.md"
+        ],
+        [
+          "EX-04",
+          "../examples/ex-04-harness-slots/README.md"
+        ]
+      ]
+    },
+    "legacy": {
+      "title": "Legacy role (2017)",
+      "description": "Does not load on current Ansible, sets each password to the user name, and its password policy has never worked on modern systems.",
+      "links": [
+        [
+          "Audit",
+          "../examples/ex-01-modernize-ansible-manage-users/reports/audit-before.md"
+        ],
+        [
+          "What it really does",
+          "../examples/ex-01-modernize-ansible-manage-users/characterization/README.md"
+        ]
+      ]
+    },
+    "modern": {
+      "title": "Modernized role",
+      "description": "0 findings, no default password, idempotent: a second run changes nothing.",
+      "links": [
+        [
+          "Pull request",
+          "../examples/ex-01-modernize-ansible-manage-users/reports/pr-body.md"
+        ]
+      ]
+    },
+    "prodcoll": {
+      "title": "Production collection",
+      "description": "Production → an automated test is required (rule R-TEST-001).",
+      "links": [
+        [
+          "Example",
+          "../examples/ex-02-create-collection/README.md"
+        ]
+      ]
+    },
+    "labcoll": {
+      "title": "Lab collection",
+      "description": "Lab → no automated test required. Same checker, no shortcuts."
+    },
+    "fwrepos": {
+      "title": "Firewall repositories",
+      "description": "One legacy repository needs a forbidden collection until its migration: it has an exception until 31 March 2027.",
+      "links": [
+        [
+          "Example",
+          "../examples/ex-03-forbid-community-general/README.md"
+        ]
+      ]
+    },
+    "checker": {
+      "title": "Checker",
+      "description": "The same automatic check for people, AI assistants, pre-commit and CI: community rules plus your rules."
+    },
+    "testplat": {
+      "title": "Test platform",
+      "description": "Disposable containers declared by your governance, so tests run the same way everywhere.",
+      "links": [
+        [
+          "ACME decision",
+          "../examples/acme/adr/ADR-0007-test-platform.md"
+        ]
+      ]
+    },
+    "ci": {
+      "title": "CI gate",
+      "description": "Blocks the merge when a rule is broken — even if an AI assistant ignored its instructions."
+    }
+  },
+  "flows": {
+    "problem": {
+      "label": "0 · The problem",
+      "steps": [
+        {
+          "text": "Red Hat publishes good practices for Ansible.",
+          "mode": "lightup",
+          "target": "cop",
+          "badge": 1
+        },
+        {
+          "text": "ai-forge gives AI assistants Ansible know-how.",
+          "mode": "lightup",
+          "target": "aiforge",
+          "badge": 2
+        },
+        {
+          "text": "aap-skills lets AI assistants operate the platform.",
+          "mode": "lightup",
+          "target": "aapskills",
+          "badge": 3
+        },
+        {
+          "text": "But every company already has its own way of working…",
+          "mode": "lightup",
+          "target": "legacy",
+          "badge": "!",
+          "errColor": "#f85149"
+        },
+        {
+          "text": "…its naming, forbidden collections, approvals. No community base knows them.",
+          "mode": "lightup",
+          "target": "rules",
+          "badge": "?",
+          "errColor": "#f85149"
+        },
+        {
+          "text": "Without governance, every team and every AI assistant improvises.",
+          "mode": "arrow",
+          "from": "dev",
+          "to": "builder",
+          "color": "#f85149",
+          "num": 6,
+          "toRight": true,
+          "waypoints": [
+            {
+              "x": 1085,
+              "y": 122
+            },
+            {
+              "x": 1085,
+              "y": 300
+            }
+          ]
+        },
+        {
+          "text": "Result: many ways of doing the same thing, and no one can prove which is right.",
+          "mode": "lightup",
+          "target": "ci",
+          "badge": "✗",
+          "errColor": "#f85149"
+        }
+      ]
+    },
+    "layers": {
+      "label": "1 · Community first, your rules on top",
+      "steps": [
+        {
+          "text": "Layer 0: the community baseline, used as published and pinned.",
+          "mode": "lightup",
+          "target": "pinned",
+          "badge": "L0"
+        },
+        {
+          "text": "People decide only what is different — and record why.",
+          "mode": "arrow",
+          "from": "people",
+          "to": "adrs",
+          "color": "#f0883e",
+          "num": 2,
+          "toTop": true
+        },
+        {
+          "text": "Each decision becomes one rule, in one place.",
+          "mode": "arrow",
+          "from": "adrs",
+          "to": "rules",
+          "color": "#f0883e",
+          "num": 3,
+          "fromBottom": true,
+          "toTop": true
+        },
+        {
+          "text": "The repository map decides where each rule applies: production is stricter.",
+          "mode": "arrow",
+          "from": "rules",
+          "to": "repomap",
+          "color": "#f0883e",
+          "num": 4,
+          "fromBottom": true,
+          "toTop": true
+        },
+        {
+          "text": "A project that cannot comply gets an exception: narrow, approved, with an expiry date.",
+          "mode": "lightup",
+          "target": "exceptions",
+          "badge": "⏱"
+        },
+        {
+          "text": "Every automatic rule has tests that prove it works.",
+          "mode": "lightup",
+          "target": "ruletests",
+          "badge": "✓"
+        },
+        {
+          "text": "Community baseline + your differences = the rules that apply here.",
+          "mode": "lightup",
+          "target": "rules",
+          "badge": "="
+        }
+      ]
+    },
+    "harness": {
+      "label": "2 · The AI assistant and the trusted zone",
+      "steps": [
+        {
+          "text": "Every AI assistant gets the same skills, installed once.",
+          "mode": "lightup",
+          "target": "skills",
+          "badge": "1×"
+        },
+        {
+          "text": "New AI tools plug into eight fixed points — all eight in use in the reference instance. The method stays the same when tools change.",
+          "mode": "lightup",
+          "target": "slots",
+          "badge": 8
+        },
+        {
+          "text": "The assistant reads only the rules that apply to the task.",
+          "mode": "arrow",
+          "from": "rules",
+          "to": "skills",
+          "color": "#f0883e",
+          "num": 3,
+          "fromRight": true,
+          "toLeft": true
+        },
+        {
+          "text": "While it works, a guardrail checks every edit and shows the AI what to fix — on the spot.",
+          "mode": "lightup",
+          "target": "slot_guardrails",
+          "badge": "✓"
+        },
+        {
+          "text": "Whatever the assistant produces goes through the checker.",
+          "mode": "arrow",
+          "from": "builder",
+          "to": "checker",
+          "color": "#58a6ff",
+          "num": 5,
+          "fromRight": true,
+          "toTop": true,
+          "waypoints": [
+            {
+              "x": 1085,
+              "y": 300
+            },
+            {
+              "x": 1085,
+              "y": 641
+            },
+            {
+              "x": 1307,
+              "y": 641
+            }
+          ]
+        },
+        {
+          "text": "The CI gate blocks anything that breaks a rule — even if the AI ignored its instructions.",
+          "mode": "arrow",
+          "from": "checker",
+          "to": "ci",
+          "color": "#f85149",
+          "num": 6,
+          "fromLeft": true,
+          "toRight": true
+        },
+        {
+          "text": "Guidance lives in the assistant; the guarantee lives in the gates.",
+          "mode": "lightup",
+          "target": "ci",
+          "badge": "🔒"
+        }
+      ]
+    },
+    "modes": {
+      "label": "3 · How people use it",
+      "steps": [
+        {
+          "text": "Set up once per repository: modes and community skills, pinned.",
+          "mode": "lightup",
+          "target": "skills",
+          "badge": "1×"
+        },
+        {
+          "text": "/audit — review what already exists.",
+          "mode": "arrow",
+          "from": "dev",
+          "to": "auditor",
+          "color": "#d2a8ff",
+          "num": 2,
+          "toTop": true
+        },
+        {
+          "text": "/build — create or modernize automation.",
+          "mode": "arrow",
+          "from": "dev",
+          "to": "builder",
+          "color": "#d2a8ff",
+          "num": 3,
+          "toRight": true,
+          "waypoints": [
+            {
+              "x": 1085,
+              "y": 122
+            },
+            {
+              "x": 1085,
+              "y": 300
+            }
+          ]
+        },
+        {
+          "text": "/librarian — propose a rule or an exception. People approve.",
+          "mode": "arrow",
+          "from": "people",
+          "to": "librarian",
+          "color": "#f0883e",
+          "num": 4,
+          "toLeft": true,
+          "waypoints": [
+            {
+              "x": 705,
+              "y": 122
+            },
+            {
+              "x": 705,
+              "y": 215
+            }
+          ]
+        },
+        {
+          "text": "/operate — check jobs in the platform. Read-only first.",
+          "mode": "arrow",
+          "from": "dev",
+          "to": "operator",
+          "color": "#d2a8ff",
+          "num": 5,
+          "toRight": true,
+          "waypoints": [
+            {
+              "x": 1085,
+              "y": 122
+            },
+            {
+              "x": 1085,
+              "y": 385
+            }
+          ]
+        },
+        {
+          "text": "The Operator works only through the platform's official interface.",
+          "mode": "lightup",
+          "target": "aap",
+          "badge": "✓"
+        },
+        {
+          "text": "Same modes for every company; only the governance changes.",
+          "mode": "lightup",
+          "target": "skills",
+          "badge": "="
+        }
+      ]
+    },
+    "ex01": {
+      "label": "4 · Example: modernize a 2017 role",
+      "steps": [
+        {
+          "text": "A developer asks the assistant to audit a legacy role.",
+          "mode": "arrow",
+          "from": "dev",
+          "to": "auditor",
+          "color": "#d2a8ff",
+          "num": 1,
+          "toTop": true
+        },
+        {
+          "text": "The Auditor reviews it against community and company rules.",
+          "mode": "arrow",
+          "from": "auditor",
+          "to": "legacy",
+          "color": "#d2a8ff",
+          "num": 2,
+          "fromRight": true,
+          "toLeft": true
+        },
+        {
+          "text": "The checker runs on the role.",
+          "mode": "arrow",
+          "from": "legacy",
+          "to": "checker",
+          "color": "#58a6ff",
+          "num": 3,
+          "fromRight": true,
+          "toTop": true,
+          "waypoints": [
+            {
+              "x": 1442,
+              "y": 210
+            },
+            {
+              "x": 1442,
+              "y": 641
+            },
+            {
+              "x": 1307,
+              "y": 641
+            }
+          ]
+        },
+        {
+          "text": "60 findings. It does not even load on current Ansible, and passwords equal user names.",
+          "mode": "lightup",
+          "target": "legacy",
+          "badge": 60,
+          "errColor": "#f85149"
+        },
+        {
+          "text": "Before changing anything, it runs the original role in a container to see what it really does.",
+          "mode": "arrow",
+          "from": "auditor",
+          "to": "testplat",
+          "color": "#f0883e",
+          "num": 5,
+          "fromRight": true,
+          "toTop": true,
+          "waypoints": [
+            {
+              "x": 1085,
+              "y": 215
+            },
+            {
+              "x": 1085,
+              "y": 635
+            },
+            {
+              "x": 935,
+              "y": 635
+            }
+          ],
+          "toXOff": 85
+        },
+        {
+          "text": "Surprise: its password policy has never worked on modern systems.",
+          "mode": "lightup",
+          "target": "testplat",
+          "badge": "!",
+          "errColor": "#f85149"
+        },
+        {
+          "text": "Everything goes into the audit report, with a plan.",
+          "mode": "lightup",
+          "target": "report",
+          "badge": "✓"
+        },
+        {
+          "text": "A success contract: what must stay the same, and what will change.",
+          "mode": "lightup",
+          "target": "contract",
+          "badge": "?"
+        },
+        {
+          "text": "People approve the contract before anything is built.",
+          "mode": "arrow",
+          "from": "people",
+          "to": "contract",
+          "color": "#f0883e",
+          "num": 9,
+          "toLeft": true,
+          "waypoints": [
+            {
+              "x": 705,
+              "y": 122
+            },
+            {
+              "x": 705,
+              "y": 300
+            }
+          ]
+        },
+        {
+          "text": "The Builder modernizes the role.",
+          "mode": "arrow",
+          "from": "builder",
+          "to": "modern",
+          "color": "#d2a8ff",
+          "num": 10,
+          "fromRight": true,
+          "toLeft": true
+        },
+        {
+          "text": "The checker runs again.",
+          "mode": "arrow",
+          "from": "modern",
+          "to": "checker",
+          "color": "#58a6ff",
+          "num": 11,
+          "fromRight": true,
+          "toTop": true,
+          "waypoints": [
+            {
+              "x": 1442,
+              "y": 295
+            },
+            {
+              "x": 1442,
+              "y": 641
+            },
+            {
+              "x": 1307,
+              "y": 641
+            }
+          ]
+        },
+        {
+          "text": "The test runs twice: the second run changes nothing.",
+          "mode": "arrow",
+          "from": "modern",
+          "to": "testplat",
+          "color": "#3fb950",
+          "num": 12,
+          "fromRight": true,
+          "toTop": true,
+          "waypoints": [
+            {
+              "x": 1442,
+              "y": 295
+            },
+            {
+              "x": 1442,
+              "y": 635
+            },
+            {
+              "x": 935,
+              "y": 635
+            }
+          ],
+          "toXOff": 85
+        },
+        {
+          "text": "A pull request with every rule applied and its evidence — ready for human approval.",
+          "mode": "lightup",
+          "target": "pr",
+          "badge": "✓"
+        }
+      ]
+    },
+    "ex02": {
+      "label": "5 · Example: create a new collection — production vs lab",
+      "steps": [
+        {
+          "text": "Two requests: a production collection and a lab collection.",
+          "mode": "arrow",
+          "from": "dev",
+          "to": "builder",
+          "color": "#d2a8ff",
+          "num": 1,
+          "toRight": true,
+          "waypoints": [
+            {
+              "x": 1085,
+              "y": 122
+            },
+            {
+              "x": 1085,
+              "y": 300
+            }
+          ]
+        },
+        {
+          "text": "The Builder creates the production collection.",
+          "mode": "arrow",
+          "from": "builder",
+          "to": "prodcoll",
+          "color": "#d2a8ff",
+          "num": 2,
+          "fromRight": true,
+          "toLeft": true
+        },
+        {
+          "text": "The repository map classifies it as production.",
+          "mode": "lightup",
+          "target": "prodcoll",
+          "badge": "PROD"
+        },
+        {
+          "text": "Production → an automated test is required, and it runs.",
+          "mode": "arrow",
+          "from": "prodcoll",
+          "to": "testplat",
+          "color": "#3fb950",
+          "num": 4,
+          "fromRight": true,
+          "toTop": true,
+          "waypoints": [
+            {
+              "x": 1442,
+              "y": 380
+            },
+            {
+              "x": 1442,
+              "y": 635
+            },
+            {
+              "x": 935,
+              "y": 635
+            }
+          ],
+          "toXOff": 85
+        },
+        {
+          "text": "The Builder creates the lab collection.",
+          "mode": "arrow",
+          "from": "builder",
+          "to": "labcoll",
+          "color": "#d2a8ff",
+          "num": 5,
+          "fromRight": true,
+          "toLeft": true
+        },
+        {
+          "text": "The repository map classifies it as lab → no test required.",
+          "mode": "lightup",
+          "target": "labcoll",
+          "badge": "LAB"
+        },
+        {
+          "text": "The lab collection passes the same checker: no shortcuts.",
+          "mode": "arrow",
+          "from": "labcoll",
+          "to": "checker",
+          "color": "#58a6ff",
+          "num": 7,
+          "fromRight": true,
+          "toTop": true,
+          "waypoints": [
+            {
+              "x": 1442,
+              "y": 465
+            },
+            {
+              "x": 1442,
+              "y": 641
+            },
+            {
+              "x": 1307,
+              "y": 641
+            }
+          ]
+        },
+        {
+          "text": "So does the production collection.",
+          "mode": "arrow",
+          "from": "prodcoll",
+          "to": "checker",
+          "color": "#58a6ff",
+          "num": 8,
+          "fromRight": true,
+          "toTop": true,
+          "waypoints": [
+            {
+              "x": 1442,
+              "y": 380
+            },
+            {
+              "x": 1442,
+              "y": 641
+            },
+            {
+              "x": 1307,
+              "y": 641
+            }
+          ]
+        },
+        {
+          "text": "Requirements come from the map — never from who asks.",
+          "mode": "lightup",
+          "target": "repomap",
+          "badge": "="
+        }
+      ]
+    },
+    "ex03": {
+      "label": "6 · Example: a new company rule",
+      "steps": [
+        {
+          "text": "Security asks: production must not use a community collection without support.",
+          "mode": "arrow",
+          "from": "people",
+          "to": "librarian",
+          "color": "#f0883e",
+          "num": 1,
+          "toLeft": true,
+          "waypoints": [
+            {
+              "x": 705,
+              "y": 122
+            },
+            {
+              "x": 705,
+              "y": 215
+            }
+          ]
+        },
+        {
+          "text": "The Librarian measures the impact on every repository in the map.",
+          "mode": "arrow",
+          "from": "librarian",
+          "to": "repomap",
+          "color": "#d2a8ff",
+          "num": 2,
+          "fromLeft": true,
+          "toRight": true
+        },
+        {
+          "text": "Only 1 of 6 repositories is affected.",
+          "mode": "lightup",
+          "target": "fwrepos",
+          "badge": "1/6"
+        },
+        {
+          "text": "It drafts the decision and the rule…",
+          "mode": "arrow",
+          "from": "librarian",
+          "to": "adrs",
+          "color": "#d2a8ff",
+          "num": 4,
+          "fromLeft": true,
+          "toRight": true
+        },
+        {
+          "text": "…with tests that prove the rule, written first.",
+          "mode": "arrow",
+          "from": "adrs",
+          "to": "ruletests",
+          "color": "#f0883e",
+          "num": 5,
+          "fromLeft": true,
+          "toLeft": true,
+          "waypoints": [
+            {
+              "x": 355,
+              "y": 211
+            },
+            {
+              "x": 355,
+              "y": 551
+            }
+          ]
+        },
+        {
+          "text": "People approve the decision.",
+          "mode": "arrow",
+          "from": "people",
+          "to": "adrs",
+          "color": "#f0883e",
+          "num": 6,
+          "toTop": true
+        },
+        {
+          "text": "The decision becomes a rule.",
+          "mode": "arrow",
+          "from": "adrs",
+          "to": "rules",
+          "color": "#f0883e",
+          "num": 7,
+          "fromBottom": true,
+          "toTop": true
+        },
+        {
+          "text": "An AI-written draft uses the forbidden collection…",
+          "mode": "arrow",
+          "from": "builder",
+          "to": "checker",
+          "color": "#58a6ff",
+          "num": 8,
+          "fromRight": true,
+          "toTop": true,
+          "waypoints": [
+            {
+              "x": 1085,
+              "y": 300
+            },
+            {
+              "x": 1085,
+              "y": 641
+            },
+            {
+              "x": 1307,
+              "y": 641
+            }
+          ]
+        },
+        {
+          "text": "…and the checker blocks it.",
+          "mode": "lightup",
+          "target": "checker",
+          "badge": "✗",
+          "errColor": "#f85149"
+        },
+        {
+          "text": "The Builder rewrites it with supported modules.",
+          "mode": "arrow",
+          "from": "builder",
+          "to": "fwrepos",
+          "color": "#3fb950",
+          "num": 10,
+          "fromRight": true,
+          "toLeft": true
+        },
+        {
+          "text": "The legacy firewall repository gets an exception until March 2027.",
+          "mode": "arrow",
+          "from": "people",
+          "to": "exceptions",
+          "color": "#f0883e",
+          "num": 11,
+          "toRight": true,
+          "waypoints": [
+            {
+              "x": 705,
+              "y": 122
+            },
+            {
+              "x": 705,
+              "y": 466
+            }
+          ]
+        },
+        {
+          "text": "When it expires, the gate blocks again — automatically.",
+          "mode": "lightup",
+          "target": "exceptions",
+          "badge": "⏱"
+        }
+      ]
+    },
+    "ex04": {
+      "label": "7 · Example: plug tools into the harness",
+      "steps": [
+        {
+          "text": "A team wants a new tool: shorter command output for the AI.",
+          "mode": "arrow",
+          "from": "people",
+          "to": "librarian",
+          "color": "#f0883e",
+          "num": 1,
+          "toLeft": true,
+          "waypoints": [
+            {
+              "x": 705,
+              "y": 122
+            },
+            {
+              "x": 705,
+              "y": 215
+            }
+          ]
+        },
+        {
+          "text": "The Librarian drafts an adoption decision: what it touches, how it is pinned, what it could conflict with, how to verify and remove it.",
+          "mode": "arrow",
+          "from": "librarian",
+          "to": "adrs",
+          "color": "#d2a8ff",
+          "num": 2,
+          "fromLeft": true,
+          "toRight": true
+        },
+        {
+          "text": "People approve it.",
+          "mode": "arrow",
+          "from": "people",
+          "to": "adrs",
+          "color": "#f0883e",
+          "num": 3,
+          "toTop": true
+        },
+        {
+          "text": "It plugs into the Input slot. Nothing else changes.",
+          "mode": "lightup",
+          "target": "slot_input",
+          "badge": "✓"
+        },
+        {
+          "text": "One setup per repository installs and verifies every adopted tool: 8 of 8 slots active.",
+          "mode": "lightup",
+          "target": "skills",
+          "badge": "8/8"
+        },
+        {
+          "text": "Test in a fresh AI session: it writes a forbidden module, on purpose…",
+          "mode": "lightup",
+          "target": "builder",
+          "badge": "✗",
+          "errColor": "#f85149"
+        },
+        {
+          "text": "…and the guardrail answers at once, with the rule and the decision behind it.",
+          "mode": "lightup",
+          "target": "slot_guardrails",
+          "badge": "!",
+          "errColor": "#f85149"
+        },
+        {
+          "text": "The AI fixes it before anything reaches CI. The CI gate still proves it.",
+          "mode": "lightup",
+          "target": "checker",
+          "badge": "✓"
+        },
+        {
+          "text": "Evolution: expired exceptions now fail the governance checks automatically.",
+          "mode": "lightup",
+          "target": "slot_evolution",
+          "badge": "⏱"
+        },
+        {
+          "text": "Every new tool: one slot, one decision. The method stays the same.",
+          "mode": "lightup",
+          "target": "slots",
+          "badge": "="
+        }
+      ]
+    },
+    "validation": {
+      "label": "8 · We tested it with a fresh AI assistant",
+      "steps": [
+        {
+          "text": "A clean repository, set up once.",
+          "mode": "lightup",
+          "target": "skills",
+          "badge": "1×"
+        },
+        {
+          "text": "A fresh assistant runs an audit with only the installed skills.",
+          "mode": "arrow",
+          "from": "dev",
+          "to": "auditor",
+          "color": "#d2a8ff",
+          "num": 2,
+          "toTop": true
+        },
+        {
+          "text": "It follows the method — and finds things we had missed.",
+          "mode": "lightup",
+          "target": "auditor",
+          "badge": 22
+        },
+        {
+          "text": "It also exposed three defects in the method itself.",
+          "mode": "arrow",
+          "from": "auditor",
+          "to": "librarian",
+          "color": "#f85149",
+          "num": 4,
+          "fromLeft": true,
+          "toRight": true
+        },
+        {
+          "text": "We fixed them, writing the tests first.",
+          "mode": "arrow",
+          "from": "librarian",
+          "to": "ruletests",
+          "color": "#f0883e",
+          "num": 5,
+          "fromLeft": true,
+          "toRight": true
+        },
+        {
+          "text": "A fresh assistant modernizes the role.",
+          "mode": "arrow",
+          "from": "dev",
+          "to": "builder",
+          "color": "#d2a8ff",
+          "num": 6,
+          "toRight": true,
+          "waypoints": [
+            {
+              "x": 1085,
+              "y": 122
+            },
+            {
+              "x": 1085,
+              "y": 300
+            }
+          ]
+        },
+        {
+          "text": "Its role works: the second run changes nothing.",
+          "mode": "arrow",
+          "from": "builder",
+          "to": "modern",
+          "color": "#3fb950",
+          "num": 7,
+          "fromRight": true,
+          "toLeft": true
+        },
+        {
+          "text": "Its own test could not run in that session — lesson: tests must run where they are written.",
+          "mode": "lightup",
+          "target": "testplat",
+          "badge": "!",
+          "errColor": "#f85149"
+        },
+        {
+          "text": "Second fresh session, all eight slots active: the guardrail fired live and the AI fixed the code at once.",
+          "mode": "lightup",
+          "target": "slot_guardrails",
+          "badge": "✓"
+        },
+        {
+          "text": "The method improves with every use (Evolution).",
+          "mode": "lightup",
+          "target": "slots",
+          "badge": "↻"
+        }
+      ]
+    },
+    "close": {
+      "label": "9 · What you get",
+      "steps": [
+        {
+          "text": "Start from the community; never fork it.",
+          "mode": "lightup",
+          "target": "cop",
+          "badge": 1
+        },
+        {
+          "text": "Your company decides only the differences — with traceability.",
+          "mode": "lightup",
+          "target": "adrs",
+          "badge": 2
+        },
+        {
+          "text": "AI assistants follow the same rules as people.",
+          "mode": "lightup",
+          "target": "skills",
+          "badge": 3
+        },
+        {
+          "text": "Success is agreed before building.",
+          "mode": "lightup",
+          "target": "contract",
+          "badge": 4
+        },
+        {
+          "text": "Gates guarantee it — with or without AI.",
+          "mode": "lightup",
+          "target": "ci",
+          "badge": 5
+        },
+        {
+          "text": "New tools plug in without redesigning anything.",
+          "mode": "lightup",
+          "target": "slots",
+          "badge": 6
+        }
+      ]
+    }
+  },
+  "inspector": {
+    "initialState": {
+      "phase": "request",
+      "headers": [
+        {
+          "value": "Choose a chapter and press Start",
+          "style": "keep",
+          "id": "h0"
+        }
+      ],
+      "body": [],
+      "cycleState": []
+    },
+    "mutations": {
+      "problem": [
+        {
+          "step": 1,
+          "label": "Today",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Community bases: good, but generic",
+              "style": "keep",
+              "id": "h0"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Company rules: nowhere",
+              "style": "err",
+              "id": "b0"
+            },
+            {
+              "value": "AI assistants: improvise",
+              "style": "err",
+              "id": "b1"
+            }
+          ]
+        }
+      ],
+      "layers": [
+        {
+          "step": 1,
+          "label": "Layers",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "L0 Community — as published",
+              "style": "keep",
+              "id": "h0"
+            }
+          ],
+          "replaceBody": []
+        },
+        {
+          "step": 2,
+          "label": "Your differences",
+          "actions": [
+            {
+              "action": "add",
+              "target": "headers",
+              "value": "L1 Company — decisions + rules",
+              "id": "h1",
+              "style": "add"
+            }
+          ]
+        },
+        {
+          "step": 5,
+          "label": "Exceptions",
+          "actions": [
+            {
+              "action": "add",
+              "target": "headers",
+              "value": "L3 Project — exceptions only",
+              "id": "h2",
+              "style": "add"
+            }
+          ]
+        },
+        {
+          "step": 7,
+          "label": "Effective rules",
+          "phase": "response",
+          "replaceBody": [
+            {
+              "value": "Rules that apply = baseline + differences",
+              "style": "add",
+              "id": "b0"
+            }
+          ]
+        }
+      ],
+      "harness": [
+        {
+          "step": 1,
+          "label": "Two places",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "AI assistant → guidance",
+              "style": "keep",
+              "id": "h0"
+            },
+            {
+              "value": "Trusted zone → guarantee",
+              "style": "keep",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": []
+        },
+        {
+          "step": 4,
+          "label": "While it works",
+          "actions": [
+            {
+              "action": "add",
+              "target": "body",
+              "value": "Guardrail: every edit checked on the spot",
+              "id": "b0",
+              "style": "add"
+            }
+          ]
+        },
+        {
+          "step": 6,
+          "label": "Guarantee",
+          "phase": "response",
+          "actions": [
+            {
+              "id": "h1",
+              "style": "highlight"
+            }
+          ]
+        }
+      ],
+      "modes": [
+        {
+          "step": 1,
+          "label": "Four modes",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Auditor · Builder · Librarian · Operator",
+              "style": "keep",
+              "id": "h0"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Rules: from your governance",
+              "style": "keep",
+              "id": "b0"
+            }
+          ]
+        }
+      ],
+      "ex01": [
+        {
+          "step": 1,
+          "label": "Before",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Findings: —",
+              "style": "keep",
+              "id": "h0"
+            },
+            {
+              "value": "Loads on current Ansible: ?",
+              "style": "keep",
+              "id": "h1"
+            },
+            {
+              "value": "Password = user name: ?",
+              "style": "keep",
+              "id": "h2"
+            },
+            {
+              "value": "Password policy works: ?",
+              "style": "keep",
+              "id": "h3"
+            },
+            {
+              "value": "Second run changes nothing: ?",
+              "style": "keep",
+              "id": "h4"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Success contract: not yet",
+              "style": "keep",
+              "id": "b0"
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "label": "Audit",
+          "phase": "error",
+          "replaceHeaders": [
+            {
+              "value": "Findings: 60",
+              "style": "err",
+              "id": "h0"
+            },
+            {
+              "value": "Loads on current Ansible: no",
+              "style": "err",
+              "id": "h1"
+            },
+            {
+              "value": "Password = user name: yes",
+              "style": "err",
+              "id": "h2"
+            },
+            {
+              "value": "Password policy works: ?",
+              "style": "keep",
+              "id": "h3"
+            },
+            {
+              "value": "Second run changes nothing: ?",
+              "style": "keep",
+              "id": "h4"
+            }
+          ]
+        },
+        {
+          "step": 6,
+          "label": "What it really does",
+          "actions": [
+            {
+              "action": "remove",
+              "id": "h3"
+            },
+            {
+              "action": "add",
+              "target": "headers",
+              "value": "Password policy works: never did",
+              "id": "h3b",
+              "style": "err"
+            }
+          ]
+        },
+        {
+          "step": 9,
+          "label": "Contract approved",
+          "phase": "request",
+          "replaceBody": [
+            {
+              "value": "Success contract: approved",
+              "style": "add",
+              "id": "b0"
+            },
+            {
+              "value": "Keep: accounts, groups, removals",
+              "style": "keep",
+              "id": "b1"
+            },
+            {
+              "value": "Change: no default password, policy works",
+              "style": "keep",
+              "id": "b2"
+            }
+          ]
+        },
+        {
+          "step": 12,
+          "label": "After",
+          "phase": "response",
+          "replaceHeaders": [
+            {
+              "value": "Findings: 0",
+              "style": "add",
+              "id": "h0"
+            },
+            {
+              "value": "Loads on current Ansible: yes",
+              "style": "add",
+              "id": "h1"
+            },
+            {
+              "value": "Password = user name: no",
+              "style": "add",
+              "id": "h2"
+            },
+            {
+              "value": "Password policy works: yes",
+              "style": "add",
+              "id": "h3"
+            },
+            {
+              "value": "Second run changes nothing: yes",
+              "style": "add",
+              "id": "h4"
+            }
+          ]
+        }
+      ],
+      "ex03": [
+        {
+          "step": 1,
+          "label": "Need",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Rule: proposed",
+              "style": "keep",
+              "id": "h0"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Repositories affected: ?",
+              "style": "keep",
+              "id": "b0"
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "label": "Impact",
+          "replaceBody": [
+            {
+              "value": "Repositories affected: 1 of 6",
+              "style": "highlight",
+              "id": "b0"
+            }
+          ]
+        },
+        {
+          "step": 6,
+          "label": "Approved",
+          "replaceHeaders": [
+            {
+              "value": "Rule: approved",
+              "style": "add",
+              "id": "h0"
+            },
+            {
+              "value": "Rule tests: written first",
+              "style": "add",
+              "id": "h1"
+            }
+          ]
+        },
+        {
+          "step": 9,
+          "label": "Blocked",
+          "phase": "error",
+          "actions": [
+            {
+              "action": "add",
+              "target": "body",
+              "value": "AI draft: 3 findings — blocked",
+              "id": "b1",
+              "style": "err"
+            }
+          ]
+        },
+        {
+          "step": 10,
+          "label": "Fixed",
+          "phase": "response",
+          "actions": [
+            {
+              "action": "remove",
+              "id": "b1"
+            },
+            {
+              "action": "add",
+              "target": "body",
+              "value": "AI draft rewritten: 0 findings",
+              "id": "b2",
+              "style": "add"
+            }
+          ]
+        },
+        {
+          "step": 11,
+          "label": "Exception",
+          "actions": [
+            {
+              "action": "add",
+              "target": "body",
+              "value": "Exception: firewall_legacy until 2027-03-31",
+              "id": "b3",
+              "style": "highlight"
+            }
+          ]
+        }
+      ],
+      "ex02": [
+        {
+          "step": 1,
+          "label": "Two requests",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Production collection",
+              "style": "keep",
+              "id": "h0"
+            },
+            {
+              "value": "Lab collection",
+              "style": "keep",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": []
+        },
+        {
+          "step": 4,
+          "label": "Production",
+          "actions": [
+            {
+              "id": "h0",
+              "style": "highlight"
+            },
+            {
+              "action": "add",
+              "target": "body",
+              "value": "Production: automated test required — passed",
+              "id": "b0",
+              "style": "add"
+            }
+          ]
+        },
+        {
+          "step": 6,
+          "label": "Lab",
+          "actions": [
+            {
+              "action": "add",
+              "target": "body",
+              "value": "Lab: no test required",
+              "id": "b1",
+              "style": "keep"
+            }
+          ]
+        },
+        {
+          "step": 8,
+          "label": "Same gates",
+          "phase": "response",
+          "actions": [
+            {
+              "action": "add",
+              "target": "body",
+              "value": "Both: same checker, 0 findings",
+              "id": "b2",
+              "style": "add"
+            }
+          ]
+        }
+      ],
+      "validation": [
+        {
+          "step": 1,
+          "label": "Fresh assistant",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Context: only the installed skills",
+              "style": "keep",
+              "id": "h0"
+            }
+          ],
+          "replaceBody": []
+        },
+        {
+          "step": 3,
+          "label": "Audit",
+          "actions": [
+            {
+              "action": "add",
+              "target": "body",
+              "value": "Followed the method: yes",
+              "id": "b0",
+              "style": "add"
+            },
+            {
+              "action": "add",
+              "target": "body",
+              "value": "New findings we had missed",
+              "id": "b1",
+              "style": "add"
+            }
+          ]
+        },
+        {
+          "step": 5,
+          "label": "Method fixed",
+          "actions": [
+            {
+              "action": "add",
+              "target": "body",
+              "value": "3 method defects found and fixed",
+              "id": "b2",
+              "style": "highlight"
+            }
+          ]
+        },
+        {
+          "step": 7,
+          "label": "Build",
+          "actions": [
+            {
+              "action": "add",
+              "target": "body",
+              "value": "Its role works and is idempotent",
+              "id": "b3",
+              "style": "add"
+            }
+          ]
+        },
+        {
+          "step": 8,
+          "label": "Lesson",
+          "phase": "error",
+          "actions": [
+            {
+              "action": "add",
+              "target": "body",
+              "value": "Its test was written but not run",
+              "id": "b4",
+              "style": "err"
+            }
+          ]
+        },
+        {
+          "step": 9,
+          "label": "Second session",
+          "phase": "response",
+          "actions": [
+            {
+              "action": "add",
+              "target": "body",
+              "value": "2nd session: guardrail fired live, fixed at once",
+              "id": "b5",
+              "style": "add"
+            }
+          ]
+        }
+      ],
+      "close": [
+        {
+          "step": 1,
+          "label": "Summary",
+          "phase": "response",
+          "replaceHeaders": [
+            {
+              "value": "One method, your rules, any AI assistant",
+              "style": "add",
+              "id": "h0"
+            }
+          ],
+          "replaceBody": []
+        }
+      ],
+      "ex04": [
+        {
+          "step": 1,
+          "label": "Request",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Slots in use: 2 of 8",
+              "style": "keep",
+              "id": "h0"
+            },
+            {
+              "value": "New tool: proposed",
+              "style": "keep",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": []
+        },
+        {
+          "step": 3,
+          "label": "Approved",
+          "actions": [
+            {
+              "action": "remove",
+              "id": "h1"
+            },
+            {
+              "action": "add",
+              "target": "headers",
+              "value": "New tool: approved (decision recorded)",
+              "id": "h1b",
+              "style": "add"
+            }
+          ]
+        },
+        {
+          "step": 5,
+          "label": "Installed",
+          "actions": [
+            {
+              "action": "remove",
+              "id": "h0"
+            },
+            {
+              "action": "add",
+              "target": "headers",
+              "value": "Slots in use: 8 of 8 — verified",
+              "id": "h0b",
+              "style": "add"
+            }
+          ]
+        },
+        {
+          "step": 7,
+          "label": "Guardrail",
+          "phase": "error",
+          "actions": [
+            {
+              "action": "add",
+              "target": "body",
+              "value": "AI wrote a forbidden module → told at once",
+              "id": "b0",
+              "style": "err"
+            }
+          ]
+        },
+        {
+          "step": 8,
+          "label": "Fixed",
+          "phase": "response",
+          "actions": [
+            {
+              "action": "remove",
+              "id": "b0"
+            },
+            {
+              "action": "add",
+              "target": "body",
+              "value": "Fixed before CI; CI still proves it",
+              "id": "b1",
+              "style": "add"
+            }
+          ]
+        },
+        {
+          "step": 9,
+          "label": "Evolution",
+          "actions": [
+            {
+              "action": "add",
+              "target": "body",
+              "value": "Expired exceptions fail automatically",
+              "id": "b2",
+              "style": "add"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "flowOrder": [
+    "problem",
+    "layers",
+    "harness",
+    "modes",
+    "ex01",
+    "ex02",
+    "ex03",
+    "ex04",
+    "validation",
+    "close"
+  ],
+  "defaultFlow": "problem",
+  "legend": [
+    {
+      "label": "Community",
+      "color": "#58a6ff"
+    },
+    {
+      "label": "Your governance / people",
+      "color": "#f0883e"
+    },
+    {
+      "label": "AI assistant",
+      "color": "#d2a8ff"
+    },
+    {
+      "label": "Your automation / OK",
+      "color": "#3fb950"
+    },
+    {
+      "label": "Gates",
+      "color": "#e3b341"
+    },
+    {
+      "label": "Blocked",
+      "color": "#f85149"
+    }
+  ]
+}

@@ -1,0 +1,8 @@
+---
+# Disposable test host: a UBI 9 container managed through podman.
+#   podman run -d --name gac-ex01 registry.access.redhat.com/ubi9/ubi sleep infinity
+all:
+  hosts:
+    gac-ex01:
+      ansible_connection: containers.podman.podman
+      ansible_python_interpreter: /usr/bin/python3

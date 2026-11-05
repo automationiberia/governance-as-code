@@ -1,0 +1,21 @@
+# ACME exception register — project layer (L3)
+# Entries follow starter-kit/gac-modes/module/skills/gac-librarian/templates/exception.yml
+# Organization lint rules read this file directly (scope, approval, expiry).
+
+- id: EXC-001
+  rule: R-COLL-001
+  scope:
+    repository: firewall_legacy
+    paths: []
+    items:
+      - community.general.ufw
+      - community.general
+  justification: >-
+    Legacy Ubuntu 20.04 hosts are managed with ufw, which has no supported
+    alternative. The hosts are retired in the Q1 2027 migration; the
+    repository is archived then.
+  requested_by: linux-team
+  approved_by: security
+  approved_on: 2026-11-04
+  expires: 2027-03-31
+  renewals: 0

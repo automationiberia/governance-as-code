@@ -1,0 +1,16 @@
+---
+login_banner_text: |-
+  Authorized use only. Activity on this system may be monitored and recorded.
+  Disconnect now if you are not an authorized user.
+
+login_banner_motd_enabled: true
+login_banner_issue_enabled: true
+login_banner_issue_net_enabled: true
+
+login_banner_motd_path: /etc/motd
+login_banner_issue_path: /etc/issue
+login_banner_issue_net_path: /etc/issue.net
+
+login_banner_owner: root
+login_banner_group: root
+login_banner_mode: "0644"

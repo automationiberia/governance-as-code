@@ -1,0 +1,16 @@
+# Exception register entry (draft — schema pending)
+# L3 only. Gates honor an exception only within its scope and until it expires.
+
+- id: EXC-NNN
+  rule: R-AREA-NNN               # rule being suspended
+  scope:
+    repository: <repo name>
+    paths: []                    # optional, narrows the scope
+    items: []                    # optional, e.g. specific modules or collections
+  justification: >-
+    Why the project cannot comply, and what the plan to remove the exception is.
+  requested_by: <person or team>
+  approved_by: <rule owner>      # mandatory when the rule is locked
+  approved_on: YYYY-MM-DD
+  expires: YYYY-MM-DD            # mandatory; expired exceptions are ignored by gates
+  renewals: 0                    # repeated renewals signal the ADR should be revisited

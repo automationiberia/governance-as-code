@@ -1,0 +1,46 @@
+
+PLAY [Characterize manage_users (modernized)] **********************************
+
+TASK [manage_users : Validating arguments against arg spec 'main' - Add and remove local users and groups, and set password aging policy] ***
+ok: [gac-char-new]
+
+TASK [manage_users : Main | Ensure every new user has an initial password] *****
+ok: [gac-char-new]
+
+TASK [manage_users : Delete_users | Ensure users are absent] *******************
+changed: [gac-char-new] => (item=olduser)
+
+TASK [manage_users : Delete_groups | Ensure groups are absent] *****************
+changed: [gac-char-new] => (item=oldgroup)
+
+TASK [manage_users : Add_groups | Ensure groups are present] *******************
+changed: [gac-char-new] => (item=oinstall)
+changed: [gac-char-new] => (item=dba)
+
+TASK [manage_users : Add_users | Read existing accounts] ***********************
+ok: [gac-char-new]
+
+TASK [manage_users : Add_users | Record users created in this run] *************
+ok: [gac-char-new]
+
+TASK [manage_users : Add_users | Ensure users are present] *********************
+changed: [gac-char-new] => (item=(censored due to no_log))
+changed: [gac-char-new] => (item=(censored due to no_log))
+
+TASK [manage_users : Password_policy | Remove password aging and account expiry] ***
+ok: [gac-char-new] => (item=oracle)
+ok: [gac-char-new] => (item=orainfra)
+
+TASK [manage_users : Password_policy | Read shadow entries] ********************
+ok: [gac-char-new]
+
+TASK [manage_users : Password_policy | Disable password inactivity period] *****
+skipping: [gac-char-new] => (item=oracle) 
+changed: [gac-char-new] => (item=orainfra)
+
+TASK [manage_users : Password_policy | Force password change at next login for new users] ***
+changed: [gac-char-new] => (item=oracle)
+
+PLAY RECAP *********************************************************************
+gac-char-new               : ok=12   changed=6    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0   
+

@@ -1,0 +1,4 @@
+---
+# `include` was removed from ansible-core: ansible-lint reports a syntax error
+# for this file and skips the other rules on it. R-DOC-001 must still fire.
+- include: other.yml

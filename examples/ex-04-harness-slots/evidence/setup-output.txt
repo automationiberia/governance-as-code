@@ -1,0 +1,18 @@
+Harness slots — acme → <tmp>/ex-01-modernize-ansible-manage-users (claude-code, project scope)
+
+slot          entry                      status       mechanism       outcome           note
+------------------------------------------------------------------------------------------------------------------------
+knowledge     community-baseline         required     reference       verified          referenced: cop-good-practices, ansible-lint
+knowledge     organization-governance    required     reference       verified          referenced: manifest.yml, adr/, rules/, exceptions/
+capabilities  gac-modes                  required     lola-module     applied+verified  gac-modes [5 skills, 4 commands, instructions] — 5 expected skills present
+capabilities  ai-forge                   required     lola-module     applied+verified  ansible-collection-standards [1 skill, 3 commands, instructions]; ansible-role [1 command, instructions]; ansible-content-development [4 skills, instructions]; ansible-documentation [1 skill, instructions]; ansible-collection-sdlc [26 skills, 3 commands, instructions] — 6 expected skills present
+capabilities  aap-skills                 required     lola-module     applied+verified  aap-skills [5 skills] — 5 expected skills present
+integrations  aap-mcp-server             recommended  mcp-server      applied+verified  aap-mcp → ${AAP_MCP_URL:-http://localhost:3000/mcp/system_monitoring}; connectivity not checked (no endpoint configured)
+input         rtk                        recommended  hook            applied+verified  PreToolUse:Bash → rtk; probe 'git status' rewritten
+output        artifact-templates         required     reference       verified          referenced: audit-report.md, success-contract.md, pr-body.md, adr.md
+output        i-have-adhd                recommended  lola-module     applied+verified  i-have-adhd [1 skill, instructions] — 1 expected skills present
+guardrails    checker-on-edit            required     hook            applied+verified  PostToolUse:Edit|Write|MultiEdit → gac_checker_on_edit.py
+execution     test-platform              required     test-platform   verified          podman available; registry.access.redhat.com/ubi9/ubi:latest present
+evolution     exception-watch            required     instance-check  verified          1 exception(s) reviewed on 2026-11-05: 0 expired, 0 invalid, 0 expiring soon
+
+Slots active: 8/8  (knowledge, capabilities, integrations, input, output, guardrails, execution, evolution)

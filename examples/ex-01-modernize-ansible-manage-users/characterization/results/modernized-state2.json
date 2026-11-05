@@ -1,0 +1,40 @@
+{
+  "groups": {
+    "dba": 1205,
+    "oinstall": 1200,
+    "oldgroup": "absent"
+  },
+  "users": {
+    "olduser": "absent",
+    "oracle": {
+      "comment": "User Oracle",
+      "expire": -1,
+      "gid": 1200,
+      "groups": [
+        "dba"
+      ],
+      "home": "/home/oracle",
+      "inactive": -1,
+      "last_change": 20762,
+      "max": 99999,
+      "min": 0,
+      "password_equals_username": false,
+      "shell": "/bin/bash",
+      "uid": 9000
+    },
+    "orainfra": {
+      "comment": "User Oracle-Infra",
+      "expire": -1,
+      "gid": 1200,
+      "groups": [],
+      "home": "/home/orainfra",
+      "inactive": -1,
+      "last_change": 20762,
+      "max": 99999,
+      "min": 0,
+      "password_equals_username": false,
+      "shell": "/bin/bash",
+      "uid": 1220
+    }
+  }
+}

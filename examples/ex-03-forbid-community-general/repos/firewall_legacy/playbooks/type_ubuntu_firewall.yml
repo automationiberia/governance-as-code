@@ -1,0 +1,15 @@
+---
+- name: Configure the firewall on legacy Ubuntu hosts
+  hosts: ubuntu_legacy
+  become: true
+  tasks:
+    - name: Allow SSH through ufw
+      community.general.ufw:
+        rule: allow
+        port: "22"
+        proto: tcp
+
+    - name: Enable ufw with a default deny policy
+      community.general.ufw:
+        state: enabled
+        policy: deny

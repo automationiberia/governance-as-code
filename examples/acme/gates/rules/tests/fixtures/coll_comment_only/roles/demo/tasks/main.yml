@@ -1,0 +1,5 @@
+---
+# Previously used community.general.ufw; replaced by ansible.posix.firewalld.
+- name: Fixture task
+  ansible.builtin.debug:
+    msg: fixture

@@ -1,0 +1,8 @@
+---
+- name: Set the timezone on lab hosts
+  hosts: lab
+  become: true
+  tasks:
+    - name: Set timezone to UTC
+      community.general.timezone:
+        name: UTC

@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+
+# Ansible / Molecule
+.ansible/
+*.retry
+
+# Collection build artifacts (ansible-galaxy collection build)
+*.tar.gz
+
+# Per-person files written by starter-kit/setup/gac-setup.sh in content
+# repositories: they contain absolute paths of the local tool environment.
+.lola/
+.claude/settings.json
+.claude/settings.local.json
+.claude/hooks/gac-hook.json
+# …except the guardrail demo repository, whose hook config is relative on purpose
+!examples/ex-04-harness-slots/demo-repo/.claude/hooks/gac-hook.json
+
+# Editors and OS
+.idea/
+.vscode/
+*.swp
+.DS_Store

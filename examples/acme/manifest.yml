@@ -1,0 +1,205 @@
+# Instance manifest — ACME (fictitious reference organization)
+instance: acme
+version: "2026.11"
+method_version: "0.1"
+
+# L0 — community bases, pinned (ADR-0001)
+bases:
+  - id: cop-good-practices
+    source: https://github.com/redhat-cop/automation-good-practices
+    ref: fb5fcd6f03c544909dbad352a352b421c41d7203
+  - id: ai-forge
+    source: https://github.com/ansible-community/ai-forge
+    ref: b8447dc561e3d5bb605500c8eb1193ff738ea114
+    modules:
+      - ansible-collection-standards
+      - ansible-role
+      - ansible-content-development
+      - ansible-documentation
+      - ansible-collection-sdlc
+  - id: aap-skills
+    source: https://github.com/ansible/aap-skills
+    ref: 4f30b4eb7207e6c2602e5354dbe00b319ff18dc4
+  - id: ansible-lint
+    source: https://github.com/ansible/ansible-lint
+    ref: v26.10.1
+    profile: production
+  # Community tools adopted into harness slots (L0, pinned) — ADR-0011, ADR-0012
+  - id: rtk
+    source: https://github.com/rtk-ai/rtk
+    ref: v1.1.0
+    edition: oss                     # Apache-2.0 only
+    binary: rtk
+    artifacts:
+      linux-x86_64:
+        url: https://github.com/rtk-ai/rtk/releases/download/v1.1.0/rtk-oss-x86_64-unknown-linux-musl.tar.gz
+        sha256: 4dec94a64035e08189ae82fd5408fe4ae9ae27a665fc07e3e3ec3c4c2d8e8a3e
+  - id: i-have-adhd
+    source: https://github.com/ayghri/i-have-adhd
+    ref: 1ecea1993b7fce257ffbd686c070948b5e07eda6
+
+layers:
+  organization:
+    adrs: adr/
+    rules: rules/
+  domains: []
+  projects:
+    exceptions: exceptions/
+
+promotion_paths:
+  prod:
+    repositories:
+      - ex-01-modernize-ansible-manage-users
+      - linux_baseline
+      - firewall_legacy
+      - network_tuning
+  nonprod:
+    repositories:
+      - lab_tools
+      - lab_sandbox
+
+slots:
+  # Every entry: adopted by an ADR, pinned, applied and verified by gac-setup.
+  knowledge:
+    - id: community-baseline
+      adr: ADR-0008
+      status: required
+      mechanism: reference
+      bases: [cop-good-practices, ansible-lint]
+    - id: organization-governance
+      adr: ADR-0008
+      status: required
+      mechanism: reference
+      paths: [manifest.yml, adr/, rules/, exceptions/]
+  capabilities:
+    - id: gac-modes
+      adr: ADR-0001
+      status: required
+      mechanism: lola-module
+      source: method
+      path: starter-kit/gac-modes
+      expect_skills: [gac-governance, gac-auditor, gac-builder, gac-librarian, gac-operator]
+    - id: ai-forge
+      adr: ADR-0001
+      status: required
+      mechanism: lola-module
+      base: ai-forge
+      modules:
+        - ansible-collection-standards
+        - ansible-role
+        - ansible-content-development
+        - ansible-documentation
+        - ansible-collection-sdlc
+      expect_skills: [ansible-zen, write-content, write-content-tests, ansible-markdown-docs, commit, create-pr]
+    - id: aap-skills
+      adr: ADR-0009
+      status: required
+      mechanism: lola-module
+      base: aap-skills
+      modules: ["."]
+      module_content: "/"          # the customer-facing skills/, not dev-tools/
+      expect_skills:
+        - aap-platform-health-check
+        - aap-effective-access-review
+        - aap-pre-upgrade-readiness
+        - aap-supportability-assessment
+        - aap-validate-deployment-topology
+  integrations:
+    - id: aap-mcp-server
+      adr: ADR-0010
+      status: recommended            # needs an AAP endpoint and a read-only token
+      mechanism: mcp-server
+      config:
+        name: aap-mcp
+        transport: http
+        url: "${AAP_MCP_URL:-http://localhost:3000/mcp/system_monitoring}"
+        url_env: AAP_MCP_URL
+        headers:
+          Authorization: "Bearer ${AAP_MCP_TOKEN}"
+  input:
+    - id: rtk
+      adr: ADR-0011
+      status: recommended
+      mechanism: hook
+      base: rtk
+      config:
+        event: PreToolUse
+        matcher: Bash
+        args: hook claude
+        probe: {command: "git status", expect: "rtk git status"}
+        env:
+          # rtk looks for its hook in the user's global config and, not finding
+          # it, tells the agent to run `rtk init -g` (once a day). The hook is
+          # declared per project on purpose: silence that advice.
+          RTK_SUPPRESS_HOOK_WARNING: "1"
+  output:
+    - id: artifact-templates
+      adr: ADR-0012
+      status: required
+      mechanism: reference
+      method_paths:                  # templates ship inside the gac-modes skills
+        - starter-kit/gac-modes/module/skills/gac-auditor/templates/audit-report.md
+        - starter-kit/gac-modes/module/skills/gac-builder/templates/success-contract.md
+        - starter-kit/gac-modes/module/skills/gac-builder/templates/pr-body.md
+        - starter-kit/gac-modes/module/skills/gac-librarian/templates/adr.md
+    - id: i-have-adhd
+      adr: ADR-0012
+      status: recommended
+      mechanism: lola-module
+      base: i-have-adhd
+      modules: ["."]
+      module_content: "/"          # its .cursor/ mirror is not a module
+      expect_skills: [i-have-adhd]
+  guardrails:
+    - id: checker-on-edit
+      adr: ADR-0013
+      status: required
+      mechanism: hook
+      config:
+        event: PostToolUse
+        matcher: Edit|Write|MultiEdit
+        script: starter-kit/hooks/gac_checker_on_edit.py
+  execution:
+    - id: test-platform
+      adr: ADR-0007
+      status: required
+      mechanism: test-platform
+  evolution:
+    - id: exception-watch
+      adr: ADR-0014
+      status: required
+      mechanism: instance-check
+      config:
+        command: python gates/checks/exception_watch.py
+
+# Optional repository classification attributes (none used yet).
+classification: {}
+
+# Test platform — Execution slot (GAC-0010): how disposable test hosts are
+# created. Builders generate tests for it and run them.
+test_platform:
+  adr: ADR-0007
+  runtime: podman
+  molecule_driver: podman            # molecule-plugins[podman]
+  connection: containers.podman.podman
+  default:
+    image: registry.access.redhat.com/ubi9/ubi:latest
+    command: sleep infinity
+    privileged: false
+    become: false                    # tests connect as root
+  init:                              # for content that manages systemd services
+    image: registry.access.redhat.com/ubi9/ubi-init:latest
+    command: /sbin/init
+    privileged: false
+    become: false
+
+gates:
+  checker:
+    config: gates/ansible-lint.yml
+    rules_dir: gates/rules
+    ignore_file: gates/ansible-lint-ignore.txt
+  pre-commit: governance-as-code/starter-kit/gates/pre-commit-config.yaml
+  ci: governance-as-code/starter-kit/gates/github-actions-checker.yml
+  ee-build: not yet defined
+  hub-publish: not yet defined
+  aap-runtime: not yet defined

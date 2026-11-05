@@ -1,0 +1,10 @@
+---
+- name: Delete_groups | Ensure groups are absent
+  ansible.builtin.group:
+    name: "{{ __manage_users_group.key }}"
+    state: absent
+  loop: "{{ manage_users_groups_absent | dict2items }}"
+  loop_control:
+    loop_var: __manage_users_group
+    label: "{{ __manage_users_group.key }}"
+  tags: manage_users_delete_groups

@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  author: fixture
+  description: Fixture role
+  license: MIT
+  min_ansible_version: "2.16"
+  platforms:
+    - name: EL
+      versions: [all]
+dependencies: []
+argument_specs:
+  main:
+    short_description: Fixture role
+    options: {}

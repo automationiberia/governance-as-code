@@ -1,0 +1,11 @@
+---
+- name: Delete_users | Ensure users are absent
+  ansible.builtin.user:
+    name: "{{ __manage_users_user.key }}"
+    state: absent
+    remove: "{{ manage_users_remove_home }}"
+  loop: "{{ manage_users_users_absent | dict2items }}"
+  loop_control:
+    loop_var: __manage_users_user
+    label: "{{ __manage_users_user.key }}"
+  tags: manage_users_delete_users
