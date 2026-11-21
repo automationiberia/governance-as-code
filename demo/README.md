@@ -18,14 +18,15 @@ AI assistant works under it.
 🖥️ **Terminal**
 
 ```bash
-git clone https://github.com/silvinux/ansible-manage-users .
+git clone https://github.com/silvinux/ansible-manage-users
 ```
 
 ### 1.2 · Add the company governance
 
-🖥️ **Terminal**
+🖥️ **Terminal** (inside the clone from 1.1)
 
 ```bash
+cd ansible-manage-users
 git submodule add git@github.com:automationiberia/governance-as-code.git governance
 cp governance/examples/acme/AGENTS.pointer.md AGENTS.md
 ```
@@ -35,17 +36,17 @@ cp governance/examples/acme/AGENTS.pointer.md AGENTS.md
 
 ### 1.3 · Install the harness
 
-🖥️ **Terminal**, for **Claude Code** (VS Code or Cursor)
+🖥️ **Terminal**, for **Cursor's own chat** (this demo)
+
+```bash
+governance/starter-kit/setup/gac-setup.sh --instance governance/examples/acme --repo . --assistant cursor
+```
+
+🖥️ **Terminal**, for **Claude Code** (VS Code or Cursor) — alternative
 
 ```bash
 governance/starter-kit/setup/gac-setup.sh --instance governance/examples/acme --repo .
 cp ~/.cache/gac/demo-settings.json .claude/settings.local.json
-```
-
-🖥️ **Terminal**, for **Cursor's own chat**
-
-```bash
-governance/starter-kit/setup/gac-setup.sh --instance governance/examples/acme --repo . --assistant cursor
 ```
 
 **Watch:** every entry of the manifest pinned, applied and verified: community
@@ -88,20 +89,14 @@ finding cites its rule and decision (ADR) · it changes nothing and asks before 
 
 ## Part 3 · Modernize the role
 
-### 3.1 · Build: success agreed first
+### 3.1 · Build (one paste — contract approved in the prompt)
 
 #### 3.1.1 · Full variant
 
 💬 **AI chat** (new chat)
 
 ```text
-/build Modernize this role following the audit report in reports/. Keep it minimal: one Molecule scenario.
-```
-
-When it shows the success contract and waits:
-
-```text
-Approved, with the audit's suggestions. Write the Molecule scenario but don't run it; CI runs it.
+/build this role in place from reports/. Contract approved: one Molecule scenario, don't run it. Proceed.
 ```
 
 #### 3.1.2 · Fast variant (slower models)
@@ -109,20 +104,14 @@ Approved, with the audit's suggestions. Write the Molecule scenario but don't ru
 💬 **AI chat** (new chat)
 
 ```text
-/build Modernize this role following the audit report in reports/. Keep it minimal: no Molecule scenario.
-```
-
-When it shows the success contract and waits:
-
-```text
-Approved, with the audit's suggestions. List R-TEST-001 as a follow-up.
+/build this role in place from reports/. Contract approved: no Molecule, list R-TEST-001 as follow-up. Proceed.
 ```
 
 **Watch:** it builds from the audit report · production read from the repository
-map · a **success contract**: what stays, what changes · it stops and waits for a
-person · the role rewritten under the company rules · the checker loop until 0
-findings · the test written and declared as not run here (fast variant: R-TEST-001,
-an `advise` rule, declared as a follow-up, not hidden).
+map · a **success contract** is recorded (approved in this paste) · the role
+rewritten under the company rules · the checker loop until 0 findings · the test
+written and declared as not run here (fast variant: R-TEST-001, an `advise`
+rule, declared as a follow-up, not hidden). No second “Approved…” message.
 
 ### 3.2 · Add a feature: the AI writes something forbidden
 
@@ -205,7 +194,7 @@ The Claude Code extension works the same in Cursor. With **Cursor's own chat**
 
 | AI assistant | Modes and skills | Guardrail on every edit | Slots |
 |--------------|------------------|-------------------------|-------|
-| Claude Code (VS Code or Cursor) | ✅ | ✅ | 6/8 |
 | Cursor's own chat (`--assistant cursor`) | ✅ | ✅ (`.cursor/hooks.json`) | 6/8 |
+| Claude Code (VS Code or Cursor) | ✅ | ✅ | 6/8 |
 
 </details>

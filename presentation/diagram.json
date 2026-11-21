@@ -537,11 +537,15 @@
     },
     "skills": {
       "title": "Installed once",
-      "description": "One setup per repository installs the modes and the community skills, pinned, in the format of each AI assistant (Claude Code, Cursor, Copilot…).",
+      "description": "One setup per repository installs the modes and the community skills, pinned, for Claude Code or Cursor's own chat (gac-setup.sh --assistant cursor).",
       "links": [
         [
           "Setup",
           "../starter-kit/SETUP.md"
+        ],
+        [
+          "Live demo",
+          "../demo/README.md"
         ]
       ]
     },
@@ -552,6 +556,10 @@
         [
           "Example report",
           "../examples/ex-01-modernize-ansible-manage-users/reports/audit-before.md"
+        ],
+        [
+          "Live demo",
+          "../demo/README.md"
         ]
       ]
     },
@@ -579,7 +587,7 @@
     },
     "slots": {
       "title": "Plug-in points",
-      "description": "New AI tools appear every week. Each one plugs into one of eight fixed points through a decision (ADR). In the reference instance all eight are adopted, installed by the setup and verified — including a guardrail that checks every edit the AI makes.",
+      "description": "New AI tools appear every week. Each one plugs into one of eight fixed points through a decision (ADR). The ACME instance adopts all eight; the live demo setup verifies the required ones — Slots active: 6/8 (Integrations and Input need an AAP endpoint / optional tools). Includes a guardrail that checks every edit the AI makes.",
       "details": [
         [
           "Knowledge",
@@ -591,15 +599,15 @@
         ],
         [
           "Integrations",
-          "AAP MCP server (read-only)"
+          "AAP MCP (recommended — needs endpoint)"
         ],
         [
           "Input",
-          "rtk — shorter command output"
+          "rtk (recommended)"
         ],
         [
           "Output",
-          "report templates + concise style"
+          "report templates (+ optional style skill)"
         ],
         [
           "Guardrails",
@@ -620,8 +628,8 @@
           "../slots/README.md"
         ],
         [
-          "EX-04",
-          "../examples/ex-04-harness-slots/README.md"
+          "Live demo",
+          "../demo/README.md"
         ]
       ]
     },
@@ -634,8 +642,8 @@
           "../examples/ex-01-modernize-ansible-manage-users/reports/audit-before.md"
         ],
         [
-          "What it really does",
-          "../examples/ex-01-modernize-ansible-manage-users/characterization/README.md"
+          "Live demo",
+          "../demo/README.md"
         ]
       ]
     },
@@ -675,7 +683,7 @@
     },
     "checker": {
       "title": "Checker",
-      "description": "The same automatic check for people, AI assistants, pre-commit and CI: community rules plus your rules."
+      "description": "The same automatic check for people, AI assistants, pre-commit and CI: community rules plus your rules. In the live demo it also runs from the terminal with no AI involved."
     },
     "testplat": {
       "title": "Test platform",
@@ -824,10 +832,10 @@
           "badge": "1×"
         },
         {
-          "text": "New AI tools plug into eight fixed points — all eight in use in the reference instance. The method stays the same when tools change.",
+          "text": "New AI tools plug into eight fixed points. The method stays the same when tools change; the live demo activates the required slots (6/8).",
           "mode": "lightup",
           "target": "slots",
-          "badge": 8
+          "badge": "8→6"
         },
         {
           "text": "The assistant reads only the rules that apply to the task.",
@@ -976,139 +984,178 @@
         }
       ]
     },
-    "ex01": {
-      "label": "4 · Example: modernize a 2017 role",
+    "close": {
+      "label": "9 · What you get",
       "steps": [
         {
-          "text": "A developer asks the assistant to audit a legacy role.",
-          "mode": "arrow",
-          "from": "dev",
-          "to": "auditor",
-          "color": "#d2a8ff",
-          "num": 1,
-          "toTop": true
+          "text": "Start from the community; never fork it.",
+          "mode": "lightup",
+          "target": "cop",
+          "badge": 1
         },
         {
-          "text": "The Auditor reviews it against community and company rules.",
+          "text": "Your company decides only the differences — with traceability.",
+          "mode": "lightup",
+          "target": "adrs",
+          "badge": 2
+        },
+        {
+          "text": "AI assistants follow the same rules as people.",
+          "mode": "lightup",
+          "target": "skills",
+          "badge": 3
+        },
+        {
+          "text": "Success is agreed before building.",
+          "mode": "lightup",
+          "target": "contract",
+          "badge": 4
+        },
+        {
+          "text": "Gates guarantee it — with or without AI.",
+          "mode": "lightup",
+          "target": "ci",
+          "badge": 5
+        },
+        {
+          "text": "New tools plug in without redesigning anything.",
+          "mode": "lightup",
+          "target": "slots",
+          "badge": 6
+        }
+      ]
+    },
+    "ex01": {
+      "label": "4 · Live demo — modernize a 2017 role",
+      "steps": [
+        {
+          "text": "Part 1 · Clone the 2017 role (silvinux/ansible-manage-users).",
+          "mode": "lightup",
+          "target": "legacy",
+          "badge": "1.1"
+        },
+        {
+          "text": "Add the company governance as a pinned submodule (ACME) and AGENTS.md.",
           "mode": "arrow",
-          "from": "auditor",
+          "from": "dev",
+          "to": "adrs",
+          "color": "#f0883e",
+          "num": 1,
+          "toTop": true,
+          "waypoints": [
+            {
+              "x": 1085,
+              "y": 122
+            },
+            {
+              "x": 530,
+              "y": 122
+            }
+          ]
+        },
+        {
+          "text": "Decisions, rules, exceptions and the repository map — one instance.",
+          "mode": "lightup",
+          "target": "repomap",
+          "badge": "ACME"
+        },
+        {
+          "text": "Install the harness once: modes, skills, guardrail. Slots active: 6/8.",
+          "mode": "lightup",
+          "target": "slots",
+          "badge": "6/8"
+        },
+        {
+          "text": "Works the same in Claude Code or Cursor's own chat.",
+          "mode": "lightup",
+          "target": "skills",
+          "badge": "✓"
+        },
+        {
+          "text": "What changed: submodule + AGENTS.md to commit; skills and hook installed locally.",
+          "mode": "arrow",
+          "from": "dev",
           "to": "legacy",
-          "color": "#d2a8ff",
+          "color": "#3fb950",
           "num": 2,
           "fromRight": true,
           "toLeft": true
         },
         {
-          "text": "The checker runs on the role.",
+          "text": "Part 2 · Audit the role under ACME (new chat).",
           "mode": "arrow",
-          "from": "legacy",
-          "to": "checker",
-          "color": "#58a6ff",
+          "from": "dev",
+          "to": "auditor",
+          "color": "#d2a8ff",
           "num": 3,
-          "fromRight": true,
-          "toTop": true,
-          "waypoints": [
-            {
-              "x": 1442,
-              "y": 210
-            },
-            {
-              "x": 1442,
-              "y": 641
-            },
-            {
-              "x": 1307,
-              "y": 641
-            }
-          ]
+          "toTop": true
         },
         {
-          "text": "60 findings. It does not even load on current Ansible, and passwords equal user names.",
-          "mode": "lightup",
-          "target": "legacy",
-          "badge": 60,
-          "errColor": "#f85149"
-        },
-        {
-          "text": "Before changing anything, it runs the original role in a container to see what it really does.",
+          "text": "While it works: Auditor declares mode and resolves ACME rules for prod.",
           "mode": "arrow",
-          "from": "auditor",
-          "to": "testplat",
+          "from": "rules",
+          "to": "auditor",
           "color": "#f0883e",
-          "num": 5,
           "fromRight": true,
-          "toTop": true,
-          "waypoints": [
-            {
-              "x": 1085,
-              "y": 215
-            },
-            {
-              "x": 1085,
-              "y": 635
-            },
-            {
-              "x": 935,
-              "y": 635
-            }
-          ],
-          "toXOff": 85
+          "toLeft": true,
+          "num": 4
         },
         {
-          "text": "Surprise: its password policy has never worked on modern systems.",
-          "mode": "lightup",
-          "target": "testplat",
-          "badge": "!",
-          "errColor": "#f85149"
-        },
-        {
-          "text": "Everything goes into the audit report, with a plan.",
+          "text": "Findings cite every rule and decision. It changes nothing and asks before building.",
           "mode": "lightup",
           "target": "report",
           "badge": "✓"
         },
         {
-          "text": "A success contract: what must stay the same, and what will change.",
-          "mode": "lightup",
-          "target": "contract",
-          "badge": "?"
-        },
-        {
-          "text": "People approve the contract before anything is built.",
+          "text": "Part 3 · Build: one /build paste (contract approved in the prompt) — it rewrites the role.",
           "mode": "arrow",
-          "from": "people",
-          "to": "contract",
-          "color": "#f0883e",
-          "num": 9,
-          "toLeft": true,
+          "from": "dev",
+          "to": "builder",
+          "color": "#d2a8ff",
+          "num": 5,
+          "toRight": true,
           "waypoints": [
             {
-              "x": 705,
+              "x": 1085,
               "y": 122
             },
             {
-              "x": 705,
+              "x": 1085,
               "y": 300
             }
           ]
         },
         {
-          "text": "The Builder modernizes the role.",
+          "text": "While it builds: rewrite under company rules, checker loop until 0 block findings.",
           "mode": "arrow",
           "from": "builder",
           "to": "modern",
           "color": "#d2a8ff",
-          "num": 10,
+          "num": 6,
           "fromRight": true,
           "toLeft": true
         },
         {
-          "text": "The checker runs again.",
+          "text": "Guardrail test: ask the AI to write a forbidden community.general task.",
+          "mode": "lightup",
+          "target": "builder",
+          "badge": "✗",
+          "errColor": "#f85149"
+        },
+        {
+          "text": "The guardrail answers at once (R-COLL-001 / ADR-0005); the AI fixes it.",
+          "mode": "lightup",
+          "target": "slot_guardrails",
+          "badge": "!",
+          "errColor": "#f85149"
+        },
+        {
+          "text": "The gate without AI: same ansible-lint CI would run — from the role root.",
           "mode": "arrow",
           "from": "modern",
           "to": "checker",
           "color": "#58a6ff",
-          "num": 11,
+          "num": 7,
           "fromRight": true,
           "toTop": true,
           "waypoints": [
@@ -1127,43 +1174,18 @@
           ]
         },
         {
-          "text": "The test runs twice: the second run changes nothing.",
-          "mode": "arrow",
-          "from": "modern",
-          "to": "testplat",
-          "color": "#3fb950",
-          "num": 12,
-          "fromRight": true,
-          "toTop": true,
-          "waypoints": [
-            {
-              "x": 1442,
-              "y": 295
-            },
-            {
-              "x": 1442,
-              "y": 635
-            },
-            {
-              "x": 935,
-              "y": 635
-            }
-          ],
-          "toXOff": 85
-        },
-        {
-          "text": "A pull request with every rule applied and its evidence — ready for human approval.",
+          "text": "0 findings. Guidance lived in the assistant; the gate still proves it.",
           "mode": "lightup",
-          "target": "pr",
+          "target": "ci",
           "badge": "✓"
         }
       ]
     },
     "ex02": {
-      "label": "5 · Example: create a new collection — production vs lab",
+      "label": "5 · EX-02 — Create a collection (prod vs lab)",
       "steps": [
         {
-          "text": "Two requests: a production collection and a lab collection.",
+          "text": "EX-02 · Two requests: a production collection and a lab collection.",
           "mode": "arrow",
           "from": "dev",
           "to": "builder",
@@ -1190,6 +1212,16 @@
           "num": 2,
           "fromRight": true,
           "toLeft": true
+        },
+        {
+          "text": "While it scaffolds: ansible-creator, then ACME pointer + checker hook + CI gate.",
+          "mode": "arrow",
+          "from": "builder",
+          "to": "skills",
+          "color": "#d2a8ff",
+          "fromRight": true,
+          "toLeft": true,
+          "num": 3
         },
         {
           "text": "The repository map classifies it as production.",
@@ -1231,6 +1263,16 @@
           "num": 5,
           "fromRight": true,
           "toLeft": true
+        },
+        {
+          "text": "While it scaffolds the lab collection: same Builder, different map entry.",
+          "mode": "arrow",
+          "from": "builder",
+          "to": "repomap",
+          "color": "#f0883e",
+          "fromRight": true,
+          "toLeft": true,
+          "num": 6
         },
         {
           "text": "The repository map classifies it as lab → no test required.",
@@ -1295,10 +1337,10 @@
       ]
     },
     "ex03": {
-      "label": "6 · Example: a new company rule",
+      "label": "6 · EX-03 — A new company rule",
       "steps": [
         {
-          "text": "Security asks: production must not use a community collection without support.",
+          "text": "EX-03 · Security asks: production must not use a community collection without support.",
           "mode": "arrow",
           "from": "people",
           "to": "librarian",
@@ -1317,12 +1359,22 @@
           ]
         },
         {
+          "text": "While it works: Librarian checks L0 first, then drafts ADR + rule + lint rule.",
+          "mode": "arrow",
+          "from": "librarian",
+          "to": "adrs",
+          "color": "#f0883e",
+          "fromRight": true,
+          "toLeft": true,
+          "num": 2
+        },
+        {
           "text": "The Librarian measures the impact on every repository in the map.",
           "mode": "arrow",
           "from": "librarian",
           "to": "repomap",
           "color": "#d2a8ff",
-          "num": 2,
+          "num": 3,
           "fromLeft": true,
           "toRight": true
         },
@@ -1382,12 +1434,36 @@
           "toTop": true
         },
         {
+          "text": "While the Builder drafts: watch for community.general — the new rule must catch it.",
+          "mode": "arrow",
+          "from": "builder",
+          "to": "checker",
+          "color": "#58a6ff",
+          "fromRight": true,
+          "toTop": true,
+          "waypoints": [
+            {
+              "x": 1085,
+              "y": 300
+            },
+            {
+              "x": 1085,
+              "y": 641
+            },
+            {
+              "x": 1307,
+              "y": 641
+            }
+          ],
+          "num": 8
+        },
+        {
           "text": "An AI-written draft uses the forbidden collection…",
           "mode": "arrow",
           "from": "builder",
           "to": "checker",
           "color": "#58a6ff",
-          "num": 8,
+          "num": 9,
           "fromRight": true,
           "toTop": true,
           "waypoints": [
@@ -1413,12 +1489,22 @@
           "errColor": "#f85149"
         },
         {
+          "text": "While it rewrites: supported modules only (ansible.builtin / posix / certified).",
+          "mode": "arrow",
+          "from": "builder",
+          "to": "modern",
+          "color": "#3fb950",
+          "fromRight": true,
+          "toLeft": true,
+          "num": 10
+        },
+        {
           "text": "The Builder rewrites it with supported modules.",
           "mode": "arrow",
           "from": "builder",
           "to": "fwrepos",
           "color": "#3fb950",
-          "num": 10,
+          "num": 11,
           "fromRight": true,
           "toLeft": true
         },
@@ -1428,7 +1514,7 @@
           "from": "people",
           "to": "exceptions",
           "color": "#f0883e",
-          "num": 11,
+          "num": 12,
           "toRight": true,
           "waypoints": [
             {
@@ -1450,10 +1536,10 @@
       ]
     },
     "ex04": {
-      "label": "7 · Example: plug tools into the harness",
+      "label": "7 · EX-04 — Plug tools into the harness",
       "steps": [
         {
-          "text": "A team wants a new tool: shorter command output for the AI.",
+          "text": "EX-04 · A team wants a new tool: shorter command output for the AI.",
           "mode": "arrow",
           "from": "people",
           "to": "librarian",
@@ -1503,11 +1589,27 @@
           "badge": "8/8"
         },
         {
+          "text": "While setup runs: each slot pinned, applied, verified — narrate the counters.",
+          "mode": "lightup",
+          "target": "slots",
+          "badge": "8/8"
+        },
+        {
           "text": "Test in a fresh AI session: it writes a forbidden module, on purpose…",
           "mode": "lightup",
           "target": "builder",
           "badge": "✗",
           "errColor": "#f85149"
+        },
+        {
+          "text": "While the agent writes the forbidden task: wait for the postToolUse hook.",
+          "mode": "arrow",
+          "from": "builder",
+          "to": "slot_guardrails",
+          "color": "#f85149",
+          "fromRight": true,
+          "toLeft": true,
+          "num": 4
         },
         {
           "text": "…and the guardrail answers at once, with the rule and the decision behind it.",
@@ -1537,10 +1639,10 @@
       ]
     },
     "validation": {
-      "label": "8 · We tested it with a fresh AI assistant",
+      "label": "8 · Validation — Fresh AI assistant",
       "steps": [
         {
-          "text": "A clean repository, set up once.",
+          "text": "Validation · A clean repository, set up once.",
           "mode": "lightup",
           "target": "skills",
           "badge": "1×"
@@ -1553,6 +1655,16 @@
           "color": "#d2a8ff",
           "num": 2,
           "toTop": true
+        },
+        {
+          "text": "While it audits: only installed skills — no coaching from the operator.",
+          "mode": "arrow",
+          "from": "auditor",
+          "to": "rules",
+          "color": "#d2a8ff",
+          "fromRight": true,
+          "toLeft": true,
+          "num": 3
         },
         {
           "text": "It follows the method — and finds things we had missed.",
@@ -1600,6 +1712,30 @@
           ]
         },
         {
+          "text": "While it builds: same contract discipline — watch for lessons on where tests run.",
+          "mode": "arrow",
+          "from": "builder",
+          "to": "checker",
+          "color": "#58a6ff",
+          "fromRight": true,
+          "toTop": true,
+          "waypoints": [
+            {
+              "x": 1085,
+              "y": 300
+            },
+            {
+              "x": 1085,
+              "y": 641
+            },
+            {
+              "x": 1307,
+              "y": 641
+            }
+          ],
+          "num": 7
+        },
+        {
           "text": "Its role works: the second run changes nothing.",
           "mode": "arrow",
           "from": "builder",
@@ -1627,47 +1763,6 @@
           "mode": "lightup",
           "target": "slots",
           "badge": "↻"
-        }
-      ]
-    },
-    "close": {
-      "label": "9 · What you get",
-      "steps": [
-        {
-          "text": "Start from the community; never fork it.",
-          "mode": "lightup",
-          "target": "cop",
-          "badge": 1
-        },
-        {
-          "text": "Your company decides only the differences — with traceability.",
-          "mode": "lightup",
-          "target": "adrs",
-          "badge": 2
-        },
-        {
-          "text": "AI assistants follow the same rules as people.",
-          "mode": "lightup",
-          "target": "skills",
-          "badge": 3
-        },
-        {
-          "text": "Success is agreed before building.",
-          "mode": "lightup",
-          "target": "contract",
-          "badge": 4
-        },
-        {
-          "text": "Gates guarantee it — with or without AI.",
-          "mode": "lightup",
-          "target": "ci",
-          "badge": 5
-        },
-        {
-          "text": "New tools plug in without redesigning anything.",
-          "mode": "lightup",
-          "target": "slots",
-          "badge": 6
         }
       ]
     }
@@ -1830,396 +1925,6 @@
           ]
         }
       ],
-      "ex01": [
-        {
-          "step": 1,
-          "label": "Before",
-          "phase": "request",
-          "replaceHeaders": [
-            {
-              "value": "Findings: —",
-              "style": "keep",
-              "id": "h0"
-            },
-            {
-              "value": "Loads on current Ansible: ?",
-              "style": "keep",
-              "id": "h1"
-            },
-            {
-              "value": "Password = user name: ?",
-              "style": "keep",
-              "id": "h2"
-            },
-            {
-              "value": "Password policy works: ?",
-              "style": "keep",
-              "id": "h3"
-            },
-            {
-              "value": "Second run changes nothing: ?",
-              "style": "keep",
-              "id": "h4"
-            }
-          ],
-          "replaceBody": [
-            {
-              "value": "Success contract: not yet",
-              "style": "keep",
-              "id": "b0"
-            }
-          ]
-        },
-        {
-          "step": 4,
-          "label": "Audit",
-          "phase": "error",
-          "replaceHeaders": [
-            {
-              "value": "Findings: 60",
-              "style": "err",
-              "id": "h0"
-            },
-            {
-              "value": "Loads on current Ansible: no",
-              "style": "err",
-              "id": "h1"
-            },
-            {
-              "value": "Password = user name: yes",
-              "style": "err",
-              "id": "h2"
-            },
-            {
-              "value": "Password policy works: ?",
-              "style": "keep",
-              "id": "h3"
-            },
-            {
-              "value": "Second run changes nothing: ?",
-              "style": "keep",
-              "id": "h4"
-            }
-          ]
-        },
-        {
-          "step": 6,
-          "label": "What it really does",
-          "actions": [
-            {
-              "action": "remove",
-              "id": "h3"
-            },
-            {
-              "action": "add",
-              "target": "headers",
-              "value": "Password policy works: never did",
-              "id": "h3b",
-              "style": "err"
-            }
-          ]
-        },
-        {
-          "step": 9,
-          "label": "Contract approved",
-          "phase": "request",
-          "replaceBody": [
-            {
-              "value": "Success contract: approved",
-              "style": "add",
-              "id": "b0"
-            },
-            {
-              "value": "Keep: accounts, groups, removals",
-              "style": "keep",
-              "id": "b1"
-            },
-            {
-              "value": "Change: no default password, policy works",
-              "style": "keep",
-              "id": "b2"
-            }
-          ]
-        },
-        {
-          "step": 12,
-          "label": "After",
-          "phase": "response",
-          "replaceHeaders": [
-            {
-              "value": "Findings: 0",
-              "style": "add",
-              "id": "h0"
-            },
-            {
-              "value": "Loads on current Ansible: yes",
-              "style": "add",
-              "id": "h1"
-            },
-            {
-              "value": "Password = user name: no",
-              "style": "add",
-              "id": "h2"
-            },
-            {
-              "value": "Password policy works: yes",
-              "style": "add",
-              "id": "h3"
-            },
-            {
-              "value": "Second run changes nothing: yes",
-              "style": "add",
-              "id": "h4"
-            }
-          ]
-        }
-      ],
-      "ex03": [
-        {
-          "step": 1,
-          "label": "Need",
-          "phase": "request",
-          "replaceHeaders": [
-            {
-              "value": "Rule: proposed",
-              "style": "keep",
-              "id": "h0"
-            }
-          ],
-          "replaceBody": [
-            {
-              "value": "Repositories affected: ?",
-              "style": "keep",
-              "id": "b0"
-            }
-          ]
-        },
-        {
-          "step": 3,
-          "label": "Impact",
-          "replaceBody": [
-            {
-              "value": "Repositories affected: 1 of 6",
-              "style": "highlight",
-              "id": "b0"
-            }
-          ]
-        },
-        {
-          "step": 6,
-          "label": "Approved",
-          "replaceHeaders": [
-            {
-              "value": "Rule: approved",
-              "style": "add",
-              "id": "h0"
-            },
-            {
-              "value": "Rule tests: written first",
-              "style": "add",
-              "id": "h1"
-            }
-          ]
-        },
-        {
-          "step": 9,
-          "label": "Blocked",
-          "phase": "error",
-          "actions": [
-            {
-              "action": "add",
-              "target": "body",
-              "value": "AI draft: 3 findings — blocked",
-              "id": "b1",
-              "style": "err"
-            }
-          ]
-        },
-        {
-          "step": 10,
-          "label": "Fixed",
-          "phase": "response",
-          "actions": [
-            {
-              "action": "remove",
-              "id": "b1"
-            },
-            {
-              "action": "add",
-              "target": "body",
-              "value": "AI draft rewritten: 0 findings",
-              "id": "b2",
-              "style": "add"
-            }
-          ]
-        },
-        {
-          "step": 11,
-          "label": "Exception",
-          "actions": [
-            {
-              "action": "add",
-              "target": "body",
-              "value": "Exception: firewall_legacy until 2027-03-31",
-              "id": "b3",
-              "style": "highlight"
-            }
-          ]
-        }
-      ],
-      "ex02": [
-        {
-          "step": 1,
-          "label": "Two requests",
-          "phase": "request",
-          "replaceHeaders": [
-            {
-              "value": "Production collection",
-              "style": "keep",
-              "id": "h0"
-            },
-            {
-              "value": "Lab collection",
-              "style": "keep",
-              "id": "h1"
-            }
-          ],
-          "replaceBody": []
-        },
-        {
-          "step": 4,
-          "label": "Production",
-          "actions": [
-            {
-              "id": "h0",
-              "style": "highlight"
-            },
-            {
-              "action": "add",
-              "target": "body",
-              "value": "Production: automated test required — passed",
-              "id": "b0",
-              "style": "add"
-            }
-          ]
-        },
-        {
-          "step": 6,
-          "label": "Lab",
-          "actions": [
-            {
-              "action": "add",
-              "target": "body",
-              "value": "Lab: no test required",
-              "id": "b1",
-              "style": "keep"
-            }
-          ]
-        },
-        {
-          "step": 8,
-          "label": "Same gates",
-          "phase": "response",
-          "actions": [
-            {
-              "action": "add",
-              "target": "body",
-              "value": "Both: same checker, 0 findings",
-              "id": "b2",
-              "style": "add"
-            }
-          ]
-        }
-      ],
-      "validation": [
-        {
-          "step": 1,
-          "label": "Fresh assistant",
-          "phase": "request",
-          "replaceHeaders": [
-            {
-              "value": "Context: only the installed skills",
-              "style": "keep",
-              "id": "h0"
-            }
-          ],
-          "replaceBody": []
-        },
-        {
-          "step": 3,
-          "label": "Audit",
-          "actions": [
-            {
-              "action": "add",
-              "target": "body",
-              "value": "Followed the method: yes",
-              "id": "b0",
-              "style": "add"
-            },
-            {
-              "action": "add",
-              "target": "body",
-              "value": "New findings we had missed",
-              "id": "b1",
-              "style": "add"
-            }
-          ]
-        },
-        {
-          "step": 5,
-          "label": "Method fixed",
-          "actions": [
-            {
-              "action": "add",
-              "target": "body",
-              "value": "3 method defects found and fixed",
-              "id": "b2",
-              "style": "highlight"
-            }
-          ]
-        },
-        {
-          "step": 7,
-          "label": "Build",
-          "actions": [
-            {
-              "action": "add",
-              "target": "body",
-              "value": "Its role works and is idempotent",
-              "id": "b3",
-              "style": "add"
-            }
-          ]
-        },
-        {
-          "step": 8,
-          "label": "Lesson",
-          "phase": "error",
-          "actions": [
-            {
-              "action": "add",
-              "target": "body",
-              "value": "Its test was written but not run",
-              "id": "b4",
-              "style": "err"
-            }
-          ]
-        },
-        {
-          "step": 9,
-          "label": "Second session",
-          "phase": "response",
-          "actions": [
-            {
-              "action": "add",
-              "target": "body",
-              "value": "2nd session: guardrail fired live, fixed at once",
-              "id": "b5",
-              "style": "add"
-            }
-          ]
-        }
-      ],
       "close": [
         {
           "step": 1,
@@ -2235,101 +1940,1721 @@
           "replaceBody": []
         }
       ],
-      "ex04": [
+      "ex01": [
         {
           "step": 1,
-          "label": "Request",
+          "label": "1.1 · Clone",
           "phase": "request",
           "replaceHeaders": [
             {
-              "value": "Slots in use: 2 of 8",
+              "value": "demo/README.md · Part 1.1",
+              "style": "highlight",
+              "id": "h0"
+            },
+            {
+              "value": "Role: not cloned yet",
+              "style": "err",
+              "id": "h1"
+            },
+            {
+              "value": "Governance: not connected",
+              "style": "err",
+              "id": "h2"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Terminal only — empty demo workspace",
+              "style": "highlight",
+              "id": "b0"
+            },
+            {
+              "value": "Source of truth: demo/README.md",
+              "style": "keep",
+              "id": "b1"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[TERM] run in the IDE terminal",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "git clone https://github.com/silvinux/ansible-manage-users",
+              "style": "keep",
+              "id": "c1"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "label": "1.2 · Governance",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Role: ansible-manage-users (2017)",
               "style": "keep",
               "id": "h0"
             },
             {
-              "value": "New tool: proposed",
+              "value": "Governance: adding ACME submodule…",
+              "style": "highlight",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Inside the clone from 1.1",
+              "style": "keep",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[TERM] inside the clone",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "cd ansible-manage-users",
+              "style": "keep",
+              "id": "c1"
+            },
+            {
+              "value": "git submodule add git@github.com:automationiberia/governance-as-code.git governance",
+              "style": "keep",
+              "id": "c2"
+            },
+            {
+              "value": "cp governance/examples/acme/AGENTS.pointer.md AGENTS.md",
+              "style": "keep",
+              "id": "c3"
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "label": "Watch ACME",
+          "phase": "response",
+          "replaceHeaders": [
+            {
+              "value": "Governance: ACME submodule + AGENTS.md",
+              "style": "add",
+              "id": "h0"
+            },
+            {
+              "value": "Open: governance/examples/acme",
               "style": "keep",
               "id": "h1"
             }
           ],
-          "replaceBody": []
+          "replaceBody": [
+            {
+              "value": "Watch: ADRs, rules, exceptions, repository map",
+              "style": "add",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[TERM] already done — browse the instance",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "ls governance/examples/acme/adr governance/examples/acme/rules",
+              "style": "keep",
+              "id": "c1"
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "label": "1.3 · Harness",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Harness: installing…",
+              "style": "highlight",
+              "id": "h0"
+            },
+            {
+              "value": "Target: Slots active 6/8",
+              "style": "keep",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Pick Cursor (this demo) or Claude Code — same modes and skills",
+              "style": "highlight",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[TERM] Cursor's own chat — this demo",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "governance/starter-kit/setup/gac-setup.sh --instance governance/examples/acme --repo . --assistant cursor",
+              "style": "keep",
+              "id": "c1"
+            },
+            {
+              "value": "[TERM] Claude Code (VS Code or Cursor) — alternative",
+              "style": "keep",
+              "id": "c2"
+            },
+            {
+              "value": "governance/starter-kit/setup/gac-setup.sh --instance governance/examples/acme --repo .",
+              "style": "keep",
+              "id": "c3"
+            },
+            {
+              "value": "cp ~/.cache/gac/demo-settings.json .claude/settings.local.json",
+              "style": "keep",
+              "id": "c4"
+            }
+          ]
+        },
+        {
+          "step": 5,
+          "label": "Slots 6/8",
+          "phase": "response",
+          "replaceHeaders": [
+            {
+              "value": "Slots active: 6/8",
+              "style": "add",
+              "id": "h0"
+            },
+            {
+              "value": "Modes, skills, guardrail, test platform, exception watch",
+              "style": "keep",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Watch setup output end with Slots active: 6/8",
+              "style": "add",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[TERM] confirm the last line of setup",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "# Slots active: 6/8",
+              "style": "keep",
+              "id": "c1"
+            }
+          ]
+        },
+        {
+          "step": 6,
+          "label": "1.4 · What changed",
+          "phase": "response",
+          "replaceHeaders": [
+            {
+              "value": "Governance: connected",
+              "style": "add",
+              "id": "h0"
+            },
+            {
+              "value": "Harness: installed locally",
+              "style": "add",
+              "id": "h1"
+            },
+            {
+              "value": "Ready to audit",
+              "style": "highlight",
+              "id": "h2"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Submodule + AGENTS.md to commit; skills/commands/hook local",
+              "style": "keep",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[TERM]",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "git status --short",
+              "style": "keep",
+              "id": "c1"
+            }
+          ]
+        },
+        {
+          "step": 7,
+          "label": "2.1 · Audit",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Environment: ready",
+              "style": "add",
+              "id": "h0"
+            },
+            {
+              "value": "Mode: Auditor",
+              "style": "keep",
+              "id": "h1"
+            },
+            {
+              "value": "Governance: acme (from AGENTS.md)",
+              "style": "keep",
+              "id": "h2"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "demo/README.md Part 2 — seed report, then /audit",
+              "style": "highlight",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[TERM] seed the saved audit report",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "mkdir -p reports && cp ~/.cache/gac/demo-audit-report.md reports/audit-ansible-manage-users.md",
+              "style": "keep",
+              "id": "c1"
+            },
+            {
+              "value": "[CHAT] new chat",
+              "style": "keep",
+              "id": "c2"
+            },
+            {
+              "value": "/audit this role. If reports/ already has an audit report, present it instead of auditing again.",
+              "style": "keep",
+              "id": "c3"
+            }
+          ]
+        },
+        {
+          "step": 8,
+          "label": "Waiting · Auditor",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Auditor: resolving effective governance…",
+              "style": "highlight",
+              "id": "h0"
+            },
+            {
+              "value": "Classification: production (from the map)",
+              "style": "keep",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Narrate: Mode: Auditor · acme@… · role / prod",
+              "style": "keep",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] already running — do not interrupt",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "/audit this role. If reports/ already has an audit report, present it instead of auditing again.",
+              "style": "keep",
+              "id": "c1"
+            },
+            {
+              "value": "[CHAT] watch for: Mode: Auditor · Governance: acme@… · role / prod",
+              "style": "keep",
+              "id": "c2"
+            }
+          ]
+        },
+        {
+          "step": 9,
+          "label": "Audit ready",
+          "phase": "response",
+          "replaceHeaders": [
+            {
+              "value": "Audit report + remediation plan: ready",
+              "style": "add",
+              "id": "h0"
+            },
+            {
+              "value": "Findings cite every rule and ADR",
+              "style": "err",
+              "id": "h1"
+            },
+            {
+              "value": "Nothing changed yet",
+              "style": "keep",
+              "id": "h2"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "It asks before building — that is the next paste",
+              "style": "add",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] let it finish — no /build yet",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "Evidence: reports/audit-ansible-manage-users.md",
+              "style": "keep",
+              "id": "c1"
+            }
+          ]
+        },
+        {
+          "step": 10,
+          "label": "3.1 · /build",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Builder: one /build paste — contract approved in the prompt",
+              "style": "highlight",
+              "id": "h0"
+            },
+            {
+              "value": "Full variant below (or use the fast variant)",
+              "style": "keep",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "demo/README.md Part 3.1 — no second Approved… message",
+              "style": "highlight",
+              "id": "b0"
+            },
+            {
+              "value": "In place from reports/ — contract in the same paste",
+              "style": "keep",
+              "id": "b1"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] new chat — full variant (this demo)",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "/build this role in place from reports/. Contract approved: one Molecule scenario, don't run it. Proceed.",
+              "style": "keep",
+              "id": "c1"
+            },
+            {
+              "value": "[CHAT] fast variant (slower models) — use this instead",
+              "style": "keep",
+              "id": "c2"
+            },
+            {
+              "value": "/build this role in place from reports/. Contract approved: no Molecule, list R-TEST-001 as follow-up. Proceed.",
+              "style": "keep",
+              "id": "c3"
+            }
+          ]
+        },
+        {
+          "step": 11,
+          "label": "Waiting · rewrite",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Builder: rewriting under company rules…",
+              "style": "highlight",
+              "id": "h0"
+            },
+            {
+              "value": "Checker loop until 0 block findings",
+              "style": "keep",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Narrate: FQCN, argument_specs, vault password, Molecule (full) or R-TEST-001 follow-up (fast)",
+              "style": "keep",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] already running — do not interrupt",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "[CHAT] watch: rewrite → checker loop → summary",
+              "style": "keep",
+              "id": "c1"
+            }
+          ]
+        },
+        {
+          "step": 12,
+          "label": "3.2 · Guardrail",
+          "phase": "error",
+          "replaceHeaders": [
+            {
+              "value": "Test: write a forbidden community.general task",
+              "style": "err",
+              "id": "h0"
+            },
+            {
+              "value": "Expect R-COLL-001 / ADR-0005 at once",
+              "style": "keep",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "demo/README.md Part 3.2 — new chat",
+              "style": "highlight",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] new chat",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "This is a test of the guardrail. Write tasks/sudoers.yml with exactly this content, then fix it the way the governance requires:\n\n- name: Allow the admins group to use sudo\n  community.general.sudoers:\n    name: admins\n    group: admins\n    commands: ALL",
+              "style": "keep",
+              "id": "c1"
+            }
+          ]
+        },
+        {
+          "step": 13,
+          "label": "Guardrail fired",
+          "phase": "response",
+          "replaceHeaders": [
+            {
+              "value": "Guardrail: R-COLL-001 (ADR-0005)",
+              "style": "add",
+              "id": "h0"
+            },
+            {
+              "value": "AI fixes the write before CI",
+              "style": "add",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Watch the hook answer, then the rewrite to a supported module",
+              "style": "add",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] already running — do not interrupt",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "(guardrail message → AI fixes sudoers.yml)",
+              "style": "keep",
+              "id": "c1"
+            }
+          ]
+        },
+        {
+          "step": 14,
+          "label": "3.3 · Gate",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Gate without AI — same check as CI",
+              "style": "highlight",
+              "id": "h0"
+            },
+            {
+              "value": "From the role root",
+              "style": "keep",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "demo/README.md Part 3.3",
+              "style": "highlight",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[TERM] from the role root",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "export PATH=\"$HOME/.cache/gac/venv/bin:$PATH\" ANSIBLE_COLLECTIONS_PATH=\"$HOME/.cache/gac/collections\"",
+              "style": "keep",
+              "id": "c1"
+            },
+            {
+              "value": "ansible-lint -c governance/examples/acme/gates/ansible-lint.yml -i governance/examples/acme/gates/ansible-lint-ignore.txt",
+              "style": "keep",
+              "id": "c2"
+            }
+          ]
+        },
+        {
+          "step": 15,
+          "label": "Done",
+          "phase": "response",
+          "replaceHeaders": [
+            {
+              "value": "Checker: 0 findings",
+              "style": "add",
+              "id": "h0"
+            },
+            {
+              "value": "Guidance in the assistant · guarantee in the gate",
+              "style": "add",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Live demo complete — same method as the worked examples",
+              "style": "add",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[TERM] already done — expect 0 findings",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "ansible-lint -c governance/examples/acme/gates/ansible-lint.yml -i governance/examples/acme/gates/ansible-lint-ignore.txt",
+              "style": "keep",
+              "id": "c1"
+            }
+          ]
+        }
+      ],
+      "ex02": [
+        {
+          "step": 1,
+          "label": "EX-02 · Two requests",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Example: EX-02 — create collections",
+              "style": "highlight",
+              "id": "h0"
+            },
+            {
+              "value": "acme.linux_baseline → prod",
+              "style": "keep",
+              "id": "h1"
+            },
+            {
+              "value": "acme.lab_tools → nonprod",
+              "style": "keep",
+              "id": "h2"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Classification from the manifest map — not from who asks",
+              "style": "highlight",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] Builder scaffolds each collection under ACME",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "Evidence: examples/ex-02-create-collection/",
+              "style": "keep",
+              "id": "c1"
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "label": "Waiting · prod scaffold",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Builder: scaffolding linux_baseline (prod)…",
+              "style": "highlight",
+              "id": "h0"
+            },
+            {
+              "value": "Will wire AGENTS.md + governance-checker CI",
+              "style": "keep",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Narrate: ansible-creator → strip samples → wire ACME gate",
+              "style": "keep",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] already running — watch R-TEST-001 for prod",
+              "style": "highlight",
+              "id": "c0"
+            }
+          ]
+        },
+        {
+          "step": 5,
+          "label": "Production",
+          "phase": "response",
+          "replaceHeaders": [
+            {
+              "value": "Map: production",
+              "style": "add",
+              "id": "h0"
+            },
+            {
+              "value": "R-TEST-001: Molecule idempotence required",
+              "style": "add",
+              "id": "h1"
+            },
+            {
+              "value": "R-COLL-001: applies",
+              "style": "keep",
+              "id": "h2"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Test runs — show Molecule idempotence",
+              "style": "add",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] prod path done — next is lab_tools",
+              "style": "highlight",
+              "id": "c0"
+            }
+          ]
+        },
+        {
+          "step": 7,
+          "label": "Waiting · lab scaffold",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Builder: scaffolding lab_tools (nonprod)…",
+              "style": "highlight",
+              "id": "h0"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Same Builder — map says no R-TEST-001",
+              "style": "keep",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] already running — lab path",
+              "style": "highlight",
+              "id": "c0"
+            }
+          ]
+        },
+        {
+          "step": 8,
+          "label": "Lab",
+          "phase": "response",
+          "replaceHeaders": [
+            {
+              "value": "Map: nonprod / lab",
+              "style": "add",
+              "id": "h0"
+            },
+            {
+              "value": "R-TEST-001: does not apply",
+              "style": "keep",
+              "id": "h1"
+            },
+            {
+              "value": "Same checker gate: still required",
+              "style": "highlight",
+              "id": "h2"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "No shortcuts — lab still passes ansible-lint",
+              "style": "keep",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] lab path — same gates, fewer process rules",
+              "style": "highlight",
+              "id": "c0"
+            }
+          ]
+        },
+        {
+          "step": 10,
+          "label": "Same gates",
+          "phase": "response",
+          "replaceHeaders": [
+            {
+              "value": "Both collections: checker green",
+              "style": "add",
+              "id": "h0"
+            },
+            {
+              "value": "Requirements from the map, never from the requester",
+              "style": "highlight",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Point at both success contracts in docs/contracts/",
+              "style": "keep",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[TERM] ansible-lint from each collection root",
+              "style": "highlight",
+              "id": "c0"
+            }
+          ]
+        }
+      ],
+      "ex03": [
+        {
+          "step": 1,
+          "label": "EX-03 · Need",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Example: EX-03 — forbid community.general in prod",
+              "style": "highlight",
+              "id": "h0"
+            },
+            {
+              "value": "Mode: Librarian",
+              "style": "keep",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Security need → ADR → rule → lint → exception lifecycle",
+              "style": "highlight",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] new chat — paste this",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "/librarian rule \"production automation must not depend on community.general\"",
+              "style": "keep",
+              "id": "c1"
+            }
+          ]
+        },
+        {
+          "step": 2,
+          "label": "Waiting · librarian",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Librarian: drafting ADR-0005 + R-COLL-001…",
+              "style": "highlight",
+              "id": "h0"
+            },
+            {
+              "value": "Impact analysis on the repository map",
+              "style": "keep",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Narrate: L0 silent → new rule justified",
+              "style": "keep",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] already running — do not interrupt",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "/librarian rule \"production automation must not depend on community.general\"",
+              "style": "keep",
+              "id": "c1"
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "label": "Impact",
+          "phase": "response",
+          "replaceHeaders": [
+            {
+              "value": "Impact: 1 of 6 repositories",
+              "style": "add",
+              "id": "h0"
+            },
+            {
+              "value": "firewall_legacy: 3 findings",
+              "style": "err",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Show reports/librarian-proposal.md",
+              "style": "keep",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] proposal ready — humans approve next",
+              "style": "highlight",
+              "id": "c0"
+            }
+          ]
+        },
+        {
+          "step": 7,
+          "label": "Approved",
+          "phase": "response",
+          "replaceHeaders": [
+            {
+              "value": "ADR-0005: accepted",
+              "style": "add",
+              "id": "h0"
+            },
+            {
+              "value": "EXC-001: approved until 2027-03-31",
+              "style": "keep",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Rule reaches agents + pre-commit + CI",
+              "style": "add",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] next: Builder on network_tuning",
+              "style": "highlight",
+              "id": "c0"
+            }
+          ]
+        },
+        {
+          "step": 9,
+          "label": "Waiting · first draft",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Builder drafting… watch for forbidden collection",
+              "style": "highlight",
+              "id": "h0"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Paste /build, then narrate until checker runs",
+              "style": "highlight",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] new chat — paste this",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "/build playbook to allow HTTPS in the firewall and tune network sysctl on production nodes, in network_tuning",
+              "style": "keep",
+              "id": "c1"
+            }
+          ]
+        },
+        {
+          "step": 10,
+          "label": "Forbidden draft",
+          "phase": "error",
+          "replaceHeaders": [
+            {
+              "value": "First draft still used community.general",
+              "style": "err",
+              "id": "h0"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Show reports/builder-first-attempt/",
+              "style": "err",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] already running — checker about to block",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "/build playbook to allow HTTPS in the firewall and tune network sysctl on production nodes, in network_tuning",
+              "style": "keep",
+              "id": "c1"
+            }
+          ]
+        },
+        {
+          "step": 11,
+          "label": "Blocked",
+          "phase": "error",
+          "replaceHeaders": [
+            {
+              "value": "Checker: blocked — community.general",
+              "style": "err",
+              "id": "h0"
+            },
+            {
+              "value": "Cites ADR-0005 / R-COLL-001",
+              "style": "err",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Show reports/builder-first-attempt-checker.txt",
+              "style": "err",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[TERM] live — first AI draft blocked",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "(cd examples/ex-03-forbid-community-general/reports/builder-first-attempt && GAC_REPOSITORY=network_tuning ansible-lint -c ../../../acme/gates/ansible-lint.yml)",
+              "style": "keep",
+              "id": "c1"
+            }
+          ]
+        },
+        {
+          "step": 12,
+          "label": "Waiting · rewrite",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Builder: rewriting with supported modules…",
+              "style": "highlight",
+              "id": "h0"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Narrate the fix — then checker green",
+              "style": "keep",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] already running after the block — watch the rewrite",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "/build playbook to allow HTTPS in the firewall and tune network sysctl on production nodes, in network_tuning",
+              "style": "keep",
+              "id": "c1"
+            }
+          ]
+        },
+        {
+          "step": 13,
+          "label": "Fixed",
+          "phase": "response",
+          "replaceHeaders": [
+            {
+              "value": "network_tuning: compliant",
+              "style": "add",
+              "id": "h0"
+            },
+            {
+              "value": "Checker: 0 findings",
+              "style": "add",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Live: compliant repo passes",
+              "style": "add",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[TERM] (cd examples/ex-03-forbid-community-general/repos/network_tuning && GAC_REPOSITORY=network_tuning ansible-lint -c ../../../acme/gates/ansible-lint.yml)",
+              "style": "highlight",
+              "id": "c0"
+            }
+          ]
+        },
+        {
+          "step": 14,
+          "label": "Exception",
+          "phase": "response",
+          "replaceHeaders": [
+            {
+              "value": "firewall_legacy: passes via EXC-001",
+              "style": "keep",
+              "id": "h0"
+            },
+            {
+              "value": "Expires: 2027-03-31",
+              "style": "highlight",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Live: exception allows; scratch expiry blocks again",
+              "style": "keep",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[TERM] exception path",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "(cd examples/ex-03-forbid-community-general/repos/firewall_legacy && GAC_REPOSITORY=firewall_legacy ansible-lint -c ../../../acme/gates/ansible-lint.yml)",
+              "style": "keep",
+              "id": "c1"
+            },
+            {
+              "value": "# scratch expiry → blocked again (demo-script.md part A)",
+              "style": "keep",
+              "id": "c2"
+            }
+          ]
+        }
+      ],
+      "ex04": [
+        {
+          "step": 1,
+          "label": "EX-04 · Request",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Example: EX-04 — harness slots",
+              "style": "highlight",
+              "id": "h0"
+            },
+            {
+              "value": "Tool request: shorter command output (rtk)",
+              "style": "keep",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Librarian drafts adoption ADR before anything is plugged in",
+              "style": "highlight",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] Librarian: adopt tool into Input slot",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "Evidence: examples/ex-04-harness-slots/",
+              "style": "keep",
+              "id": "c1"
+            }
+          ]
         },
         {
           "step": 3,
           "label": "Approved",
-          "actions": [
+          "phase": "response",
+          "replaceHeaders": [
             {
-              "action": "remove",
-              "id": "h1"
+              "value": "Adoption ADR: accepted",
+              "style": "add",
+              "id": "h0"
             },
             {
-              "action": "add",
-              "target": "headers",
-              "value": "New tool: approved (decision recorded)",
-              "id": "h1b",
-              "style": "add"
+              "value": "Slot: Input",
+              "style": "keep",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "One slot, one decision — method unchanged",
+              "style": "keep",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] approved — setup will install it",
+              "style": "highlight",
+              "id": "c0"
             }
           ]
         },
         {
           "step": 5,
           "label": "Installed",
-          "actions": [
+          "phase": "response",
+          "replaceHeaders": [
             {
-              "action": "remove",
+              "value": "Slots active: 8/8",
+              "style": "add",
               "id": "h0"
             },
             {
-              "action": "add",
-              "target": "headers",
-              "value": "Slots in use: 8 of 8 — verified",
-              "id": "h0b",
-              "style": "add"
+              "value": "gac-setup.sh --with-recommended",
+              "style": "keep",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Show evidence/setup-output.txt last line",
+              "style": "add",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[TERM] starter-kit/setup/gac-setup.sh --instance <repo>/governance --repo <repo> --with-recommended",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "# last line must read: Slots active: 8/8",
+              "style": "keep",
+              "id": "c1"
+            }
+          ]
+        },
+        {
+          "step": 6,
+          "label": "Waiting · setup",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Setup: verifying each slot…",
+              "style": "highlight",
+              "id": "h0"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Narrate Knowledge → Capabilities → … → Evolution",
+              "style": "keep",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[TERM] already running — watch slot counters",
+              "style": "highlight",
+              "id": "c0"
             }
           ]
         },
         {
           "step": 7,
-          "label": "Guardrail",
+          "label": "Guardrail test",
           "phase": "error",
-          "actions": [
+          "replaceHeaders": [
             {
-              "action": "add",
-              "target": "body",
-              "value": "AI wrote a forbidden module → told at once",
-              "id": "b0",
-              "style": "err"
+              "value": "Fresh session: write forbidden module on purpose",
+              "style": "err",
+              "id": "h0"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Paste the probe — or run the hook deterministically",
+              "style": "highlight",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] new chat — paste this",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "This is a test of the guardrail. Write a task using community.general.ufw, then fix it the way the governance requires.",
+              "style": "keep",
+              "id": "c1"
+            },
+            {
+              "value": "[TERM] deterministic fallback (demo-script part D)",
+              "style": "keep",
+              "id": "c2"
+            },
+            {
+              "value": "cd examples/ex-04-harness-slots/demo-repo",
+              "style": "keep",
+              "id": "c3"
             }
           ]
         },
         {
           "step": 8,
-          "label": "Fixed",
-          "phase": "response",
-          "actions": [
+          "label": "Waiting · hook",
+          "phase": "error",
+          "replaceHeaders": [
             {
-              "action": "remove",
+              "value": "Guardrail: postToolUse firing…",
+              "style": "err",
+              "id": "h0"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Wait for R-COLL-001 · ADR-0005 in the chat",
+              "style": "err",
               "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] already running — do not interrupt",
+              "style": "highlight",
+              "id": "c0"
             },
             {
-              "action": "add",
-              "target": "body",
-              "value": "Fixed before CI; CI still proves it",
-              "id": "b1",
-              "style": "add"
+              "value": "This is a test of the guardrail. Write a task using community.general.ufw, then fix it the way the governance requires.",
+              "style": "keep",
+              "id": "c1"
             }
           ]
         },
         {
           "step": 9,
-          "label": "Evolution",
-          "actions": [
+          "label": "Guardrail",
+          "phase": "error",
+          "replaceHeaders": [
             {
-              "action": "add",
-              "target": "body",
-              "value": "Expired exceptions fail automatically",
-              "id": "b2",
-              "style": "add"
+              "value": "Guardrail: R-COLL-001 · ADR-0005",
+              "style": "err",
+              "id": "h0"
+            },
+            {
+              "value": "Answered right after Write",
+              "style": "err",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Show evidence/live-session.md",
+              "style": "err",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] watch — agent must fix before continuing",
+              "style": "highlight",
+              "id": "c0"
+            }
+          ]
+        },
+        {
+          "step": 10,
+          "label": "Fixed",
+          "phase": "response",
+          "replaceHeaders": [
+            {
+              "value": "AI fixed before CI",
+              "style": "add",
+              "id": "h0"
+            },
+            {
+              "value": "CI gate still proves it",
+              "style": "keep",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Guidance on the laptop; proof in CI",
+              "style": "add",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] let it finish the fix",
+              "style": "highlight",
+              "id": "c0"
+            }
+          ]
+        },
+        {
+          "step": 11,
+          "label": "Evolution",
+          "phase": "response",
+          "replaceHeaders": [
+            {
+              "value": "Exception-watch: expired exceptions fail checks",
+              "style": "add",
+              "id": "h0"
+            },
+            {
+              "value": "Every new tool: one slot, one ADR",
+              "style": "highlight",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Method stays the same",
+              "style": "keep",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] EX-04 complete",
+              "style": "highlight",
+              "id": "c0"
+            }
+          ]
+        }
+      ],
+      "validation": [
+        {
+          "step": 1,
+          "label": "Validation · Fresh setup",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Validation: fresh AI assistant",
+              "style": "highlight",
+              "id": "h0"
+            },
+            {
+              "value": "Clean repository, set up once",
+              "style": "keep",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Dogfooding — saved outputs in docs/validation/",
+              "style": "keep",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] fresh session — /audit with only installed skills",
+              "style": "highlight",
+              "id": "c0"
+            },
+            {
+              "value": "Evidence: docs/validation/dogfooding-2026-11-05/",
+              "style": "keep",
+              "id": "c1"
+            }
+          ]
+        },
+        {
+          "step": 3,
+          "label": "Waiting · audit",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Fresh assistant: auditing…",
+              "style": "highlight",
+              "id": "h0"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Narrate: mode declared, six company rules found alone",
+              "style": "keep",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] already running — do not coach it",
+              "style": "highlight",
+              "id": "c0"
+            }
+          ]
+        },
+        {
+          "step": 4,
+          "label": "Audit",
+          "phase": "response",
+          "replaceHeaders": [
+            {
+              "value": "Followed the method",
+              "style": "add",
+              "id": "h0"
+            },
+            {
+              "value": "Found gaps we had missed",
+              "style": "highlight",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Show audit-output.md",
+              "style": "add",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] audit done — three method defects next",
+              "style": "highlight",
+              "id": "c0"
+            }
+          ]
+        },
+        {
+          "step": 6,
+          "label": "Method fixed",
+          "phase": "response",
+          "replaceHeaders": [
+            {
+              "value": "Defects fixed — tests written first",
+              "style": "add",
+              "id": "h0"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Evolution slot in action",
+              "style": "keep",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] method improved before the next session",
+              "style": "highlight",
+              "id": "c0"
+            }
+          ]
+        },
+        {
+          "step": 7,
+          "label": "Build",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Fresh assistant: modernizing…",
+              "style": "highlight",
+              "id": "h0"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Same /build discipline as EX-01",
+              "style": "keep",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] fresh session — /build under ACME",
+              "style": "highlight",
+              "id": "c0"
+            }
+          ]
+        },
+        {
+          "step": 8,
+          "label": "Waiting · build",
+          "phase": "request",
+          "replaceHeaders": [
+            {
+              "value": "Builder: rewriting + checker loop…",
+              "style": "highlight",
+              "id": "h0"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Narrate until second run is changed=0",
+              "style": "keep",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] already running — do not interrupt",
+              "style": "highlight",
+              "id": "c0"
+            }
+          ]
+        },
+        {
+          "step": 9,
+          "label": "Build result",
+          "phase": "response",
+          "replaceHeaders": [
+            {
+              "value": "Role works: second run changes nothing",
+              "style": "add",
+              "id": "h0"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Its own test could not run in-session — lesson follows",
+              "style": "keep",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] build done",
+              "style": "highlight",
+              "id": "c0"
+            }
+          ]
+        },
+        {
+          "step": 10,
+          "label": "Lesson",
+          "phase": "response",
+          "replaceHeaders": [
+            {
+              "value": "Lesson: tests must run where they are written",
+              "style": "highlight",
+              "id": "h0"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "See dogfooding README lessons",
+              "style": "keep",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] lesson captured for Evolution",
+              "style": "highlight",
+              "id": "c0"
+            }
+          ]
+        },
+        {
+          "step": 11,
+          "label": "Second session",
+          "phase": "response",
+          "replaceHeaders": [
+            {
+              "value": "All eight slots active",
+              "style": "add",
+              "id": "h0"
+            },
+            {
+              "value": "Guardrail fired live — AI fixed at once",
+              "style": "add",
+              "id": "h1"
+            }
+          ],
+          "replaceBody": [
+            {
+              "value": "Method improves with every use",
+              "style": "highlight",
+              "id": "b0"
+            }
+          ],
+          "replaceCycleState": [
+            {
+              "value": "[CHAT] validation complete",
+              "style": "highlight",
+              "id": "c0"
             }
           ]
         }

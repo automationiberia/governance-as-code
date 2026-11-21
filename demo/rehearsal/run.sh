@@ -19,8 +19,7 @@ P_GUARD='This is a test of the guardrail. Write tasks/sudoers.yml with exactly t
     name: admins
     group: admins
     commands: ALL'
-P_BUILD='/build Modernize this role following the audit report in reports/. Keep it minimal: one Molecule scenario.'
-P_APPROVE="Approved, with the audit's suggestions. Write the Molecule scenario but don't run it; CI runs it."
+P_BUILD='/build this role in place from reports/. Contract approved: one Molecule scenario, don'\''t run it. Proceed.'
 
 export GAC_REHEARSAL=1
 echo $$ > "$D/.rehearsal-lock"; trap 'rm -f "$D/.rehearsal-lock"' EXIT
@@ -42,8 +41,7 @@ step "1.2 add governance"     1.2-governance 'git -c protocol.file.allow=always 
 step "1.3 install harness"    1.3-install    'governance/starter-kit/setup/gac-setup.sh --instance governance/examples/acme --repo . && cp ~/.cache/gac/demo-settings.json .claude/settings.local.json'
 step "1.4 git status"         1.4-status     'git status --short'
 step "2.1 report + /audit"    2.1-audit      'mkdir -p reports && cp ~/.cache/gac/demo-audit-report.md reports/audit-ansible-manage-users.md && claude -p "/audit this role. If reports/ already has an audit report, present it instead of auditing again."'
-step "3.1 /build → contract"  3.1-contract   'claude -p "$P_BUILD"'
-step "3.1 approve → done"     3.1-build      'claude -p --continue "$P_APPROVE"'
+step "3.1 /build"             3.1-build      'claude -p "$P_BUILD"'
 step "3.2 guardrail"          3.2-guardrail  'claude -p "$P_GUARD"'
 step "3.3 gate"               3.3-gate       'ansible-lint -c governance/examples/acme/gates/ansible-lint.yml -i governance/examples/acme/gates/ansible-lint-ignore.txt -f pep8 --nocolor 2>/dev/null | grep -cE "^[^ ].*:[0-9]+"'
 
