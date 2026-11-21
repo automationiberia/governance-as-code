@@ -13,7 +13,8 @@ Mechanisms:
   test-platform   container runtime and image for tests are available
   instance-check  a check of the instance itself runs and passes
 
-Hooks and MCP registration are implemented for Claude Code; other assistants
+Hooks are implemented for Claude Code (and the method's checker hook for Cursor);
+MCP registration for Claude Code; other assistants
 get lola-module entries and a "not supported yet" note for the rest.
 """
 
@@ -173,10 +174,22 @@ class Setup:
         archive.unlink()
         return binary
 
+    def add_cursor_hook(self, event: str, matcher: str, command: str) -> None:
+        """Register a hook in <repo>/.cursor/hooks.json (Cursor's project hooks, version 1)."""
+        path = self.repo / ".cursor" / "hooks.json"
+        data = json.loads(path.read_text(encoding="utf-8")) if path.is_file() else {}
+        data.setdefault("version", 1)
+        entries = data.setdefault("hooks", {}).setdefault(event, [])
+        if not any(h.get("command") == command for h in entries):
+            entries.append({"command": command, "matcher": matcher, "timeout": 240})
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(data, indent=2) + "\n", encoding="utf-8")
+
     def m_hook(self, e: dict) -> tuple[str, str]:
-        if self.assistant != "claude-code" or self.scope != "project":
-            return "not-supported", f"hooks for {self.assistant}/{self.scope} not implemented"
         cfg = e["config"]
+        cursor = self.assistant == "cursor" and self.scope == "project" and not e.get("base")
+        if (self.assistant != "claude-code" and not cursor) or self.scope != "project":
+            return "not-supported", f"hooks for {self.assistant}/{self.scope} not implemented"
         if e.get("base"):  # hook provided by a pinned binary (e.g. rtk)
             binary = self.install_binary(e["base"])
             command = f"{binary} {cfg['args']}"
@@ -188,7 +201,7 @@ class Setup:
             ok = cfg["probe"]["expect"] in probe.stdout
             return ("applied+verified" if ok else "failed"), f"{cfg['event']}:{cfg['matcher']} → {binary.name}; probe '{cfg['probe']['command']}' {'rewritten' if ok else 'NOT rewritten'}"
         # hook provided by the method (checker on edit)
-        hooks_dir = self.repo / ".claude" / "hooks"
+        hooks_dir = self.repo / (".cursor" if cursor else ".claude") / "hooks"
         hooks_dir.mkdir(parents=True, exist_ok=True)
         script = hooks_dir / Path(cfg["script"]).name
         shutil.copy2(METHOD_ROOT / cfg["script"], script)
@@ -202,12 +215,20 @@ class Setup:
             "offline": True,
         }
         (hooks_dir / "gac-hook.json").write_text(json.dumps(hook_cfg, indent=2) + "\n", encoding="utf-8")
-        command = f'{sys.executable} "$CLAUDE_PROJECT_DIR/.claude/hooks/{script.name}"'
-        self.add_hook(cfg["event"], cfg["matcher"], command)
-        probe = self.run([sys.executable, str(script)], input=json.dumps(
-            {"tool_input": {"file_path": str(self.repo / "README.md")}}), env=dict(os.environ, CLAUDE_PROJECT_DIR=str(self.repo)))
+        if cursor:
+            event, matcher = cfg.get("cursor_event", "postToolUse"), cfg.get("cursor_matcher", "Write")
+            self.add_cursor_hook(event, matcher, f'{sys.executable} "{script}"')
+            payload = {"hook_event_name": event, "cursor_version": "probe", "workspace_roots": [str(self.repo)],
+                       "tool_input": {"file_path": str(self.repo / "README.md")}}
+            env = dict(os.environ, CURSOR_PROJECT_DIR=str(self.repo))
+        else:
+            event, matcher = cfg["event"], cfg["matcher"]
+            self.add_hook(event, matcher, f'{sys.executable} "$CLAUDE_PROJECT_DIR/.claude/hooks/{script.name}"')
+            payload = {"tool_input": {"file_path": str(self.repo / "README.md")}}
+            env = dict(os.environ, CLAUDE_PROJECT_DIR=str(self.repo))
+        probe = self.run([sys.executable, str(script)], input=json.dumps(payload), env=env)
         ok = probe.returncode == 0
-        return ("applied+verified" if ok else "failed"), f"{cfg['event']}:{cfg['matcher']} → {script.name}"
+        return ("applied+verified" if ok else "failed"), f"{event}:{matcher} → {script.name}"
 
     def m_test_platform(self, e: dict) -> tuple[str, str]:
         tp = self.manifest.get("test_platform", {})

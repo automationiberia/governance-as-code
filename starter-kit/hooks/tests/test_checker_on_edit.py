@@ -6,6 +6,10 @@ The hook receives Claude Code's PostToolUse JSON on stdin. It must:
 - report only the findings of the edited file, on stderr, with exit 2
   (Claude Code shows stderr to the agent), so context stays small;
 - stay silent with exit 0 when the edited file is clean.
+
+It also receives Cursor's postToolUse JSON (same script, both assistants):
+Cursor cannot read stderr from a post-tool hook, so findings go back to the
+agent as {"additional_context": ...} on stdout, with exit 0.
 """
 
 from __future__ import annotations
@@ -90,3 +94,43 @@ def test_governance_instance_is_ignored() -> None:
     (root / "governance/rules.yml").write_text("---\n- id: x\n")
     proc = run_hook(root, "governance/rules.yml")
     assert proc.returncode == 0 and proc.stderr == ""
+
+
+# ---------------------------------------------------------------- Cursor
+def make_cursor_repo(tasks: str) -> Path:
+    root = make_repo(tasks)
+    shutil.move(str(root / ".claude"), str(root / ".cursor"))
+    return root
+
+
+def run_cursor_hook(root: Path, file_path: str, field: str = "file_path") -> subprocess.CompletedProcess:
+    payload = {"hook_event_name": "postToolUse", "tool_name": "Write", "cursor_version": "test",
+               "workspace_roots": [str(root)], "cwd": str(root),
+               "tool_input": {field: str(root / file_path)}, "tool_output": "{}"}
+    env = dict(os.environ, CURSOR_PROJECT_DIR=str(root))
+    for var in ("GAC_REPOSITORY", "CLAUDE_PROJECT_DIR"):
+        env.pop(var, None)
+    return subprocess.run([sys.executable, str(HOOK)], input=json.dumps(payload), capture_output=True,
+                          text=True, env=env, check=False, timeout=300)
+
+
+def test_cursor_violation_is_returned_as_additional_context() -> None:
+    root = make_cursor_repo(FORBIDDEN)
+    proc = run_cursor_hook(root, "roles/demo/tasks/main.yml")
+    assert proc.returncode == 0, proc.stderr
+    context = json.loads(proc.stdout)["additional_context"]
+    assert "R-COLL-001" in context and "roles/demo/tasks/main.yml" in context
+
+
+def test_cursor_clean_file_returns_no_context() -> None:
+    root = make_cursor_repo(CLEAN)
+    proc = run_cursor_hook(root, "roles/demo/tasks/main.yml")
+    assert proc.returncode == 0, proc.stderr
+    assert "additional_context" not in (json.loads(proc.stdout) if proc.stdout.strip() else {})
+
+
+def test_cursor_path_field_is_accepted() -> None:
+    root = make_cursor_repo(FORBIDDEN)
+    proc = run_cursor_hook(root, "roles/demo/tasks/main.yml", field="path")
+    assert "R-COLL-001" in json.loads(proc.stdout)["additional_context"]
+

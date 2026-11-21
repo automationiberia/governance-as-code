@@ -55,8 +55,9 @@ R-DOC-001 requires, and used the `__firewall_` loop prefix of R-CODE-001.
 ## Limits — stated, not hidden
 
 - **Integrations** is configured, not exercised: no AAP endpoint was available.
-- **Hooks and MCP registration** are implemented for Claude Code only; other
-  assistants get the Lola modules and a "not supported yet" line.
+- **Hooks and MCP registration** were implemented for Claude Code only when this
+  example was built. The guardrail hook now also installs for Cursor
+  (`.cursor/hooks.json`); rtk and MCP registration remain Claude Code only.
 - Hooks are guidance on the developer's machine and can be disabled; the CI
   gate remains the proof.
 

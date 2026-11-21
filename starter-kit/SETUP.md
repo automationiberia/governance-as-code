@@ -84,6 +84,8 @@ If Lola adds commit pinning, the script reduces to a `.lola-req` file.
   `.claude/hooks/gac-hook.json` contain absolute paths of the local tool
   environment — do not commit them; each person runs the script. `.mcp.json`
   uses environment variables and can be shared.
-- Hooks and MCP registration are implemented for Claude Code; for other
-  assistants the script installs the Lola modules and reports the rest as
-  "not supported yet".
+- The guardrail hook (checker on every edit) is implemented for Claude Code
+  (`.claude/settings.json`, PostToolUse) and Cursor (`.cursor/hooks.json`,
+  postToolUse: findings return as `additional_context`). Binary hooks such as
+  rtk and MCP registration are Claude Code only; for other assistants the script
+  installs the Lola modules and reports the rest as "not supported yet".

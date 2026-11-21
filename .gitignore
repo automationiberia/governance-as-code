@@ -17,6 +17,8 @@ __pycache__/
 .claude/settings.json
 .claude/settings.local.json
 .claude/hooks/gac-hook.json
+.cursor/hooks.json
+.cursor/hooks/gac-hook.json
 # …except the guardrail demo repository, whose hook config is relative on purpose
 !examples/ex-04-harness-slots/demo-repo/.claude/hooks/gac-hook.json
 

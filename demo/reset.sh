@@ -25,7 +25,7 @@ export GIT_COMMITTER_NAME=demo GIT_COMMITTER_EMAIL=demo@example.com
 export GIT_AUTHOR_DATE="2026-01-01T00:00:00Z" GIT_COMMITTER_DATE="2026-01-01T00:00:00Z"
 
 # Demo-only files in ~/.cache/gac, copied from any folder: demo-settings.json (step 1.3:
-# the model, the pre-approved commands of permissions.json and the pinned tools on PATH;
+# the pre-approved commands of permissions.json and the pinned tools on PATH;
 # the IDE chat does not inherit the terminal environment) and demo-audit-report.md (step 2.1).
 write_demo_settings() {
   mkdir -p "$HOME/.cache/gac"

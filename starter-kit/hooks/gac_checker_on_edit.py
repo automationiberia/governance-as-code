@@ -1,13 +1,18 @@
 #!/usr/bin/env python3
 """Guardrails hook: run the governance checker after the agent edits a file.
 
-Claude Code PostToolUse hook (matcher: Edit|Write|MultiEdit). Reads the hook
-JSON on stdin; when the edited file is Ansible content, runs the checker from
-the repository root (same command as pre-commit and CI) and reports, on stderr
-with exit code 2, only the findings of the edited file — Claude Code shows them
-to the agent, which fixes them before going on. Silent (exit 0) otherwise.
+One script, two assistants. Reads the hook JSON on stdin; when the edited file
+is Ansible content, runs the checker from the repository root (same command as
+pre-commit and CI) and reports only the findings of the edited file, so the
+agent fixes them before going on. Silent otherwise.
 
-Configuration: <repo>/.claude/hooks/gac-hook.json, written by gac-setup:
+- Claude Code, PostToolUse (matcher Edit|Write|MultiEdit): findings on stderr,
+  exit code 2 — Claude Code shows them to the agent.
+- Cursor, postToolUse (matcher Write): findings as {"additional_context": ...}
+  on stdout, exit 0 — Cursor injects them into the conversation.
+
+Configuration: gac-hook.json next to the script (.claude/hooks/ or
+.cursor/hooks/), written by gac-setup:
   {"ansible_lint": "/path/to/ansible-lint", "config": "governance/gates/ansible-lint.yml",
    "ignore_file": "...", "collections_path": "...", "offline": true}
 
@@ -32,11 +37,18 @@ def main() -> int:
         payload = json.load(sys.stdin)
     except json.JSONDecodeError:
         return 0
-    file_path = (payload.get("tool_input") or {}).get("file_path")
+    cursor = "cursor_version" in payload or payload.get("hook_event_name") == "postToolUse"
+    tool_input = payload.get("tool_input") or {}
+    file_path = next((tool_input[k] for k in ("file_path", "path", "target_file") if tool_input.get(k)), None)
     if not file_path:
         return 0
-    root = Path(os.environ.get("CLAUDE_PROJECT_DIR") or payload.get("cwd") or ".").resolve()
-    edited = Path(file_path).resolve()
+    roots = payload.get("workspace_roots") or []
+    root = Path(
+        os.environ.get("CLAUDE_PROJECT_DIR") or os.environ.get("CURSOR_PROJECT_DIR")
+        or (roots[0] if roots else None) or payload.get("cwd") or "."
+    ).resolve()
+    edited = Path(file_path)
+    edited = (edited if edited.is_absolute() else root / edited).resolve()
     try:
         rel = edited.relative_to(root)
     except ValueError:
@@ -44,8 +56,9 @@ def main() -> int:
     if edited.suffix not in CONTENT_SUFFIXES or (rel.parts and rel.parts[0] in SKIP_DIRS):
         return 0
 
-    cfg_file = root / ".claude" / "hooks" / "gac-hook.json"
-    if not cfg_file.is_file():
+    candidates = (Path(__file__).resolve().parent, root / ".claude" / "hooks", root / ".cursor" / "hooks")
+    cfg_file = next((d / "gac-hook.json" for d in candidates if (d / "gac-hook.json").is_file()), None)
+    if cfg_file is None:
         return 0
     cfg = json.loads(cfg_file.read_text(encoding="utf-8"))
     config = Path(cfg["config"])
@@ -69,13 +82,16 @@ def main() -> int:
         return 0
     shown = findings[:MAX_LINES]
     more = f"\n… and {len(findings) - MAX_LINES} more" if len(findings) > MAX_LINES else ""
-    print(
+    message = (
         f"Governance checker: {len(findings)} finding(s) in {rel.as_posix()} "
         "(rule ids starting with R- come from the organization's ADRs):\n"
         + "\n".join(shown) + more
-        + "\nFix them before continuing, or propose an exception with /librarian.",
-        file=sys.stderr,
+        + "\nFix them before continuing, or propose an exception with /librarian."
     )
+    if cursor:
+        print(json.dumps({"additional_context": message}))
+        return 0
+    print(message, file=sys.stderr)
     return 2
 
 

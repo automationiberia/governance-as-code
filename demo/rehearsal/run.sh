@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Headless, timed rehearsal of the whole demo with Claude Code, same steps as demo/README.md:
-#   reset → 1 clone, governance, harness → 2 audit → 3 modernize, approve, guardrail, gate → reset
+#   reset → 1 clone, governance, harness → 2 audit → 3.1 modernize (full variant), 3.2 guardrail, 3.3 gate → reset
 # Outputs: rehearsal/<run>-*.md and rehearsal/<run>-timings.md (ignored by git).
 #   rehearsal/run.sh [run-name]
 set -uo pipefail
@@ -43,9 +43,9 @@ step "1.3 install harness"    1.3-install    'governance/starter-kit/setup/gac-s
 step "1.4 git status"         1.4-status     'git status --short'
 step "2.1 report + /audit"    2.1-audit      'mkdir -p reports && cp ~/.cache/gac/demo-audit-report.md reports/audit-ansible-manage-users.md && claude -p "/audit this role. If reports/ already has an audit report, present it instead of auditing again."'
 step "3.1 /build → contract"  3.1-contract   'claude -p "$P_BUILD"'
-step "3.2 approve → done"     3.2-build      'claude -p --continue "$P_APPROVE"'
-step "3.3 guardrail"          3.3-guardrail  'claude -p "$P_GUARD"'
-step "3.4 gate"               3.4-gate       'ansible-lint -c governance/examples/acme/gates/ansible-lint.yml -i governance/examples/acme/gates/ansible-lint-ignore.txt -f pep8 --nocolor 2>/dev/null | grep -cE "^[^ ].*:[0-9]+"'
+step "3.1 approve → done"     3.1-build      'claude -p --continue "$P_APPROVE"'
+step "3.2 guardrail"          3.2-guardrail  'claude -p "$P_GUARD"'
+step "3.3 gate"               3.3-gate       'ansible-lint -c governance/examples/acme/gates/ansible-lint.yml -i governance/examples/acme/gates/ansible-lint-ignore.txt -f pep8 --nocolor 2>/dev/null | grep -cE "^[^ ].*:[0-9]+"'
 
 {
   total=$(( $(date +%s) - START ))
@@ -55,10 +55,10 @@ step "3.4 gate"               3.4-gate       'ansible-lint -c governance/example
   echo "## Checks"
   grep -q "Slots active: 6/8" "$OUT/$RUN-1.3-install.md"     && echo "- install: 6/8 slots ✅" || echo "- install: slots ❌"
   grep -q "Mode: Auditor" "$OUT/$RUN-2.1-audit.md"           && echo "- audit: mode declared ✅" || echo "- audit: mode NOT declared ❌"
-  grep -q "R-COLL-001" "$OUT/$RUN-3.3-guardrail.md"          && echo "- guardrail: R-COLL-001 reported ✅" || echo "- guardrail: R-COLL-001 missing ❌"
+  grep -q "R-COLL-001" "$OUT/$RUN-3.2-guardrail.md"          && echo "- guardrail: R-COLL-001 reported ✅" || echo "- guardrail: R-COLL-001 missing ❌"
   grep -q "community.general" "$W/tasks/sudoers.yml" 2>/dev/null && echo "- guardrail: NOT fixed (community.general still in tasks/sudoers.yml) ❌" || echo "- guardrail: fixed, no community.general left ✅"
   grep -qi "success contract" "$OUT/$RUN-3.1-contract.md"    && echo "- build: success contract shown ✅" || echo "- build: no contract ❌"
-  n=$(tail -1 "$OUT/$RUN-3.4-gate.md")
+  n=$(tail -1 "$OUT/$RUN-3.3-gate.md")
   [[ "$n" == 0 ]] && echo "- gate on the modernized role (incl. the guardrail fix): 0 findings ✅" || echo "- gate: $n findings ❌"
 } >> "$T"
 
