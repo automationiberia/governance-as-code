@@ -67,6 +67,10 @@ def hits(lines: list[str], rule_id: str) -> list[str]:
         ("doc_role_with_broken_tasks", 1),
         # Regression: an ansible-test integration target is not a role (EX-02).
         ("doc_integration_target_is_not_a_role", 0),
+        # Regression (live demo): a role repository has the role at its root
+        # (like silvinux/ansible-manage-users or any Galaxy role repository).
+        ("doc_role_at_repo_root_without_specs", 1),
+        ("doc_role_at_repo_root_with_specs", 0),
     ],
 )
 def test_r_doc_001(case: str, expected: int) -> None:

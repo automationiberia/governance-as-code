@@ -1,0 +1,50 @@
+{
+  "permissions": {
+    "allow": [
+      "Read",
+      "Edit",
+      "Write",
+      "Glob",
+      "Grep",
+      "Skill",
+      "Bash(ansible-lint:*)",
+      "Bash(ansible-creator:*)",
+      "Bash(ansible-galaxy:*)",
+      "Bash(ansible-playbook:*)",
+      "Bash(ansible-doc:*)",
+      "Bash(molecule:*)",
+      "Bash(podman images:*)",
+      "Bash(podman ps:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git mv:*)",
+      "Bash(ls:*)",
+      "Bash(cat:*)",
+      "Bash(head:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(mkdir:*)",
+      "Bash(cp:*)",
+      "Bash(date:*)",
+      "Bash(mktemp:*)",
+      "Bash(rsync:*)",
+      "Bash(env:*)",
+      "Read(//tmp/**)",
+      "Edit(//tmp/**)",
+      "Bash(cd:*)",
+      "Bash(tail:*)",
+      "Bash(wc:*)",
+      "Bash(touch:*)",
+      "Bash(which:*)",
+      "Bash(rm:*)",
+      "Bash(tar:*)",
+      "Bash(mv:*)"
+    ],
+    "deny": [
+      "Bash(git push:*)",
+      "Bash(git commit:*)",
+      "Bash(rm -rf:*)"
+    ]
+  }
+}

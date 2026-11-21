@@ -135,6 +135,7 @@ governance-as-code/
 │   └── AGENTS.pointer.md
 ├── templates/         # index of the templates shipped inside the skills
 ├── presentation/      # animated walkthrough (FlowStory), demo script
+├── demo/              # live demo with an AI assistant: workspaces rebuilt by reset.sh
 └── examples/
     ├── acme/          # reference governance instance
     └── ex-01-.../     # worked example: modernize ansible-manage-users

@@ -25,3 +25,9 @@ __pycache__/
 .vscode/
 *.swp
 .DS_Store
+
+# Live demo: workspaces the AI writes into, and rehearsal outputs (demo/reset.sh rebuilds them)
+demo/workspaces/
+demo/.machine-scratch/
+demo/.rehearsal-lock
+demo/rehearsal/*.md

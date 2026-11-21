@@ -35,6 +35,20 @@ class RoleArgumentSpecsRule(AnsibleLintRule):
         # integration targets (tests/integration/targets/<t>).
         if role_dir.parent.name != "roles":
             return []
+        return self._check(role_dir, role_dir.name, file)
+
+    def matchyaml(self, file: Lintable) -> list[MatchError]:
+        # A role repository (a Galaxy role, a fork of one) has the role at its
+        # root: ansible-lint sees no role directory, only meta/main.yml.
+        path = Path(str(file.path))
+        if path.name not in ("main.yml", "main.yaml") or path.parent.name != "meta":
+            return []
+        role_dir = path.parent.parent
+        if role_dir.resolve() != Path.cwd().resolve() or not (role_dir / "tasks").is_dir():
+            return []
+        return self._check(role_dir, Path.cwd().name, file)
+
+    def _check(self, role_dir: Path, name: str, file: Lintable) -> list[MatchError]:
         meta = role_dir / "meta"
         if (meta / "argument_specs.yml").is_file() or (meta / "argument_specs.yaml").is_file():
             return []
@@ -43,7 +57,7 @@ class RoleArgumentSpecsRule(AnsibleLintRule):
                 return []
         return [
             self.create_matcherror(
-                message=f"Role '{role_dir.name}' has no meta/argument_specs.yml (ACME ADR-0002).",
+                message=f"Role '{name}' has no meta/argument_specs.yml (ACME ADR-0002).",
                 filename=file,
                 lineno=1,
             )

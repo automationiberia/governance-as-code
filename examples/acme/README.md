@@ -6,6 +6,7 @@ organization needs, following [docs/spec/08-instance.md](../../docs/spec/08-inst
 ```text
 acme/
 ├── manifest.yml                  # pinned bases, layers, promotion paths, slots, checker
+├── AGENTS.pointer.md             # the pointer a team copies to AGENTS.md (method repo as submodule at governance/)
 ├── adr/                          # organization decisions (only the delta from L0)
 ├── rules/organization.yml        # rule registry — single source
 ├── exceptions/register.yml       # project exceptions (EXC-001)
