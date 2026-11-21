@@ -49,6 +49,7 @@ layers:
 promotion_paths:
   prod:
     repositories:
+      - ansible-manage-users          # the live demo: github.com/silvinux/ansible-manage-users
       - ex-01-modernize-ansible-manage-users
       - linux_baseline
       - firewall_legacy

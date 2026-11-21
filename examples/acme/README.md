@@ -13,7 +13,7 @@ acme/
 └── gates/
     ├── ansible-lint.yml          # the checker configuration
     ├── ansible-lint-ignore.txt   # exceptions and baselines (none yet)
-    └── rules/                    # organization lint rules (R-DOC-001, R-COLL-001)
+    └── rules/                    # organization lint rules (R-CODE-001 for roles at the repository root, R-DOC-001, R-COLL-001)
 ```
 
 ## Decisions

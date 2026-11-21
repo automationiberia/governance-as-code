@@ -1,0 +1,7 @@
+---
+- name: Fixture loop
+  ansible.builtin.debug:
+    msg: "{{ __demo_role_item }}"
+  loop: [a, b]
+  loop_control:
+    loop_var: __demo_role_item

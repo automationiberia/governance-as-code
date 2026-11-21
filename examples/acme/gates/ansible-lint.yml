@@ -6,6 +6,7 @@ profile: production                 # ADR-0001
 # including organization rules — unless it is listed here.
 enable_list:
   - loop-var-prefix                 # ADR-0001 → R-CODE-001 (tighten L0)
+  - R-CODE-001                      # ADR-0001 (roles at the repository root)
   - R-DOC-001                       # ADR-0002 (organization rule)
   - R-COLL-001                      # ADR-0005 (organization rule)
 

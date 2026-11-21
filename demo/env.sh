@@ -1,5 +1,6 @@
 # The presenter's shell setup, done once before the demo, in the IDE terminal
-# (bash or zsh). From workspaces/ansible-manage-users:   source ../../env.sh
+# (bash or zsh), from any folder:   source <governance-as-code>/demo/env.sh
+# (from demo/workspaces/ansible-manage-users: source ../../env.sh). It does not change folder.
 # It only prepares tools; every demo command is literal.
 if [ -n "${ZSH_VERSION:-}" ]; then
   eval '_gac_env_file="${(%):-%x}"'
@@ -20,7 +21,6 @@ else
   PS1='\[\e[1;35m\]acme\[\e[0m\]:\W\$ '
 fi
 
-[ -d "$DEMO_DIR/workspaces/ansible-manage-users" ] && cd "$DEMO_DIR/workspaces/ansible-manage-users"
 if command -v ansible-lint >/dev/null && command -v lola >/dev/null; then
   echo "tools: ok"
 else

@@ -1,0 +1,7 @@
+---
+- name: Fixture loop
+  ansible.builtin.debug:
+    msg: "{{ __other_item }}"
+  loop: [a, b]
+  loop_control:
+    loop_var: __other_item

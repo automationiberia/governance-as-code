@@ -163,3 +163,27 @@ def test_r_coll_001_scope(repository: str, expected: bool) -> None:
         }
     }
     assert r_coll_001.applies_to(repository, manifest=manifest) is expected
+
+
+# R-CODE-001 (ADR-0001): loop variables prefixed __<role>_. Inside roles/<name>/
+# ansible-lint's loop-var-prefix enforces it; a role at the repository root has no
+# role directory, so the ACME rule does (role name: galaxy_info.role_name, else the
+# repository name without ansible-role-/ansible-, dashes as underscores).
+@pytest.mark.parametrize(
+    ("case", "expected"),
+    [
+        ("code_root_role_loop_without_prefix", 1),
+        ("code_root_role_loop_wrong_prefix", 1),
+        ("code_root_role_loop_with_prefix", 0),
+        ("ansible-demo-role", 0),
+    ],
+)
+def test_r_code_001_role_at_repo_root(case: str, expected: int) -> None:
+    assert len(hits(lint(case, "lab_tools"), "R-CODE-001")) == expected
+
+
+def test_r_code_001_leaves_roles_dir_to_ansible_lint() -> None:
+    lines = lint("code_role_under_roles_dir", "lab_tools")
+    assert len(hits(lines, "R-CODE-001")) == 0
+    assert any("loop-var-prefix" in line for line in lines)
+
