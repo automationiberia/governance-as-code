@@ -33,3 +33,4 @@ demo/workspaces/
 demo/.machine-scratch/
 demo/.rehearsal-lock
 demo/rehearsal/*.md
+*.mp4
