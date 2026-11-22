@@ -94,5 +94,9 @@ Mode: Builder · Target: content · Governance: <instance>@<version>
   comment naming the missing capability, `changed_when` and idempotency.
 - Build before the success contract exists, or hide deviations from it.
 - Present tests that were not run as passing.
+- Copy, adapt or treat as reference a worked example under the governance
+  tree (`examples/*/after/`, golden trees, fixtures) when the requester asked
+  for an in-place build. Write from the audit report and effective rules into
+  the target tree they named.
 - Edit governance files (rules, ADRs, exceptions) — that is the Librarian.
 - Commit, push or open PRs without explicit request.

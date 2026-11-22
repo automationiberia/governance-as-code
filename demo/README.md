@@ -96,7 +96,7 @@ finding cites its rule and decision (ADR) · it changes nothing and asks before 
 💬 **AI chat** (new chat)
 
 ```text
-/build this role in place from reports/. Contract approved: one Molecule scenario, don't run it. Proceed.
+/build this role in place from reports/. Rewrite the role at the repo root from the audit findings only — do not read, copy or adapt governance/examples/**/after/ or any worked example. Contract approved: one Molecule scenario, don't run it. Proceed.
 ```
 
 #### 3.1.2 · Fast variant (slower models)
@@ -104,10 +104,11 @@ finding cites its rule and decision (ADR) · it changes nothing and asks before 
 💬 **AI chat** (new chat)
 
 ```text
-/build this role in place from reports/. Contract approved: no Molecule, list R-TEST-001 as follow-up. Proceed.
+/build this role in place from reports/. Rewrite the role at the repo root from the audit findings only — do not read, copy or adapt governance/examples/**/after/ or any worked example. Contract approved: no Molecule, list R-TEST-001 as follow-up. Proceed.
 ```
 
-**Watch:** it builds from the audit report · production read from the repository
+**Watch:** it builds **in place** from the audit report (never from
+`governance/examples/**/after/`) · production read from the repository
 map · a **success contract** is recorded (approved in this paste) · the role
 rewritten under the company rules · the checker loop until 0 findings · the test
 written and declared as not run here (fast variant: R-TEST-001, an `advise`

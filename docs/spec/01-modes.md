@@ -89,7 +89,7 @@ Workflow:
 | **Delegates to** | `ansible-scaffold-collection`, `ansible-scaffold-role`, `write-content`, `write-content-tests`, `write-module`, `write-module-tests`, `remove-deprecations`, `ansible-markdown-docs`, `changelog-fragment`, `commit`, `create-pr` (ai-forge) |
 | **Output** | Content changes, plus the tests, docs and approvals required by the process rules (`TEST`, `DOC`, `PROC`) that apply to the repository, PR draft ([template](../../starter-kit/gac-modes/module/skills/gac-builder/templates/pr-body.md)) listing the rules applied |
 | **Human gates** | Approvals required by `PROC` rules; commit / PR only on explicit request |
-| **Must not** | Finish with failing `block` findings. Bypass a rule instead of proposing an exception |
+| **Must not** | Finish with failing `block` findings. Bypass a rule instead of proposing an exception. Copy or adapt a worked example (`examples/*/after/`) when asked to build in place — write from the audit report and rules into the named target |
 
 Workflow:
 1. Intake: what, why, target repository.
